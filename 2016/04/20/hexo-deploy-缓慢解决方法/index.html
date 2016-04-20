@@ -8,17 +8,17 @@
     
         <meta name="keywords" content="Hexo deploy" />
     
-    <meta name="description" content="&amp;#x4E0D;&amp;#x77E5;&amp;#x9053;&amp;#x51FA;&amp;#x4E8E;&amp;#x4EC0;&amp;#x4E48;&amp;#x539F;&amp;#x56E0;&amp;#xFF0C;&amp;#x4F7F;&amp;#x7528;hexo deploy&amp;#x90E8;&amp;#x7F72;&amp;#x5230;github&amp;#x4F1A;&amp;#x975E;&amp;#x5E38;&amp;#x7F13;&amp;#x6162;&amp;#xFF0C;&amp;#x6709;&amp;#x65F">
+    <meta name="description" content="不知道出于什么原因，使用hexo deploy部署到github会非常缓慢，有时候一个小时都没反应。查询了一大堆资源都没有找到解决方法，后来结合github部署个人网站原理，其实更改的最主要就是index.html这个静态网页。所以尝试手动push到github，这样部署过程就快很多了。步骤如下：    ＊ 新建一个文件夹，cd到这个目录，使用git init初始化git然后git remote">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo deploy 部署github缓慢解决方法">
-<meta property="og:url" content="http://yoursite.com/2016/04/20/hexo-deploy-缓慢解决方法/index.html">
+<meta property="og:url" content="http://tk820723.github.io/2016/04/20/hexo-deploy-缓慢解决方法/index.html">
 <meta property="og:site_name" content="一半游云 一半凌霄">
-<meta property="og:description" content="&amp;#x4E0D;&amp;#x77E5;&amp;#x9053;&amp;#x51FA;&amp;#x4E8E;&amp;#x4EC0;&amp;#x4E48;&amp;#x539F;&amp;#x56E0;&amp;#xFF0C;&amp;#x4F7F;&amp;#x7528;hexo deploy&amp;#x90E8;&amp;#x7F72;&amp;#x5230;github&amp;#x4F1A;&amp;#x975E;&amp;#x5E38;&amp;#x7F13;&amp;#x6162;&amp;#xFF0C;&amp;#x6709;&amp;#x65F">
+<meta property="og:description" content="不知道出于什么原因，使用hexo deploy部署到github会非常缓慢，有时候一个小时都没反应。查询了一大堆资源都没有找到解决方法，后来结合github部署个人网站原理，其实更改的最主要就是index.html这个静态网页。所以尝试手动push到github，这样部署过程就快很多了。步骤如下：    ＊ 新建一个文件夹，cd到这个目录，使用git init初始化git然后git remote">
 <meta property="og:image" content="http://7xt6mv.com2.z0.glb.clouddn.com/png_002.png">
 <meta property="og:updated_time" content="2016-04-20T09:04:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo deploy 部署github缓慢解决方法">
-<meta name="twitter:description" content="&amp;#x4E0D;&amp;#x77E5;&amp;#x9053;&amp;#x51FA;&amp;#x4E8E;&amp;#x4EC0;&amp;#x4E48;&amp;#x539F;&amp;#x56E0;&amp;#xFF0C;&amp;#x4F7F;&amp;#x7528;hexo deploy&amp;#x90E8;&amp;#x7F72;&amp;#x5230;github&amp;#x4F1A;&amp;#x975E;&amp;#x5E38;&amp;#x7F13;&amp;#x6162;&amp;#xFF0C;&amp;#x6709;&amp;#x65F">
+<meta name="twitter:description" content="不知道出于什么原因，使用hexo deploy部署到github会非常缓慢，有时候一个小时都没反应。查询了一大堆资源都没有找到解决方法，后来结合github部署个人网站原理，其实更改的最主要就是index.html这个静态网页。所以尝试手动push到github，这样部署过程就快很多了。步骤如下：    ＊ 新建一个文件夹，cd到这个目录，使用git init初始化git然后git remote">
 <meta name="twitter:image" content="http://7xt6mv.com2.z0.glb.clouddn.com/png_002.png">
     
 
@@ -152,7 +152,7 @@
         </div>
         <div class="article-entry" itemprop="articleBody">
             <img src="http://7xt6mv.com2.z0.glb.clouddn.com/png_002.png" class="png" width="1000">
-<p>&#x4E0D;&#x77E5;&#x9053;&#x51FA;&#x4E8E;&#x4EC0;&#x4E48;&#x539F;&#x56E0;&#xFF0C;&#x4F7F;&#x7528;hexo deploy&#x90E8;&#x7F72;&#x5230;github&#x4F1A;&#x975E;&#x5E38;&#x7F13;&#x6162;&#xFF0C;&#x6709;&#x65F6;&#x5019;&#x4E00;&#x4E2A;&#x5C0F;&#x65F6;&#x90FD;&#x6CA1;&#x53CD;&#x5E94;&#x3002;&#x67E5;&#x8BE2;&#x4E86;&#x4E00;&#x5927;&#x5806;&#x8D44;&#x6E90;&#x90FD;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#xFF0C;&#x540E;&#x6765;&#x7ED3;&#x5408;github&#x90E8;&#x7F72;&#x4E2A;&#x4EBA;&#x7F51;&#x7AD9;&#x539F;&#x7406;&#xFF0C;&#x5176;&#x5B9E;&#x66F4;&#x6539;&#x7684;&#x6700;&#x4E3B;&#x8981;&#x5C31;&#x662F;index.html&#x8FD9;&#x4E2A;&#x9759;&#x6001;&#x7F51;&#x9875;&#x3002;&#x6240;&#x4EE5;&#x5C1D;&#x8BD5;&#x624B;&#x52A8;push&#x5230;github&#xFF0C;&#x8FD9;&#x6837;&#x90E8;&#x7F72;&#x8FC7;&#x7A0B;&#x5C31;&#x5FEB;&#x5F88;&#x591A;&#x4E86;&#x3002;<br>&#x6B65;&#x9AA4;&#x5982;&#x4E0B;&#xFF1A;<br>    &#xFF0A; &#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x5939;&#xFF0C;cd&#x5230;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x4F7F;&#x7528;git init&#x521D;&#x59CB;&#x5316;git&#x7136;&#x540E;git remote add origin <a href="https://github.com/&#x4F60;&#x7684;&#x7528;&#x6237;&#x540D;/&#x4F60;&#x7684;&#x7528;&#x6237;&#x540D;.github.io" target="_blank" rel="external">https://github.com/&#x4F60;&#x7684;&#x7528;&#x6237;&#x540D;/&#x4F60;&#x7684;&#x7528;&#x6237;&#x540D;.github.io</a> &#x7ED9;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x8FDE;&#x63A5;&#x5230;&#x4F60;&#x7684;&#x7F51;&#x9875;<br>    &#xFF0A; git pull origin master &#x62C9;&#x4E0B;&#x5F53;&#x524D;&#x76EE;&#x5F55;<br>    &#xFF0A; &#x7136;&#x540E;&#x628A;hexo&#x5728;&#x4F60;&#x672C;&#x5730;&#x7F51;&#x9875;&#x76EE;&#x5F55;&#x4E0B;&#x751F;&#x6210;&#x7684;public&#x6240;&#x6709;&#x4E1C;&#x897F;&#x66FF;&#x6362;&#x8FDB;&#x65B0;&#x5EFA;&#x7684;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x5939;<br>    &#xFF0A; &#x7136;&#x540E;push&#x4E00;&#x4E0B;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x6574;&#x4E2A;&#x90E8;&#x7F72;&#x5C31;&#x5B8C;&#x6210;&#x4E86;</p>
+<p>不知道出于什么原因，使用hexo deploy部署到github会非常缓慢，有时候一个小时都没反应。查询了一大堆资源都没有找到解决方法，后来结合github部署个人网站原理，其实更改的最主要就是index.html这个静态网页。所以尝试手动push到github，这样部署过程就快很多了。<br>步骤如下：<br>    ＊ 新建一个文件夹，cd到这个目录，使用git init初始化git然后git remote add origin <a href="https://github.com/你的用户名/你的用户名.github.io" target="_blank" rel="external">https://github.com/你的用户名/你的用户名.github.io</a> 给这个目录连接到你的网页<br>    ＊ git pull origin master 拉下当前目录<br>    ＊ 然后把hexo在你本地网页目录下生成的public所有东西替换进新建的这个文件夹<br>    ＊ 然后push一下这个文件夹，整个部署就完成了</p>
 
         </div>
         <footer class="article-footer">
@@ -160,7 +160,7 @@
 
 
 
-    <a data-url="http://yoursite.com/2016/04/20/hexo-deploy-缓慢解决方法/" data-id="cin8nmckj0000kvkrpm3o845t" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://tk820723.github.io/2016/04/20/hexo-deploy-缓慢解决方法/" data-id="cin8on7120000rnkr5bikb5ub" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -227,7 +227,7 @@
     <section id="comments">
     
         
-    <div class="ds-thread" data-thread-key="2016/04/20/hexo-deploy-缓慢解决方法/" data-title="hexo deploy 部署github缓慢解决方法" data-url="http://yoursite.com/2016/04/20/hexo-deploy-缓慢解决方法/"></div>
+    <div class="ds-thread" data-thread-key="2016/04/20/hexo-deploy-缓慢解决方法/" data-title="hexo deploy 部署github缓慢解决方法" data-url="http://tk820723.github.io/2016/04/20/hexo-deploy-缓慢解决方法/"></div>
     <style>
         #ds-thread #ds-reset .ds-textarea-wrapper {
             background: none;
