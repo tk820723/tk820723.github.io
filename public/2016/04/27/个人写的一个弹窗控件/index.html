@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>个人写的一个弹窗控件 | 一半游云 一半凌霄</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="&amp;#x6700;&amp;#x8FD1;&amp;#x516C;&amp;#x53F8;&amp;#x5DE5;&amp;#x4F5C;&amp;#x9700;&amp;#x8981;&amp;#x505A;&amp;#x4E00;&amp;#x4E2A;&amp;#x4ECE;&amp;#x4E0B;&amp;#x5F80;&amp;#x4E0A;&amp;#x7684;&amp;#x5F39;&amp;#x7A97;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x6211;&amp;#x53D1;&amp;#x73B0;&amp;#x539F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="个人写的一个弹窗控件">
+<meta property="og:url" content="http://www.cloudwind.cc/2016/04/27/个人写的一个弹窗控件/index.html">
+<meta property="og:site_name" content="一半游云 一半凌霄">
+<meta property="og:description" content="&amp;#x6700;&amp;#x8FD1;&amp;#x516C;&amp;#x53F8;&amp;#x5DE5;&amp;#x4F5C;&amp;#x9700;&amp;#x8981;&amp;#x505A;&amp;#x4E00;&amp;#x4E2A;&amp;#x4ECE;&amp;#x4E0B;&amp;#x5F80;&amp;#x4E0A;&amp;#x7684;&amp;#x5F39;&amp;#x7A97;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x6211;&amp;#x53D1;&amp;#x73B0;&amp;#x539F;">
+<meta property="og:image" content="http://7xt6mv.com2.z0.glb.clouddn.com/ActionSheet.png">
+<meta property="og:updated_time" content="2016-06-17T07:11:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="个人写的一个弹窗控件">
+<meta name="twitter:description" content="&amp;#x6700;&amp;#x8FD1;&amp;#x516C;&amp;#x53F8;&amp;#x5DE5;&amp;#x4F5C;&amp;#x9700;&amp;#x8981;&amp;#x505A;&amp;#x4E00;&amp;#x4E2A;&amp;#x4ECE;&amp;#x4E0B;&amp;#x5F80;&amp;#x4E0A;&amp;#x7684;&amp;#x5F39;&amp;#x7A97;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x6211;&amp;#x53D1;&amp;#x73B0;&amp;#x539F;">
+<meta name="twitter:image" content="http://7xt6mv.com2.z0.glb.clouddn.com/ActionSheet.png">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/titillium-web/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css">
+    
+    
+        <link rel="stylesheet" href="/vendor/scrollLoading/style.css">
+    
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Hexo/">Hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/cocos2dx/">cocos2dx</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/iOS开发/">iOS开发</a></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/iOS开发/">iOS开发</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-个人写的一个弹窗控件" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        个人写的一个弹窗控件
+        </h1>
+    
+
+            </header>
+        
+        <div class="article-subtitle">
+            <a href="/2016/04/27/个人写的一个弹窗控件/" class="article-date">
+    <time datetime="2016-04-27T03:09:06.000Z" itemprop="datePublished">2016-04-27</time>
+</a>
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>&#x6700;&#x8FD1;&#x516C;&#x53F8;&#x5DE5;&#x4F5C;&#x9700;&#x8981;&#x505A;&#x4E00;&#x4E2A;&#x4ECE;&#x4E0B;&#x5F80;&#x4E0A;&#x7684;&#x5F39;&#x7A97;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x53D1;&#x73B0;&#x539F;&#x751F;Actionsheet&#x4E0D;&#x662F;&#x5F88;&#x597D;&#x7528;&#xFF0C;&#x6240;&#x4EE5;&#x5C31;&#x81EA;&#x5DF1;&#x5199;&#x4E86;&#x4E00;&#x4E2A;&#x5F39;&#x7A97;&#x63A7;&#x4EF6;&#x3002;</p>
+<p>github&#x5730;&#x5740;&#xFF1A;<a href="https://github.com/tk820723/WBCustomActionSheet" target="_blank" rel="external">https://github.com/tk820723/WBCustomActionSheet</a></p>
+<p><img src="http://7xt6mv.com2.z0.glb.clouddn.com/ActionSheet.png" alt="WBCustomActionSheet"></p>
+<p>&#x4F7F;&#x7528;&#x8D77;&#x6765;&#x975E;&#x5E38;&#x7B80;&#x5355;&#x3002;<br>&#x7C7B;&#x65B9;&#x6CD5;&#x4F20;&#x5165;&#x5F39;&#x6846;&#x6807;&#x9898;&#x6587;&#x5B57;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;&#x7C7B;&#x4F3C;tableview&#x7684;datasource&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x6309;&#x94AE;&#x6837;&#x5F0F;&#x90FD;&#x53EF;&#x4EE5;&#x4F20;&#x8FDB;&#x53BB;&#xFF0C;&#x53EF;&#x4EE5;&#x4E0D;&#x4E3A;&#x6BCF;&#x4E2A;&#x6309;&#x94AE;&#x7ED1;&#x5B9A;&#x65B9;&#x6CD5;&#xFF0C;&#x4F7F;&#x7528;delegate&#x7684;didSelectIndex&#x6765;&#x5224;&#x65AD;&#x4E5F;&#x53EF;&#x4EE5;&#x3002;&#x663E;&#x793A;&#x51FA;&#x6765;&#x8C03;&#x7528;showAnimated&#x5373;&#x53EF;&#x3002;</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://www.cloudwind.cc/2016/04/27/个人写的一个弹窗控件/" data-id="cipnvp26o0004ywkrmm3yw6k7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2016/04/27/个人写的一个弹窗控件/" data-title="个人写的一个弹窗控件" data-url="http://www.cloudwind.cc/2016/04/27/个人写的一个弹窗控件/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="/" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="/" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="google-plus" href="/" target="_blank">
+                        <i class="icon fa fa-google-plus"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/tk820723" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="http://weibo.com/u/2236371871" target="_blank">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="rss" href="/" target="_blank">
+                        <i class="icon fa fa-rss"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/04/29/音乐播放器/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            Hexo插入音乐播放器
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/04/20/mac下还原pvr与plist为多个png/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">mac下还原pvr与plist为多个png</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/06/17/关于如何编写Hexo博客总结（二）/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2016/06/17/&#x5173;&#x4E8E;&#x5982;&#x4F55;&#x7F16;&#x5199;Hexo&#x535A;&#x5BA2;&#x603B;&#x7ED3;&#xFF08;&#x4E8C;&#xFF09;/markdown.jpg)" alt="关于如何编写Hexo博客总结（二）" class="thumbnail-image"></span>
+    
+    
+</a>
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Hexo/">Hexo</a></p>
+                            <p class="item-title"><a href="/2016/06/17/关于如何编写Hexo博客总结（二）/" class="title">关于如何编写Hexo博客总结（二）</a></p>
+                            <p class="item-date"><time datetime="2016-06-17T06:56:50.000Z" itemprop="datePublished">2016-06-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/06/16/关于如何编写hexo博客总结（一）/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/2016/06/16/&#x5173;&#x4E8E;&#x5982;&#x4F55;&#x7F16;&#x5199;hexo&#x535A;&#x5BA2;&#x603B;&#x7ED3;&#xFF08;&#x4E00;&#xFF09;/markdown.jpg)" alt="关于如何编写hexo博客总结（一）" class="thumbnail-image"></span>
+    
+    
+</a>
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Hexo/">Hexo</a></p>
+                            <p class="item-title"><a href="/2016/06/16/关于如何编写hexo博客总结（一）/" class="title">关于如何编写hexo博客总结（一）</a></p>
+                            <p class="item-date"><time datetime="2016-06-16T07:40:33.000Z" itemprop="datePublished">2016-06-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/04/29/音乐播放器/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://7xt6mv.com2.z0.glb.clouddn.com/png_008.png)" alt="Hexo插入音乐播放器" class="thumbnail-image"></span>
+    
+    
+</a>
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Hexo/">Hexo</a></p>
+                            <p class="item-title"><a href="/2016/04/29/音乐播放器/" class="title">Hexo插入音乐播放器</a></p>
+                            <p class="item-date"><time datetime="2016-04-29T02:17:19.000Z" itemprop="datePublished">2016-04-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/04/27/个人写的一个弹窗控件/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://7xt6mv.com2.z0.glb.clouddn.com/ActionSheet.png)" alt="个人写的一个弹窗控件" class="thumbnail-image"></span>
+    
+    
+</a>
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/iOS开发/">iOS开发</a></p>
+                            <p class="item-title"><a href="/2016/04/27/个人写的一个弹窗控件/" class="title">个人写的一个弹窗控件</a></p>
+                            <p class="item-date"><time datetime="2016-04-27T03:09:06.000Z" itemprop="datePublished">2016-04-27</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/04/20/mac下还原pvr与plist为多个png/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://7xt6mv.com2.z0.glb.clouddn.com/png_004.png)" alt="mac下还原pvr与plist为多个png" class="thumbnail-image"></span>
+    
+    
+</a>
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/cocos2dx/">cocos2dx</a></p>
+                            <p class="item-title"><a href="/2016/04/20/mac下还原pvr与plist为多个png/" class="title">mac下还原pvr与plist为多个png</a></p>
+                            <p class="item-date"><time datetime="2016-04-20T09:06:34.000Z" itemprop="datePublished">2016-04-20</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cocos2dx/">cocos2dx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS开发/">iOS开发</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-deploy/">Hexo deploy</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Hexo-deploy/" style="font-size: 10px;">Hexo deploy</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">音乐播放器</h3>
+        <div class="widget">
+            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=350
+            src="http://music.163.com/outchain/player?type=0&id=66176787&auto=1&height=350"></iframe>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2016 Weibai Lu</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'cloudwind'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//www.cloudwind.cc/js/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+    
+        <script src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
+    
+
+    
+        <script src="/vendor/scrollLoading/jquery.scrollLoading.js"></script>
+        <script src="/vendor/scrollLoading/main.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
