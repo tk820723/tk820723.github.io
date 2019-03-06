@@ -69,5 +69,7 @@ theme: hueman
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo:
-     coding: https://git.coding.net/tk820723/myblog.git,coding-pages
+  repo: https://github.com/tk820723/tk820723.github.io.git
+  branch: master
+  message: Publish
+
