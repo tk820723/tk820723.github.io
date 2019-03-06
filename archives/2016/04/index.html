@@ -146,7 +146,7 @@
         <a href="/2016/04/29/音乐播放器/" class="thumbnail">
     
     
-        <span style="background-image:url(http://7xt6mv.com2.z0.glb.clouddn.com/png_008.png)" alt="Hexo插入音乐播放器" class="thumbnail-image"></span>
+        <span style="background-image:url(http://7xt6mv.com1.z0.glb.clouddn.com/png_008.png)" alt="Hexo插入音乐播放器" class="thumbnail-image"></span>
     
     
         
@@ -175,7 +175,9 @@
 
         <p class="article-excerpt">
             
-&#x8FD9;&#x4E2A;&#x7F51;&#x7AD9;&#x4E5F;&#x5F04;&#x4E86;&#x4E00;&#x9635;&#x5B50;&#xFF0C;&#x611F;&#x89C9;&#x56FE;&#x7247;&#x4EC0;&#x4E48;&#x90FD;&#x53EF;&#x4EE5;&#x987A;&#x5229;&#x52A0;&#x8F7D;&#x4E86
+这个网站也弄了一阵子，感觉图片什么都可以顺利加载了，顺便研究了一下如何插入网易音乐的模块。如果想像小编一样在侧边栏加入音乐播放器，可以在hexo themes/你的主体/layout/widget目录下创建music.ejs文件，插入以下代码：
+&lt;% if (site.tags.length) { %&gt;
+    &lt;div class=&quot;widget-wrap widg
         </p>
     </div>
 </article>
@@ -219,7 +221,10 @@
     
 
         <p class="article-excerpt">
-            &#x6700;&#x8FD1;&#x516C;&#x53F8;&#x5DE5;&#x4F5C;&#x9700;&#x8981;&#x505A;&#x4E00;&#x4E2A;&#x4ECE;&#x4E0B;&#x5F80;&#x4E0A;&#x7684;&#x5F39;&#x7A97;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x53D1;&#x73B0;&#x539F;
+            最近公司工作需要做一个从下往上的弹窗，但是我发现原生Actionsheet不是很好用，所以就自己写了一个弹窗控件。
+github地址：https://github.com/tk820723/WBCustomActionSheet
+
+使用起来非常简单。类方法传入弹框标题文字，然后使用类似tableview的datasource使用方法，每一个按钮样式都可以传进去，可以不为每个按钮绑定方法，使用del
         </p>
     </div>
 </article>
@@ -268,7 +273,8 @@
 
         <p class="article-excerpt">
             
-&#x5728;&#x7F51;&#x4E0A;&#x627E;&#x4E86;&#x5F88;&#x4E45;&#xFF0C;&#x5982;&#x4F55;&#x628A;&#x5F88;&#x591A;&#x7F51;&#x4E0A;&#x4E0B;&#x8F7D;&#x7684;ipa&#x5305;&#x4E2D;&#x6263;&#x51FA;&#x7684;&#x56FE;&#x7
+在网上找了很久，如何把很多网上下载的ipa包中扣出的图片资源（通常为pvr与plist结合格式）还原为png，只找到了一些python写的代码，但是mac下跑不起来，一直没有找到很好的自动化方法，就自己写了一个mac软件，帮助处理自动化切图。需要自己传入相应的png大图路径，plist文件路径，以及输出目录路径
+控制器代码1234567891011121314151617181920212223
         </p>
     </div>
 </article>
@@ -313,7 +319,7 @@
 
         <p class="article-excerpt">
             
-&#x4E0D;&#x77E5;&#x9053;&#x51FA;&#x4E8E;&#x4EC0;&#x4E48;&#x539F;&#x56E0;&#xFF0C;&#x4F7F;&#x7528;hexo deploy&#x90E8;&#x7F72;&#x5230;github&#x4F1A;&#x975E;&#x5E38;&#x7F13;&#x6162;&#xFF0C;&#x6709;&#x65F
+不知道出于什么原因，使用hexo deploy部署到github会非常缓慢，有时候一个小时都没反应。查询了一大堆资源都没有找到解决方法，后来结合github部署个人网站原理，其实更改的最主要就是index.html这个静态网页。所以尝试手动push到github，这样部署过程就快很多了。步骤如下：    ＊ 新建一个文件夹，cd到这个目录，使用git init初始化git然后git remote
         </p>
     </div>
 </article>
@@ -362,7 +368,10 @@
 
         <p class="article-excerpt">
             
-&#x6298;&#x817E;&#x534A;&#x5929;&#x7EC8;&#x4E8E;&#x628A;Hexo&#x670D;&#x52A1;&#x5668;&#x5F04;&#x597D;&#x4E86;&#xFF0C;&#x4E3B;&#x8981;&#x662F;&#x5404;&#x79CD;&#x88C5;&#x4E86;&#x4E00;&#x534A;&#x5931;&#x
+折腾半天终于把Hexo服务器弄好了，主要是各种装了一半失败，然后查阅资料，原来是翻墙的原因。翻了墙之后又遇到国内hexo2.0和3.0教程不兼容问题，公司网络连接github也是时好时坏，磕磕碰碰终于搞好了一个网站。可以用来装逼了哈哈。下面👇全是学习hexo的测试。
+这是一段blockquote
+Weibai LuQueteMe.com
+Code Block1NSLog(@"Hello cod
         </p>
     </div>
 </article>
@@ -449,7 +458,7 @@
                             <a href="/2016/06/17/关于如何编写Hexo博客总结（二）/" class="thumbnail">
     
     
-        <span style="background-image:url(/2016/06/17/&#x5173;&#x4E8E;&#x5982;&#x4F55;&#x7F16;&#x5199;Hexo&#x535A;&#x5BA2;&#x603B;&#x7ED3;&#xFF08;&#x4E8C;&#xFF09;/markdown.jpg)" alt="关于如何编写Hexo博客总结（二）" class="thumbnail-image"></span>
+        <span style="background-image:url(http://7xt6mv.com1.z0.glb.clouddn.com/image/posts/HexoSummarymarkdown_2_1.jpg)" alt="关于如何编写Hexo博客总结（二）" class="thumbnail-image"></span>
     
     
 </a>
@@ -468,7 +477,7 @@
                             <a href="/2016/06/16/关于如何编写hexo博客总结（一）/" class="thumbnail">
     
     
-        <span style="background-image:url(/2016/06/16/&#x5173;&#x4E8E;&#x5982;&#x4F55;&#x7F16;&#x5199;hexo&#x535A;&#x5BA2;&#x603B;&#x7ED3;&#xFF08;&#x4E00;&#xFF09;/markdown.jpg)" alt="关于如何编写hexo博客总结（一）" class="thumbnail-image"></span>
+        <span style="background-image:url(http://7xt6mv.com1.z0.glb.clouddn.com/image/posts/HexoSummarymarkdown_1_1.jpg)" alt="关于如何编写hexo博客总结（一）" class="thumbnail-image"></span>
     
     
 </a>
@@ -487,7 +496,7 @@
                             <a href="/2016/04/29/音乐播放器/" class="thumbnail">
     
     
-        <span style="background-image:url(http://7xt6mv.com2.z0.glb.clouddn.com/png_008.png)" alt="Hexo插入音乐播放器" class="thumbnail-image"></span>
+        <span style="background-image:url(http://7xt6mv.com1.z0.glb.clouddn.com/png_008.png)" alt="Hexo插入音乐播放器" class="thumbnail-image"></span>
     
     
 </a>
@@ -600,7 +609,7 @@
         <h3 class="widget-title">音乐播放器</h3>
         <div class="widget">
             <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=350
-            src="http://music.163.com/outchain/player?type=0&id=66176787&auto=1&height=350"></iframe>
+            src="http://music.163.com/outchain/player?type=0&id=405802264&auto=0&height=350"></iframe>
         </div>
     </div>
 
@@ -620,7 +629,7 @@
                 <h1 class="logo-wrap">
                     <a href="/" class="logo"></a>
                 </h1>
-                <p>&copy; 2016 Weibai Lu</p>
+                <p>&copy; 2019 Weibai Lu</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
             </div>
         </div>
