@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>createMarkedFile</key>
+	<false/>
+	<key>sheetClusters</key>
+	<array>
+		<array>
+			<string>hello-world.md</string>
+		</array>
+		<array>
+			<string>hexo-deploy-缓慢解决方法.md</string>
+		</array>
+		<array>
+			<string>mac下还原pvr与plist为多个png.md</string>
+		</array>
+		<array>
+			<string>个人写的一个弹窗控件.md</string>
+		</array>
+		<array>
+			<string>关于如何编写hexo博客总结（一）.md</string>
+		</array>
+		<array>
+			<string>关于如何编写Hexo博客总结（二）.md</string>
+		</array>
+		<array>
+			<string>终于把Hexo服务器弄好了.md</string>
+		</array>
+		<array>
+			<string>音乐播放器.md</string>
+		</array>
+	</array>
+</dict>
+</plist>
