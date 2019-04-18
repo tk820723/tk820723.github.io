@@ -3,26 +3,32 @@
 <head>
     <meta charset="utf-8">
     
-    <title>mac下还原pvr与plist为多个png | 一半游云 一半凌霄</title>
+    <title>更好的NSLog | 一半游云 一半凌霄</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
         <meta name="keywords" content="" />
     
-    <meta name="description" content="在网上找了很久，如何把很多网上下载的ipa包中扣出的图片资源（通常为pvr与plist结合格式）还原为png，只找到了一些python写的代码，但是mac下跑不起来，一直没有找到很好的自动化方法，就自己写了一个mac软件，帮助处理自动化切图。需要自己传入相应的png大图路径，plist文件路径，以及输出目录路径
-控制器代码1234567891011121314151617181920212223">
+    <meta name="description" content="更好的NSLog自从Xcode9之后，系统的消息里头加入了很多的其实并不需要的log，再加上各种第三方的log，整个log console看的非常的杂乱，想要看见自己的log很困难。
+第一步，让我们来一一解决掉系统的log系统的log有两种类型，一个是UI新出的main tread checker的log，以及系统输出的NSLog
+
+干掉main tread checker只需要在scheme编辑">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mac下还原pvr与plist为多个png">
-<meta property="og:url" content="http://www.cloudwind.cc/2016/04/20/mac下还原pvr与plist为多个png/index.html">
+<meta property="og:title" content="更好的NSLog">
+<meta property="og:url" content="http://www.cloudwind.cc/2019/04/18/更好的NSLog/index.html">
 <meta property="og:site_name" content="一半游云 一半凌霄">
-<meta property="og:description" content="在网上找了很久，如何把很多网上下载的ipa包中扣出的图片资源（通常为pvr与plist结合格式）还原为png，只找到了一些python写的代码，但是mac下跑不起来，一直没有找到很好的自动化方法，就自己写了一个mac软件，帮助处理自动化切图。需要自己传入相应的png大图路径，plist文件路径，以及输出目录路径
-控制器代码1234567891011121314151617181920212223">
-<meta property="og:image" content="http://i2.bvimg.com/684169/615b03d783eed71d.png">
-<meta property="og:updated_time" content="2019-04-18T09:02:29.495Z">
+<meta property="og:description" content="更好的NSLog自从Xcode9之后，系统的消息里头加入了很多的其实并不需要的log，再加上各种第三方的log，整个log console看的非常的杂乱，想要看见自己的log很困难。
+第一步，让我们来一一解决掉系统的log系统的log有两种类型，一个是UI新出的main tread checker的log，以及系统输出的NSLog
+
+干掉main tread checker只需要在scheme编辑">
+<meta property="og:image" content="http://i2.bvimg.com/684169/24a1e16ae07b9344.jpg">
+<meta property="og:updated_time" content="2019-04-18T09:01:21.492Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mac下还原pvr与plist为多个png">
-<meta name="twitter:description" content="在网上找了很久，如何把很多网上下载的ipa包中扣出的图片资源（通常为pvr与plist结合格式）还原为png，只找到了一些python写的代码，但是mac下跑不起来，一直没有找到很好的自动化方法，就自己写了一个mac软件，帮助处理自动化切图。需要自己传入相应的png大图路径，plist文件路径，以及输出目录路径
-控制器代码1234567891011121314151617181920212223">
-<meta name="twitter:image" content="http://i2.bvimg.com/684169/615b03d783eed71d.png">
+<meta name="twitter:title" content="更好的NSLog">
+<meta name="twitter:description" content="更好的NSLog自从Xcode9之后，系统的消息里头加入了很多的其实并不需要的log，再加上各种第三方的log，整个log console看的非常的杂乱，想要看见自己的log很困难。
+第一步，让我们来一一解决掉系统的log系统的log有两种类型，一个是UI新出的main tread checker的log，以及系统输出的NSLog
+
+干掉main tread checker只需要在scheme编辑">
+<meta name="twitter:image" content="http://i2.bvimg.com/684169/24a1e16ae07b9344.jpg">
     
 
     
@@ -128,33 +134,39 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/cocos2dx/">cocos2dx</a>
+    <a class="page-title-link" href="/categories/iOS开发/">iOS开发</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-mac下还原pvr与plist为多个png" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-更好的NSLog" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        mac下还原pvr与plist为多个png
+        更好的NSLog
         </h1>
     
 
             </header>
         
         <div class="article-subtitle">
-            <a href="/2016/04/20/mac下还原pvr与plist为多个png/" class="article-date">
-    <time datetime="2016-04-20T09:06:34.000Z" itemprop="datePublished">2016-04-20</time>
+            <a href="/2019/04/18/更好的NSLog/" class="article-date">
+    <time datetime="2019-04-18T08:08:18.000Z" itemprop="datePublished">2019-04-18</time>
 </a>
             
         </div>
         <div class="article-entry" itemprop="articleBody">
-            <p><img src="http://i2.bvimg.com/684169/615b03d783eed71d.png" alt="Markdown"></p>
-<p>在网上找了很久，如何把很多网上下载的ipa包中扣出的图片资源（通常为pvr与plist结合格式）还原为png，只找到了一些python写的代码，但是mac下跑不起来，一直没有找到很好的自动化方法，就自己写了一个mac软件，帮助处理自动化切图。需要自己传入相应的png大图路径，plist文件路径，以及输出目录路径</p>
-<figure class="highlight objc"><figcaption><span>控制器代码</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>) <span class="keyword">IBOutlet</span> <span class="built_in">NSTextField</span> *pngPathField;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>) <span class="keyword">IBOutlet</span> <span class="built_in">NSTextField</span> *plistPathField;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>) <span class="keyword">IBOutlet</span> <span class="built_in">NSTextField</span> *targetPathField;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">[<span class="keyword">super</span> viewDidLoad];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">IBAction</span>)BtnClicked:(<span class="built_in">NSButton</span> *)sender &#123;</span><br><span class="line"><span class="keyword">if</span> (_pngPathField.stringValue.length == <span class="number">0</span> || _plistPathField.stringValue.length == <span class="number">0</span> || _targetPathField.stringValue.length == <span class="number">0</span>) &#123;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"输入路径不能为空"</span>);</span><br><span class="line"><span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//读取所有的文件，转换为数据数组</span></span><br><span class="line"><span class="built_in">NSString</span> *pngPath = _pngPathField.stringValue;</span><br><span class="line"><span class="built_in">NSString</span> *plistPath = _plistPathField.stringValue;</span><br><span class="line"><span class="built_in">NSString</span> *targetPath = _targetPathField.stringValue;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSDictionary</span> *plistDic = [<span class="built_in">NSDictionary</span> dictionaryWithContentsOfFile:plistPath];</span><br><span class="line"><span class="built_in">NSDictionary</span> *framesDic = [plistDic valueForKey:<span class="string">@"frames"</span>];</span><br><span class="line"><span class="built_in">NSArray</span> *framesArray = framesDic.allValues;</span><br><span class="line"><span class="built_in">NSArray</span> *namesArray = framesDic.allKeys;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (framesArray.count==<span class="number">0</span>||namesArray.count==<span class="number">0</span>) &#123;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"字典文件没有对象"</span>);</span><br><span class="line"><span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//遍历数组转换plist数据</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt; namesArray.count; i++) &#123;</span><br><span class="line"><span class="built_in">NSString</span> *picName = namesArray[i];</span><br><span class="line"><span class="built_in">NSDictionary</span> *singleImageFrameDic = framesArray[i];</span><br><span class="line"><span class="built_in">BOOL</span> rotated = [[singleImageFrameDic objectForKey:<span class="string">@"rotated"</span>] boolValue];</span><br><span class="line"><span class="built_in">NSRect</span> frame = <span class="built_in">NSRectFromString</span>([singleImageFrameDic valueForKey:<span class="string">@"frame"</span>]);</span><br><span class="line"><span class="keyword">if</span> (rotated) &#123;</span><br><span class="line">frame = <span class="built_in">NSMakeRect</span>(frame.origin.x, frame.origin.y, frame.size.height, frame.size.width);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">frame = <span class="built_in">NSMakeRect</span>(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSImage</span> *image = [[<span class="built_in">NSImage</span> alloc] initWithContentsOfFile:pngPath];</span><br><span class="line"><span class="built_in">CGImageRef</span> cutImageRef = [<span class="keyword">self</span> cutImage:image frame:frame];</span><br><span class="line">[<span class="keyword">self</span> WriteImageRefToFile:cutImageRef path:targetPath withImageName:picName];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"输入图片成功"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//根据数据切割图片，返回切割完的图片ref</span></span><br><span class="line">- (<span class="built_in">CGImageRef</span>)cutImage: (<span class="built_in">NSImage</span> *)image frame: (<span class="built_in">NSRect</span>)frame&#123;</span><br><span class="line"></span><br><span class="line"><span class="built_in">CGImageSourceRef</span> source = <span class="built_in">CGImageSourceCreateWithData</span>((<span class="built_in">CFDataRef</span>)[image TIFFRepresentation], <span class="literal">NULL</span>);</span><br><span class="line"><span class="built_in">CGImageRef</span> maskRef =  <span class="built_in">CGImageSourceCreateImageAtIndex</span>(source, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line"><span class="built_in">CGImageRef</span> finalImgRef = <span class="built_in">CGImageCreateWithImageInRect</span>(maskRef, frame);</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> finalImgRef;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//把图片输出到选择的目录</span></span><br><span class="line">- (<span class="keyword">void</span>)WriteImageRefToFile: (<span class="built_in">CGImageRef</span>) image path: (<span class="built_in">NSString</span> *)path withImageName: (<span class="built_in">NSString</span> *)imageName</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">NSString</span> *desPath = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@/%@"</span>,path,imageName];</span><br><span class="line"></span><br><span class="line"><span class="built_in">CFURLRef</span> url = (__bridge <span class="built_in">CFURLRef</span>)[<span class="built_in">NSURL</span> fileURLWithPath:desPath];</span><br><span class="line"></span><br><span class="line"><span class="built_in">CGImageDestinationRef</span> destination = <span class="built_in">CGImageDestinationCreateWithURL</span>(url, kUTTypePNG, <span class="number">1</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">CGImageDestinationAddImage</span>(destination, image, <span class="literal">nil</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">CGImageDestinationFinalize</span>(destination)) &#123;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"Failed to write image to %@"</span>, path);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">CFRelease</span>(destination);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)setRepresentedObject:(<span class="keyword">id</span>)representedObject &#123;</span><br><span class="line">[<span class="keyword">super</span> setRepresentedObject:representedObject];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Update the view, if already loaded.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+            <h1 id="更好的NSLog"><a href="#更好的NSLog" class="headerlink" title="更好的NSLog"></a>更好的NSLog</h1><p>自从Xcode9之后，系统的消息里头加入了很多的其实并不需要的log，再加上各种第三方的log，整个log console看的非常的杂乱，想要看见自己的log很困难。</p>
+<p>第一步，让我们来一一解决掉系统的log<br>系统的log有两种类型，一个是UI新出的main tread checker的log，以及系统输出的NSLog</p>
+<ul>
+<li>干掉main tread checker只需要在scheme编辑中选择Diagnostics tag，然后将main tread checker的勾选消除掉，就可以屏蔽掉此类log。</li>
+<li>系统输出NSLog这个比较复杂，因为没有入口可以将它关闭，只能通过关闭NSLog输出来间接关闭系统的输出。有些童鞋会问，那NSLog被关闭自己想要输出怎么办，没关系，这个后面会说，这里先说下如何关闭NSLog的输出。想要关闭NSLog，也是在scheme编辑中，在Arguments tag下，增加”OS_ACTIVITY_DT_MODE”的key，然后设置value为NO，就可以关闭所有的NSLog的输出（包括第三方和自己的）<br><img src="http://i2.bvimg.com/684169/24a1e16ae07b9344.jpg" alt="Markdown"></li>
+</ul>
+<p>第二步，让我们来解决掉一些第三方的log<br>其实在第一步的时候我们已经干掉了大部分第三方的log（通过干掉NSLog），我这边观察，还剩下GoogleFireBase的各种log还在输出，这个就需要进入到相对应的第三方的文档去查看如何关闭。以GoogleFireBase的输出为例，想要关闭GoogleFirebase的输出，只需要在初始化App的时候，将firebase的loggerLevel设置为min即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[FIRConfiguration sharedInstance] setLoggerLevel:FIRLoggerLevelMin];</span><br></pre></td></tr></table></figure></p>
+<p>第三步，使用我们更加好用的log来进行输出。现在大部分iOS程序员都知道通过使用另外一个Log来输出进行Debug和Release的区分（Release不需要输出log），这里直接上代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//DLog 打印，debug下打印 非debug不打印</span><br><span class="line">#ifdef DEBUG</span><br><span class="line">#define DLog(FORMAT, ...) fprintf(stderr,&quot;%s\n&quot;, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);</span><br><span class="line">#else</span><br><span class="line">#define DLog(...)</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure></p>
+<p>使用DLog来代替原来的NSLog，中间的参数可以自己选择调整，我这里把基本上用不上的时间输出给去掉了，只留下比较基础的东西，需要其他的可以自己修改，然后将DLog放入全局的引用中就可以愉快的使用log去Debug了</p>
 
         </div>
         <footer class="article-footer">
@@ -162,7 +174,7 @@
 
 
 
-    <a data-url="http://www.cloudwind.cc/2016/04/20/mac下还原pvr与plist为多个png/" data-id="cjumf3doz0000j2upavykpw5m" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.cloudwind.cc/2019/04/18/更好的NSLog/" data-id="cjumf3dpd0008j2up8fg1oxsq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -229,7 +241,7 @@
     <section id="comments">
     
         
-    <div class="ds-thread" data-thread-key="2016/04/20/mac下还原pvr与plist为多个png/" data-title="mac下还原pvr与plist为多个png" data-url="http://www.cloudwind.cc/2016/04/20/mac下还原pvr与plist为多个png/"></div>
+    <div class="ds-thread" data-thread-key="2019/04/18/更好的NSLog/" data-title="更好的NSLog" data-url="http://www.cloudwind.cc/2019/04/18/更好的NSLog/"></div>
     <style>
         #ds-thread #ds-reset .ds-textarea-wrapper {
             background: none;
@@ -333,20 +345,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2016/04/27/个人写的一个弹窗控件/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">下一篇</strong>
-        <p class="article-nav-title">
-        
-            个人写的一个弹窗控件
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2016/04/20/hexo-deploy-缓慢解决方法/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2016/06/17/关于如何编写Hexo博客总结（二）/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">hexo deploy 部署github缓慢解决方法</p>
+        <p class="article-nav-title">关于如何编写Hexo博客总结（二）</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
