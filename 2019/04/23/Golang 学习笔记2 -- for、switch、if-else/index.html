@@ -3,18 +3,26 @@
 <head>
     <meta charset="utf-8">
     
-    <title>分类：: iOS开发 | 苇白的混沌空间 | 致虚极 守静笃</title>
+    <title>Golang 学习笔记2 -- for、switch、if-else | 苇白的混沌空间 | 致虚极 守静笃</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="苇白的混沌空间 | 致虚极 守静笃">
-<meta property="og:url" content="http://www.spacevoid.cn/categories/iOS开发/index.html">
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="For循环基础init12345for i := 0; i &amp;lt; 5; i++ &amp;#123;	for j := 0; j &amp;lt; 5; j++ &amp;#123;		fmt.Println(i, &amp;quot; - &amp;quot;, j)	&amp;#125;&amp;#125;
+替代While循环12345i := 0for i &amp;lt; 10 &amp;#123; // 可以看成是 while(i&amp;lt;10)&amp;#12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang 学习笔记2 -- for、switch、if-else">
+<meta property="og:url" content="http://www.spacevoid.cn/2019/04/23/Golang 学习笔记2 -- for、switch、if-else/index.html">
 <meta property="og:site_name" content="苇白的混沌空间 | 致虚极 守静笃">
-<meta property="og:description">
+<meta property="og:description" content="For循环基础init12345for i := 0; i &amp;lt; 5; i++ &amp;#123;	for j := 0; j &amp;lt; 5; j++ &amp;#123;		fmt.Println(i, &amp;quot; - &amp;quot;, j)	&amp;#125;&amp;#125;
+替代While循环12345i := 0for i &amp;lt; 10 &amp;#123; // 可以看成是 while(i&amp;lt;10)&amp;#12">
+<meta property="og:image" content="http://i1.bvimg.com/684169/91ddff1a9750e1ae.jpg">
+<meta property="og:updated_time" content="2019-04-23T11:09:38.085Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="苇白的混沌空间 | 致虚极 守静笃">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Golang 学习笔记2 -- for、switch、if-else">
+<meta name="twitter:description" content="For循环基础init12345for i := 0; i &amp;lt; 5; i++ &amp;#123;	for j := 0; j &amp;lt; 5; j++ &amp;#123;		fmt.Println(i, &amp;quot; - &amp;quot;, j)	&amp;#125;&amp;#125;
+替代While循环12345i := 0for i &amp;lt; 10 &amp;#123; // 可以看成是 while(i&amp;lt;10)&amp;#12">
+<meta name="twitter:image" content="http://i1.bvimg.com/684169/91ddff1a9750e1ae.jpg">
     
 
     
@@ -124,132 +132,154 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-folder-open"></i>分类：: <em class="page-title-link">iOS开发</em>
+    <a class="page-title-link" href="/categories/golang/">golang</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-Golang 学习笔记2 -- for、switch、if-else" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2019" class="archive-year"><i class="icon fa fa-calendar-o"></i>2019</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2019/04/18/更好的NSLog/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://i2.bvimg.com/684169/24a1e16ae07b9344.jpg)" alt="更好的NSLog" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="ds-thread-count" data-thread-key="2019/04/18/更好的NSLog/">0</span>
-    
-</span>
-
-    
-</a>
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/iOS开发/">iOS开发</a>
-            </p>
-            <p class="date"><time datetime="2019-04-18T08:08:18.000Z" itemprop="datePublished">2019-04-18</time></p>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/04/18/更好的NSLog/">更好的NSLog</a>
+        Golang 学习笔记2 -- for、switch、if-else
         </h1>
     
 
-        <p class="article-excerpt">
-            更好的NSLog自从Xcode9之后，系统的消息里头加入了很多的其实并不需要的log，再加上各种第三方的log，整个log console看的非常的杂乱，想要看见自己的log很困难。
-第一步，让我们来一一解决掉系统的log系统的log有两种类型，一个是UI新出的main tread checker的log，以及系统输出的NSLog
-
-干掉main tread checker只需要在scheme编辑
-        </p>
-    </div>
-</article>
-    
-
-    
-    
+            </header>
         
-            </div></section>
-        
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2016" class="archive-year"><i class="icon fa fa-calendar-o"></i>2016</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2016/04/27/个人写的一个弹窗控件/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://i1.bvimg.com/684169/123bb89ea2fe4ceb.jpg)" alt="个人写的一个弹窗控件" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="ds-thread-count" data-thread-key="2016/04/27/个人写的一个弹窗控件/">0</span>
-    
-</span>
-
-    
+        <div class="article-subtitle">
+            <a href="/2019/04/23/Golang 学习笔记2 -- for、switch、if-else/" class="article-date">
+    <time datetime="2019-04-23T07:23:31.000Z" itemprop="datePublished">2019-04-23</time>
 </a>
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/iOS开发/">iOS开发</a>
-            </p>
-            <p class="date"><time datetime="2016-04-27T03:09:06.000Z" itemprop="datePublished">2016-04-27</time></p>
+            
         </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2016/04/27/个人写的一个弹窗控件/">个人写的一个弹窗控件</a>
-        </h1>
-    
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="http://i1.bvimg.com/684169/91ddff1a9750e1ae.jpg" alt=""></p>
+<h1 id="For循环"><a href="#For循环" class="headerlink" title="For循环"></a>For循环</h1><h4 id="基础init"><a href="#基础init" class="headerlink" title="基础init"></a>基础init</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for i := 0; i &lt; 5; i++ &#123;</span><br><span class="line">	for j := 0; j &lt; 5; j++ &#123;</span><br><span class="line">		fmt.Println(i, &quot; - &quot;, j)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="替代While循环"><a href="#替代While循环" class="headerlink" title="替代While循环"></a>替代While循环</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">i := 0</span><br><span class="line">for i &lt; 10 &#123; // 可以看成是 while(i&lt;10)&#123;...&#125;</span><br><span class="line">	fmt.Println(i)</span><br><span class="line">	i++</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h1><h4 id="有表达式的"><a href="#有表达式的" class="headerlink" title="有表达式的"></a>有表达式的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var i = 1</span><br><span class="line">switch i &#123;</span><br><span class="line">case 0:</span><br><span class="line">	fmt.Println(&quot;0&quot;)</span><br><span class="line">case 1:</span><br><span class="line">	fmt.Println(&quot;1&quot;)  //最后打印1</span><br><span class="line">default:</span><br><span class="line">	fmt.Println(&quot;default&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="没有表达式的"><a href="#没有表达式的" class="headerlink" title="没有表达式的"></a>没有表达式的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var i = 1</span><br><span class="line">switch &#123;</span><br><span class="line">case i == 0:</span><br><span class="line">	fmt.Println(&quot;0&quot;)</span><br><span class="line">case i == 1:</span><br><span class="line">	fmt.Println(&quot;1&quot;) //最后打印1</span><br><span class="line">default:</span><br><span class="line">	fmt.Println(&quot;default&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="If-else"><a href="#If-else" class="headerlink" title="If-else"></a>If-else</h1><ul>
+<li>if后面可以插入一个初始化表达式，然后用分号隔开判断条件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">b := true</span><br><span class="line">c := false</span><br><span class="line">if food := &quot;Chocolate&quot;; b &#123; //这句话里面的food先被初始化为Chocolate，然后再判断b的bool值</span><br><span class="line">	fmt.Println(food)  </span><br><span class="line">&#125;else if c&#123;</span><br><span class="line">	//dosomething</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	//dosomething</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// fmt.Println(food)  //被初始化的food只在if区域内生效，这句话food没有初始化</span><br></pre></td></tr></table></figure>
 
-        <p class="article-excerpt">
-            最近公司工作需要做一个从下往上的弹窗，但是我发现原生Actionsheet不是很好用，所以就自己写了一个弹窗控件。
-github地址：https://github.com/tk820723/WBCustomActionSheet
-使用起来非常简单。类方法传入弹框标题文字，然后使用类似tableview的datasource使用方法，每一个按钮样式都可以传进去，可以不为每个按钮绑定方法，使用dele
-        </p>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://www.spacevoid.cn/2019/04/23/Golang 学习笔记2 -- for、switch、if-else/" data-id="cjutpnmy4000181up9gviweu1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
     </div>
 </article>
+
+    <section id="comments">
     
+        
+    <div class="ds-thread" data-thread-key="2019/04/23/Golang 学习笔记2 -- for、switch、if-else/" data-title="Golang 学习笔记2 -- for、switch、if-else" data-url="http://www.spacevoid.cn/2019/04/23/Golang 学习笔记2 -- for、switch、if-else/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
 
-
-    </div></section>
-
-
-
+    
+    </section>
 
                         </div>
                     </section>
@@ -269,6 +299,29 @@ github地址：https://github.com/tk820723/WBCustomActionSheet
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/04/23/Golang 学习笔记3 -- 函数/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            Golang 学习笔记3 -- 函数
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/04/23/Golang 学习笔记1 -- 基础类型、fmt、工作空间、指针/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">Golang 学习笔记1 -- 基础类型、fmt、工作空间、指针</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         

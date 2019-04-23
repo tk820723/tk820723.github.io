@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8">
     
-    <title>分类：: iOS开发 | 苇白的混沌空间 | 致虚极 守静笃</title>
+    <title>分类：: golang | 苇白的混沌空间 | 致虚极 守静笃</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="苇白的混沌空间 | 致虚极 守静笃">
-<meta property="og:url" content="http://www.spacevoid.cn/categories/iOS开发/index.html">
+<meta property="og:url" content="http://www.spacevoid.cn/categories/golang/index.html">
 <meta property="og:site_name" content="苇白的混沌空间 | 致虚极 守静笃">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -124,7 +124,7 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-folder-open"></i>分类：: <em class="page-title-link">iOS开发</em>
+    <i class="icon fa fa-folder-open"></i>分类：: <em class="page-title-link">golang</em>
     </h1>
 </div>
                         <div class="main-body-content">
@@ -147,17 +147,17 @@
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2019/04/18/更好的NSLog/" class="thumbnail">
+        <a href="/2019/04/23/Golang 学习笔记3 -- 函数/" class="thumbnail">
     
     
-        <span style="background-image:url(http://i2.bvimg.com/684169/24a1e16ae07b9344.jpg)" alt="更好的NSLog" class="thumbnail-image"></span>
+        <span style="background-image:url(http://i1.bvimg.com/684169/91ddff1a9750e1ae.jpg)" alt="Golang 学习笔记3 -- 函数" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="ds-thread-count" data-thread-key="2019/04/18/更好的NSLog/">0</span>
+        <span class="ds-thread-count" data-thread-key="2019/04/23/Golang 学习笔记3 -- 函数/">0</span>
     
 </span>
 
@@ -166,22 +166,24 @@
         
         <div class="article-meta">
             <p class="category">
-            <a class="article-category-link" href="/categories/iOS开发/">iOS开发</a>
+            <a class="article-category-link" href="/categories/golang/">golang</a>
             </p>
-            <p class="date"><time datetime="2019-04-18T08:08:18.000Z" itemprop="datePublished">2019-04-18</time></p>
+            <p class="date"><time datetime="2019-04-23T08:30:00.000Z" itemprop="datePublished">2019-04-23</time></p>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2019/04/18/更好的NSLog/">更好的NSLog</a>
+        <a href="/2019/04/23/Golang 学习笔记3 -- 函数/">Golang 学习笔记3 -- 函数</a>
         </h1>
     
 
         <p class="article-excerpt">
-            更好的NSLog自从Xcode9之后，系统的消息里头加入了很多的其实并不需要的log，再加上各种第三方的log，整个log console看的非常的杂乱，想要看见自己的log很困难。
-第一步，让我们来一一解决掉系统的log系统的log有两种类型，一个是UI新出的main tread checker的log，以及系统输出的NSLog
+            
+函数
+main函数是你的程序的入口
 
-干掉main tread checker只需要在scheme编辑
+定义1234func greet(fname, lname string) (r int) &#123; //接收两个string的参数，返回一个int值	fmt.Println(fname, lname)	return		//这里直接返回r作为返回值&#125;
+返回两个参数的函数123456789101112131415161718192021packa
         </p>
     </div>
 </article>
@@ -189,15 +191,53 @@
 
     
     
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
         
-            </div></section>
+        <a href="/2019/04/23/Golang 学习笔记2 -- for、switch、if-else/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://i1.bvimg.com/684169/91ddff1a9750e1ae.jpg)" alt="Golang 学习笔记2 -- for、switch、if-else" class="thumbnail-image"></span>
+    
+    
         
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="ds-thread-count" data-thread-key="2019/04/23/Golang 学习笔记2 -- for、switch、if-else/">0</span>
+    
+</span>
+
+    
+</a>
         
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2016" class="archive-year"><i class="icon fa fa-calendar-o"></i>2016</a>
-            </div>
-            <div class="archives">
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/golang/">golang</a>
+            </p>
+            <p class="date"><time datetime="2019-04-23T07:23:31.000Z" itemprop="datePublished">2019-04-23</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2019/04/23/Golang 学习笔记2 -- for、switch、if-else/">Golang 学习笔记2 -- for、switch、if-else</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            
+For循环基础init12345for i := 0; i &lt; 5; i++ &#123;	for j := 0; j &lt; 5; j++ &#123;		fmt.Println(i, &quot; - &quot;, j)	&#125;&#125;
+替代While循环12345i := 0for i &lt; 10 &#123; // 可以看成是 while(i&lt;10)&#12
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
     
     
     
@@ -206,17 +246,17 @@
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2016/04/27/个人写的一个弹窗控件/" class="thumbnail">
+        <a href="/2019/04/23/Golang 学习笔记1 -- 基础类型、fmt、工作空间、指针/" class="thumbnail">
     
     
-        <span style="background-image:url(http://i1.bvimg.com/684169/123bb89ea2fe4ceb.jpg)" alt="个人写的一个弹窗控件" class="thumbnail-image"></span>
+        <span style="background-image:url(http://i1.bvimg.com/684169/91ddff1a9750e1ae.jpg)" alt="Golang 学习笔记1 -- 基础类型、fmt、工作空间、指针" class="thumbnail-image"></span>
     
     
         
 <span class="comment-counter">
     <i class="fa fa-comments-o"></i>
     
-        <span class="ds-thread-count" data-thread-key="2016/04/27/个人写的一个弹窗控件/">0</span>
+        <span class="ds-thread-count" data-thread-key="2019/04/23/Golang 学习笔记1 -- 基础类型、fmt、工作空间、指针/">0</span>
     
 </span>
 
@@ -225,24 +265,25 @@
         
         <div class="article-meta">
             <p class="category">
-            <a class="article-category-link" href="/categories/iOS开发/">iOS开发</a>
+            <a class="article-category-link" href="/categories/golang/">golang</a>
             </p>
-            <p class="date"><time datetime="2016-04-27T03:09:06.000Z" itemprop="datePublished">2016-04-27</time></p>
+            <p class="date"><time datetime="2019-04-23T06:44:54.000Z" itemprop="datePublished">2019-04-23</time></p>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2016/04/27/个人写的一个弹窗控件/">个人写的一个弹窗控件</a>
+        <a href="/2019/04/23/Golang 学习笔记1 -- 基础类型、fmt、工作空间、指针/">Golang 学习笔记1 -- 基础类型、fmt、工作空间、指针</a>
         </h1>
     
 
         <p class="article-excerpt">
-            最近公司工作需要做一个从下往上的弹窗，但是我发现原生Actionsheet不是很好用，所以就自己写了一个弹窗控件。
-github地址：https://github.com/tk820723/WBCustomActionSheet
-使用起来非常简单。类方法传入弹框标题文字，然后使用类似tableview的datasource使用方法，每一个按钮样式都可以传进去，可以不为每个按钮绑定方法，使用dele
+            
+基础类型12345678910111213a := 10     //int 默认值:0b := &quot;golang&quot;   //string 默认值:（空）c := 4.17   //float64 默认值:0d := true   //bool 默认值:falsee := &quot;Hello&quot;    //stringf := `Do you like my hat
         </p>
     </div>
 </article>
+    
+        </div>
     
 
 
