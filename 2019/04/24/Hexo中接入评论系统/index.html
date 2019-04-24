@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
+
     
-    <title>Hexo中接入评论系统 | 苇白的混沌空间 | 致虚极 守静笃</title>
+
+    
+    <title>Hexo hueman主题接入评论系统 | 苇白的混沌空间</title>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
         <meta name="keywords" content="" />
     
     <meta name="description" content="探索评论系统折腾了好久的个人网站又迎来了他的新的功能：评论。以前就折腾过一次这个，不过接入的是多说的服务，很多年没维护之后，这次重启了这个网站却发现，原来很多的评论系统都已经凉了，包括多说。重新接入一个评论系统吧，找了很久，看有人推荐gitment，据说是基于git仓库来进行储存评论，感觉不会挂，所以我就抱着试一试的心态接入了。接完了一直不能登陆，一登陆就返回主页，报一个miss_match_re">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo中接入评论系统">
+<meta property="og:title" content="Hexo hueman主题接入评论系统">
 <meta property="og:url" content="http://www.spacevoid.cn/2019/04/24/Hexo中接入评论系统/index.html">
-<meta property="og:site_name" content="苇白的混沌空间 | 致虚极 守静笃">
+<meta property="og:site_name" content="苇白的混沌空间">
 <meta property="og:description" content="探索评论系统折腾了好久的个人网站又迎来了他的新的功能：评论。以前就折腾过一次这个，不过接入的是多说的服务，很多年没维护之后，这次重启了这个网站却发现，原来很多的评论系统都已经凉了，包括多说。重新接入一个评论系统吧，找了很久，看有人推荐gitment，据说是基于git仓库来进行储存评论，感觉不会挂，所以我就抱着试一试的心态接入了。接完了一直不能登陆，一登陆就返回主页，报一个miss_match_re">
 <meta property="og:image" content="http://i1.bvimg.com/684169/78d00bc9cd49f7c1.jpg">
-<meta property="og:updated_time" content="2019-04-24T07:30:22.449Z">
+<meta property="og:updated_time" content="2019-04-24T10:15:16.136Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo中接入评论系统">
+<meta name="twitter:title" content="Hexo hueman主题接入评论系统">
 <meta name="twitter:description" content="探索评论系统折腾了好久的个人网站又迎来了他的新的功能：评论。以前就折腾过一次这个，不过接入的是多说的服务，很多年没维护之后，这次重启了这个网站却发现，原来很多的评论系统都已经凉了，包括多说。重新接入一个评论系统吧，找了很久，看有人推荐gitment，据说是基于git仓库来进行储存评论，感觉不会挂，所以我就抱着试一试的心态接入了。接完了一直不能登陆，一登陆就返回主页，报一个miss_match_re">
 <meta name="twitter:image" content="http://i1.bvimg.com/684169/78d00bc9cd49f7c1.jpg">
     
@@ -26,22 +30,23 @@
 
     
 
-    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/vendor/titillium-web/styles.css">
-    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
 
     <link rel="stylesheet" href="/css/style.css">
 
-    <script src="/vendor/jquery/2.0.3/jquery.min.js"></script>
+    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
     
     
-        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css">
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
     
     
-        <link rel="stylesheet" href="/vendor/scrollLoading/style.css">
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
     
     
     
+
 
 </head>
 
@@ -72,10 +77,6 @@
                             
                                         <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Hexo/">Hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/cocos2dx/">cocos2dx</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/golang/">golang</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/iOS开发/">iOS开发</a></li></ul>
                                     
-                                <li class="main-nav-list-item" >
-                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
-                                </li>
-                            
                         </ul>
                         <nav id="sub-nav">
                             <div id="search-form-wrap">
@@ -132,6 +133,7 @@
     <a class="page-title-link" href="/categories/Hexo/">Hexo</a>
     </h1>
 </div>
+
                         <div class="main-body-content">
                             <article id="post-Hexo中接入评论系统" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
@@ -140,18 +142,27 @@
                 
     
         <h1 class="article-title" itemprop="name">
-        Hexo中接入评论系统
+        Hexo hueman主题接入评论系统
         </h1>
     
 
             </header>
         
-        <div class="article-subtitle">
-            <a href="/2019/04/24/Hexo中接入评论系统/" class="article-date">
-    <time datetime="2019-04-24T07:03:00.000Z" itemprop="datePublished">2019-04-24</time>
-</a>
-            
-        </div>
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/04/24/Hexo中接入评论系统/" class="article-date">
+            <time datetime="2019-04-24T07:03:00.000Z" itemprop="datePublished">2019-04-24</time>
+        </a>
+    </div>
+
+		
+
+                
+            </div>
+        
+        
         <div class="article-entry" itemprop="articleBody">
             <h1 id="探索评论系统"><a href="#探索评论系统" class="headerlink" title="探索评论系统"></a>探索评论系统</h1><p>折腾了好久的个人网站又迎来了他的新的功能：评论。<br>以前就折腾过一次这个，不过接入的是多说的服务，很多年没维护之后，这次重启了这个网站却发现，原来很多的评论系统都已经凉了，包括多说。<br>重新接入一个评论系统吧，找了很久，看有人推荐gitment，据说是基于git仓库来进行储存评论，感觉不会挂，所以我就抱着试一试的心态接入了。接完了一直不能登陆，一登陆就返回主页，报一个miss_match_redirectURL的错误，仔细检查了很久，发现没有配错什么东西<br>回到了gitment仓库搜索issues才发现，原来gitment的原理是通过作者建立的一个application验证，来授予外部访问的授权，然后再转存到你自己的仓库中。本来没什么，但是麻烦就处在这个application是有服务器验证的，于是在很久没维护之后，这个验证已经挂掉了，想要通过验证，需要自己建立一个验证服务器，略觉麻烦，遂放弃。有兴趣的同学可以通过这个教程来接入：<a href="https://imsun.net/posts/gitment-introduction/" target="_blank" rel="external">https://imsun.net/posts/gitment-introduction/</a> 我遇到的问题其实也有解决方案：<a href="https://github.com/imsun/gitment/issues/178" target="_blank" rel="external">https://github.com/imsun/gitment/issues/178</a></p>
 <p>转而尝试去接入另外的评论系统：来必力</p>
@@ -162,6 +173,7 @@
 <h2 id="第三步：安装"><a href="#第三步：安装" class="headerlink" title="第三步：安装"></a>第三步：安装</h2><p>复制图中框住的文字（div的整个block），回到你hexo的目录，打开主题目录下的layout/comment/index.ejs（其他主题也有类似的东西）,直接把之前的复制的文字粘贴在最底部就大功告成了，然后部署你的hexo就可以了。</p>
 <p><img src="http://i1.bvimg.com/684169/75cae2ff313cc83c.jpg" alt="安装"></p>
 <h2 id="第四步：管理"><a href="#第四步：管理" class="headerlink" title="第四步：管理"></a>第四步：管理</h2><p>回到来必力的网站，点击右上角的个人图标，然后点击管理，就可以管理各种各样的东西，包括删除评论，新评论的提醒，登陆方法调整（点亮/拖动那些icons）等等，很简单，这里就不赘述了，大家自己研究就好。</p>
+<h1 id="其他选择：Next主题-valine"><a href="#其他选择：Next主题-valine" class="headerlink" title="其他选择：Next主题+valine"></a>其他选择：Next主题+valine</h1><p>目前博主现在已经移步next主题并且使用自带的valine来做评论系统<br>Next主题：<a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="external">https://github.com/theme-next/hexo-theme-next</a><br>Valine评论系统：<a href="https://ioliu.cn/2017/add-valine-comments-to-your-blog/#more" target="_blank" rel="external">https://ioliu.cn/2017/add-valine-comments-to-your-blog/#more</a></p>
 
         </div>
         <footer class="article-footer">
@@ -169,7 +181,7 @@
 
 
 
-    <a data-url="http://www.spacevoid.cn/2019/04/24/Hexo中接入评论系统/" data-id="cjuuwipzl0004z2upbwu0mha6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.spacevoid.cn/2019/04/24/Hexo中接入评论系统/" data-id="cjuv4ndue000673upcfr6uto5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -231,28 +243,38 @@
 
         </footer>
     </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "苇白"
+        },
+        "headline": "Hexo hueman主题接入评论系统",
+        "image": "http://www.spacevoid.cnhttp://i1.bvimg.com/684169/78d00bc9cd49f7c1.jpg",
+        "keywords": "",
+        "genre": "Hexo",
+        "datePublished": "2019-04-24",
+        "dateCreated": "2019-04-24",
+        "dateModified": "2019-04-24",
+        "url": "http://www.spacevoid.cn/2019/04/24/Hexo中接入评论系统/",
+        "description": "探索评论系统折腾了好久的个人网站又迎来了他的新的功能：评论。以前就折腾过一次这个，不过接入的是多说的服务，很多年没维护之后，这次重启了这个网站却发现，原来很多的评论系统都已经凉了，包括多说。重新接入一个评论系统吧，找了很久，看有人推荐gitment，据说是基于git仓库来进行储存评论，感觉不会挂，所以我就抱着试一试的心态接入了。接完了一直不能登陆，一登陆就返回主页，报一个miss_match_re"
+        "wordCount": 52
+    }
+</script>
+
 </article>
 
     <section id="comments">
     
-        <div id="lv-container" data-id="city" data-uid="MTAyMC80Mzg5OS8yMDQzNA==">
-	<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
+        
+    <div id="valine-thread"></div>
 
-       if (typeof LivereTower === 'function') { return; }
 
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-	</script>
-<noscript> Please activate JavaScript for write a comment in LiveRe</noscript>
-</div>
     
     </section>
+
 
 
                         </div>
@@ -265,7 +287,7 @@
             
                 
                 <li>
-                    <a class="social-tooltip" title="github" href="https://github.com/tk820723" target="_blank">
+                    <a class="social-tooltip" title="github" href="https://github.com/tk820723" target="_blank" rel="noopener">
                         <i class="icon fa fa-github"></i>
                     </a>
                 </li>
@@ -291,6 +313,9 @@
         
             
                 
+
+            
+                
     <div class="widget-wrap">
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
@@ -302,15 +327,16 @@
                             <a href="/2019/04/24/Hexo中接入评论系统/" class="thumbnail">
     
     
-        <span style="background-image:url(http://i1.bvimg.com/684169/78d00bc9cd49f7c1.jpg)" alt="Hexo中接入评论系统" class="thumbnail-image"></span>
+        <span style="background-image:url(http://i1.bvimg.com/684169/78d00bc9cd49f7c1.jpg)" alt="Hexo hueman主题接入评论系统" class="thumbnail-image"></span>
     
     
 </a>
+
                         </div>
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Hexo/">Hexo</a></p>
-                            <p class="item-title"><a href="/2019/04/24/Hexo中接入评论系统/" class="title">Hexo中接入评论系统</a></p>
+                            <p class="item-title"><a href="/2019/04/24/Hexo中接入评论系统/" class="title">Hexo hueman主题接入评论系统</a></p>
                             <p class="item-date"><time datetime="2019-04-24T07:03:00.000Z" itemprop="datePublished">2019-04-24</time></p>
                         </div>
                     </li>
@@ -325,6 +351,7 @@
     
     
 </a>
+
                         </div>
                         
                         <div class="item-inner">
@@ -344,6 +371,7 @@
     
     
 </a>
+
                         </div>
                         
                         <div class="item-inner">
@@ -363,6 +391,7 @@
     
     
 </a>
+
                         </div>
                         
                         <div class="item-inner">
@@ -382,6 +411,7 @@
     
     
 </a>
+
                         </div>
                         
                         <div class="item-inner">
@@ -416,52 +446,10 @@
 
 
             
-                
-    <div class="widget-wrap widget-list">
-        <h3 class="widget-title">标签</h3>
-        <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo-deploy/">Hexo deploy</a><span class="tag-list-count">1</span></li></ul>
-        </div>
-    </div>
-
-
-            
-                
-    <div class="widget-wrap widget-float">
-        <h3 class="widget-title">标签云</h3>
-        <div class="widget tagcloud">
-            <a href="/tags/Hexo-deploy/" style="font-size: 10px;">Hexo deploy</a>
-        </div>
-    </div>
-
-
-            
-                
-    <div class="widget-wrap widget-list">
-        <h3 class="widget-title">链接</h3>
-        <div class="widget">
-            <ul>
-                
-            </ul>
-        </div>
-    </div>
-
-
-            
-                
-    <div class="widget-wrap widget-list">
-        <h3 class="widget-title">音乐播放器</h3>
-        <div class="widget">
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=350
-            src="http://music.163.com/outchain/player?type=0&id=405802264&auto=0&height=350"></iframe>
-        </div>
-    </div>
-
-
-            
         
     </div>
 </aside>
+
                 </div>
             </div>
         </div>
@@ -476,19 +464,54 @@
                 <p>&copy; 2019 苇白</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
             </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
         </div>
     </div>
 </footer>
+
         
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:false,
+            verify:false,
+            app_id: '4yEaeF3u0NOkNq3YHGUF0ttr-gzGzoHsz',
+            app_key: 'uoOK8B8VTKzC8otpHw4JChNd',
+            placeholder: '留下你的评论',
+            pageSize: '10',
+            avatar: 'identicon',
+            avatar_cdn:  'https://gravatar.loli.net/avatar/'
+        });
+    </script>
+
+
+
+
 
     
-        <script src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
     
 
-    
-        <script src="/vendor/scrollLoading/jquery.scrollLoading.js"></script>
-        <script src="/vendor/scrollLoading/main.js"></script>
-    
 
 
 <!-- Custom Scripts -->
