@@ -3,35 +3,23 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Golang 学习笔记3 -- 函数 | 苇白的混沌空间 | 致虚极 守静笃</title>
+    <title>Hexo中接入评论系统 | 苇白的混沌空间 | 致虚极 守静笃</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
         <meta name="keywords" content="" />
     
-    <meta name="description" content="函数
-main函数是你的程序的入口
-
-定义1234func greet(fname, lname string) (r int) &amp;#123; //接收两个string的参数，返回一个int值	fmt.Println(fname, lname)	return		//这里直接返回r作为返回值&amp;#125;
-返回两个参数的函数123456789101112131415161718192021packa">
+    <meta name="description" content="探索评论系统折腾了好久的个人网站又迎来了他的新的功能：评论。以前就折腾过一次这个，不过接入的是多说的服务，很多年没维护之后，这次重启了这个网站却发现，原来很多的评论系统都已经凉了，包括多说。重新接入一个评论系统吧，找了很久，看有人推荐gitment，据说是基于git仓库来进行储存评论，感觉不会挂，所以我就抱着试一试的心态接入了。接完了一直不能登陆，一登陆就返回主页，报一个miss_match_re">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Golang 学习笔记3 -- 函数">
-<meta property="og:url" content="http://www.spacevoid.cn/2019/04/23/Golang 学习笔记3 -- 函数/index.html">
+<meta property="og:title" content="Hexo中接入评论系统">
+<meta property="og:url" content="http://www.spacevoid.cn/2019/04/24/Hexo中接入评论系统/index.html">
 <meta property="og:site_name" content="苇白的混沌空间 | 致虚极 守静笃">
-<meta property="og:description" content="函数
-main函数是你的程序的入口
-
-定义1234func greet(fname, lname string) (r int) &amp;#123; //接收两个string的参数，返回一个int值	fmt.Println(fname, lname)	return		//这里直接返回r作为返回值&amp;#125;
-返回两个参数的函数123456789101112131415161718192021packa">
-<meta property="og:image" content="http://i1.bvimg.com/684169/91ddff1a9750e1ae.jpg">
-<meta property="og:updated_time" content="2019-04-23T11:08:25.914Z">
+<meta property="og:description" content="探索评论系统折腾了好久的个人网站又迎来了他的新的功能：评论。以前就折腾过一次这个，不过接入的是多说的服务，很多年没维护之后，这次重启了这个网站却发现，原来很多的评论系统都已经凉了，包括多说。重新接入一个评论系统吧，找了很久，看有人推荐gitment，据说是基于git仓库来进行储存评论，感觉不会挂，所以我就抱着试一试的心态接入了。接完了一直不能登陆，一登陆就返回主页，报一个miss_match_re">
+<meta property="og:image" content="http://i1.bvimg.com/684169/78d00bc9cd49f7c1.jpg">
+<meta property="og:updated_time" content="2019-04-24T07:30:22.449Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Golang 学习笔记3 -- 函数">
-<meta name="twitter:description" content="函数
-main函数是你的程序的入口
-
-定义1234func greet(fname, lname string) (r int) &amp;#123; //接收两个string的参数，返回一个int值	fmt.Println(fname, lname)	return		//这里直接返回r作为返回值&amp;#125;
-返回两个参数的函数123456789101112131415161718192021packa">
-<meta name="twitter:image" content="http://i1.bvimg.com/684169/91ddff1a9750e1ae.jpg">
+<meta name="twitter:title" content="Hexo中接入评论系统">
+<meta name="twitter:description" content="探索评论系统折腾了好久的个人网站又迎来了他的新的功能：评论。以前就折腾过一次这个，不过接入的是多说的服务，很多年没维护之后，这次重启了这个网站却发现，原来很多的评论系统都已经凉了，包括多说。重新接入一个评论系统吧，找了很久，看有人推荐gitment，据说是基于git仓库来进行储存评论，感觉不会挂，所以我就抱着试一试的心态接入了。接完了一直不能登陆，一登陆就返回主页，报一个miss_match_re">
+<meta name="twitter:image" content="http://i1.bvimg.com/684169/78d00bc9cd49f7c1.jpg">
     
 
     
@@ -141,68 +129,39 @@ main函数是你的程序的入口
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/golang/">golang</a>
+    <a class="page-title-link" href="/categories/Hexo/">Hexo</a>
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-Golang 学习笔记3 -- 函数" class="article article-single article-type-post" itemscope itemprop="blogPost">
+                            <article id="post-Hexo中接入评论系统" class="article article-single article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             <header class="article-header">
                 
     
         <h1 class="article-title" itemprop="name">
-        Golang 学习笔记3 -- 函数
+        Hexo中接入评论系统
         </h1>
     
 
             </header>
         
         <div class="article-subtitle">
-            <a href="/2019/04/23/Golang 学习笔记3 -- 函数/" class="article-date">
-    <time datetime="2019-04-23T08:30:00.000Z" itemprop="datePublished">2019-04-23</time>
+            <a href="/2019/04/24/Hexo中接入评论系统/" class="article-date">
+    <time datetime="2019-04-24T07:03:00.000Z" itemprop="datePublished">2019-04-24</time>
 </a>
             
         </div>
         <div class="article-entry" itemprop="articleBody">
-            <p><img src="http://i1.bvimg.com/684169/91ddff1a9750e1ae.jpg" alt=""></p>
-<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><ul>
-<li>main函数是你的程序的入口</li>
-</ul>
-<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">func greet(fname, lname string) (r int) &#123; //接收两个string的参数，返回一个int值</span><br><span class="line">	fmt.Println(fname, lname)</span><br><span class="line">	return		//这里直接返回r作为返回值</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="返回两个参数的函数"><a href="#返回两个参数的函数" class="headerlink" title="返回两个参数的函数"></a>返回两个参数的函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">   &quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">   id, err := ReturnId()</span><br><span class="line"></span><br><span class="line">   if err != nil &#123;</span><br><span class="line">      fmt.Printf(&quot;ERROR: %s&quot;, err)</span><br><span class="line">      return</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   fmt.Printf(&quot;Id: %d\n&quot;, id)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func ReturnId() (int, error) &#123;</span><br><span class="line">   id := 10</span><br><span class="line">   return id, nil</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>值得注意的</p>
-<ul>
-<li>函数返回两个值是go语法中常用的做法，一般来说第一个值是想要的函数返回值，第二个返回值通常与错误处理相关</li>
-<li>如果你不关心错误，你可以使用下划线来代替第二个参数：id, _ = ReturnFuc()</li>
-<li>在函数中，如果你命名了返回值的变量，相当于构造了这个函数作用域中的变量，请小心作用域陷阱: <a href="https://www.goinggo.net/2013/10/functions-and-naked-returns-in-go.html" target="_blank" rel="external">https://www.goinggo.net/2013/10/functions-and-naked-returns-in-go.html</a></li>
-</ul>
-</blockquote>
-<h4 id="返回不定个参数的函数"><a href="#返回不定个参数的函数" class="headerlink" title="返回不定个参数的函数"></a>返回不定个参数的函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">func add(a ...int) int &#123; // 传入的这个a的类型为切片，后面的笔记还会说到切片，这里仅作为了解即可</span><br><span class="line">	sum := 0</span><br><span class="line">	for _, i := range a &#123;</span><br><span class="line">		sum += i</span><br><span class="line">	&#125;</span><br><span class="line">	return sum</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">data := []int&#123;43, 56, 87, 12, 45, 57&#125; //创建一个切片</span><br><span class="line">n := add(data...) //将切片传入，不可传入数组</span><br></pre></td></tr></table></figure>
-<h4 id="切片当参数的函数"><a href="#切片当参数的函数" class="headerlink" title="切片当参数的函数"></a>切片当参数的函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">func add(a []int) int &#123; // 传入的这个a的类型为切片，后面的笔记还会说到切片，这里仅作为了解即可</span><br><span class="line">	sum := 0</span><br><span class="line">	for _, i := range a &#123;</span><br><span class="line">		sum += i</span><br><span class="line">	&#125;</span><br><span class="line">	return sum</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">data := []int&#123;43, 56, 87, 12, 45, 57&#125; //创建一个切片</span><br><span class="line">n := add(data...) //将切片传入，不可传入数组</span><br></pre></td></tr></table></figure>
-<h4 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	//函数指针相当于代码块的概念，这个指针可以把一段代码块当成是参数来进行传递，常用于回调的传递</span><br><span class="line">	greeting := func() &#123;</span><br><span class="line">		fmt.Println(&quot;Hello world!&quot;)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	greeting()</span><br><span class="line">	fmt.Printf(&quot;%T\n&quot;, greeting)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">func makeGreeter() func() string &#123;</span><br><span class="line">	return func() string &#123;</span><br><span class="line">		return &quot;Hello world!&quot;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	greet := makeGreeter()</span><br><span class="line">	fmt.Println(greet())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h4><p>匿名函数是指没有定义名字符号的函数</p>
-<ul>
-<li>直接调用</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">   func(s string) &#123;</span><br><span class="line">       println(s)</span><br><span class="line">    &#125;(&quot;hello,world!&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>复值给变量</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">   add:=func(x,y int)int&#123;</span><br><span class="line">       return x+y</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   println(add(1,2))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>作为参数</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">func test(f func()) &#123;</span><br><span class="line">   f()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">   test(func() &#123;</span><br><span class="line">       println(&quot;hello,world!&quot;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>作为返回值</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">func test()func(int,int)int&#123;</span><br><span class="line">   return func(x,y int)int&#123;</span><br><span class="line">       return x+y</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">   add:=test()</span><br><span class="line">   println(add(1,2))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>闭包: 闭包就是匿名函数，匿名函数可以引用外面的局部变量，当闭包没有执行完毕的时候，局部变量不会被释放，并且在闭包里面修改变量值会影响整个变量</li>
-</ul>
+            <h1 id="探索评论系统"><a href="#探索评论系统" class="headerlink" title="探索评论系统"></a>探索评论系统</h1><p>折腾了好久的个人网站又迎来了他的新的功能：评论。<br>以前就折腾过一次这个，不过接入的是多说的服务，很多年没维护之后，这次重启了这个网站却发现，原来很多的评论系统都已经凉了，包括多说。<br>重新接入一个评论系统吧，找了很久，看有人推荐gitment，据说是基于git仓库来进行储存评论，感觉不会挂，所以我就抱着试一试的心态接入了。接完了一直不能登陆，一登陆就返回主页，报一个miss_match_redirectURL的错误，仔细检查了很久，发现没有配错什么东西<br>回到了gitment仓库搜索issues才发现，原来gitment的原理是通过作者建立的一个application验证，来授予外部访问的授权，然后再转存到你自己的仓库中。本来没什么，但是麻烦就处在这个application是有服务器验证的，于是在很久没维护之后，这个验证已经挂掉了，想要通过验证，需要自己建立一个验证服务器，略觉麻烦，遂放弃。有兴趣的同学可以通过这个教程来接入：<a href="https://imsun.net/posts/gitment-introduction/" target="_blank" rel="external">https://imsun.net/posts/gitment-introduction/</a> 我遇到的问题其实也有解决方案：<a href="https://github.com/imsun/gitment/issues/178" target="_blank" rel="external">https://github.com/imsun/gitment/issues/178</a></p>
+<p>转而尝试去接入另外的评论系统：来必力</p>
+<h1 id="接入来必力"><a href="#接入来必力" class="headerlink" title="接入来必力"></a>接入来必力</h1><p>来必力是韩国的产品，有中文的版本，有免费版本可以使用。接入方法也非常简单，这里使用我的主题hueman来做例子，一步一步记录一下接入的过程。</p>
+<h2 id="第一步：注册来必力"><a href="#第一步：注册来必力" class="headerlink" title="第一步：注册来必力"></a>第一步：注册来必力</h2><p>来必力的官方网站：<a href="https://www.livere.com" target="_blank" rel="external">https://www.livere.com</a><br>在这个网站注册一个账号，并且使用邮箱来验证你的账号，注册就大功告成了</p>
+<h2 id="第二步：初始化"><a href="#第二步：初始化" class="headerlink" title="第二步：初始化"></a>第二步：初始化</h2><p>回到首页，点击安装按钮，然后在city版本下点击安装，然后输入你的网站的连接（如我这个网站：<a href="https://spacevoid.cn)，网站名称随便，选择个人，然后点击申请获取代码来到下面这个页面" target="_blank" rel="external">https://spacevoid.cn)，网站名称随便，选择个人，然后点击申请获取代码来到下面这个页面</a></p>
+<p><img src="http://i1.bvimg.com/684169/78d00bc9cd49f7c1.jpg" alt="初始化"></p>
+<h2 id="第三步：安装"><a href="#第三步：安装" class="headerlink" title="第三步：安装"></a>第三步：安装</h2><p>复制图中框住的文字（div的整个block），回到你hexo的目录，打开主题目录下的layout/comment/index.ejs（其他主题也有类似的东西）,直接把之前的复制的文字粘贴在最底部就大功告成了，然后部署你的hexo就可以了。</p>
+<p><img src="http://i1.bvimg.com/684169/75cae2ff313cc83c.jpg" alt="安装"></p>
+<h2 id="第四步：管理"><a href="#第四步：管理" class="headerlink" title="第四步：管理"></a>第四步：管理</h2><p>回到来必力的网站，点击右上角的个人图标，然后点击管理，就可以管理各种各样的东西，包括删除评论，新评论的提醒，登陆方法调整（点亮/拖动那些icons）等等，很简单，这里就不赘述了，大家自己研究就好。</p>
 
         </div>
         <footer class="article-footer">
@@ -210,7 +169,7 @@ main函数是你的程序的入口
 
 
 
-    <a data-url="http://www.spacevoid.cn/2019/04/23/Golang 学习笔记3 -- 函数/" data-id="cjuuwipzk0003z2upryitu47l" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.spacevoid.cn/2019/04/24/Hexo中接入评论系统/" data-id="cjuuwipzl0004z2upbwu0mha6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -318,20 +277,10 @@ main函数是你的程序的入口
         
 <nav id="article-nav">
     
-        <a href="/2019/04/24/Hexo中接入评论系统/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">下一篇</strong>
-        <p class="article-nav-title">
-        
-            Hexo中接入评论系统
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
     
-    
-        <a href="/2019/04/23/Golang 学习笔记2 -- for、switch、if-else/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2019/04/23/Golang 学习笔记3 -- 函数/" id="article-nav-older" class="article-nav-link-wrap">
         <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">Golang 学习笔记2 -- for、switch、if-else</p>
+        <p class="article-nav-title">Golang 学习笔记3 -- 函数</p>
         <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
         </a>
     
