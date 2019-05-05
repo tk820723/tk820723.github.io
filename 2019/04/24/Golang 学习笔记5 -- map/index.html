@@ -6,19 +6,30 @@
     
 
     
-    <title>分类：: cocos2dx | 苇白的混沌空间</title>
+    <title>Golang 学习笔记5 -- map | 苇白的混沌空间</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="苇白的混沌空间">
-<meta property="og:url" content="http://www.spacevoid.cn/categories/cocos2dx/index.html">
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="mapmap是一堆键值对的未排序集合
+声明12var myMap = make(map[string] PersonInfo)myMap[&amp;quot;123&amp;quot;] = PersonInfo&amp;#123;&amp;quot;1&amp;quot;, &amp;quot;Jack&amp;quot;, &amp;quot;address 1...&amp;quot;...&amp;#125;
+123var myMap = map[string]str">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang 学习笔记5 -- map">
+<meta property="og:url" content="http://www.spacevoid.cn/2019/04/24/Golang 学习笔记5 -- map/index.html">
 <meta property="og:site_name" content="苇白的混沌空间">
-<meta property="og:description">
+<meta property="og:description" content="mapmap是一堆键值对的未排序集合
+声明12var myMap = make(map[string] PersonInfo)myMap[&amp;quot;123&amp;quot;] = PersonInfo&amp;#123;&amp;quot;1&amp;quot;, &amp;quot;Jack&amp;quot;, &amp;quot;address 1...&amp;quot;...&amp;#125;
+123var myMap = map[string]str">
+<meta property="og:image" content="https://blog.golang.org/go-brand/logos.jpg">
+<meta property="og:updated_time" content="2019-05-05T08:35:02.638Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="苇白的混沌空间">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Golang 学习笔记5 -- map">
+<meta name="twitter:description" content="mapmap是一堆键值对的未排序集合
+声明12var myMap = make(map[string] PersonInfo)myMap[&amp;quot;123&amp;quot;] = PersonInfo&amp;#123;&amp;quot;1&amp;quot;, &amp;quot;Jack&amp;quot;, &amp;quot;address 1...&amp;quot;...&amp;#125;
+123var myMap = map[string]str">
+<meta name="twitter:image" content="https://blog.golang.org/go-brand/logos.jpg">
     
 
     
@@ -125,76 +136,147 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-folder-open"></i>分类：: <em class="page-title-link">cocos2dx</em>
+    <a class="page-title-link" href="/categories/golang/">golang</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-Golang 学习笔记5 -- map" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2016" class="archive-year"><i class="icon fa fa-calendar-o"></i>2016</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2016/04/20/mac下还原pvr与plist为多个png/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://i.loli.net/2019/05/05/5cce9efda42c7.png)" alt="mac下还原pvr与plist为多个png" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span><a href="http://www.spacevoid.cn/2016/04/20/mac下还原pvr与plist为多个png/#isso-thread"></a></span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/cocos2dx/">cocos2dx</a>
-            </div>
-            <div class="date"><time datetime="2016-04-20T09:06:34.000Z" itemprop="datePublished">2016-04-20</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2016/04/20/mac下还原pvr与plist为多个png/">mac下还原pvr与plist为多个png</a>
+        Golang 学习笔记5 -- map
         </h1>
     
 
-        <p class="article-excerpt">
-            
-在网上找了很久，如何把很多网上下载的ipa包中扣出的图片资源（通常为pvr与plist结合格式）还原为png，只找到了一些python写的代码，但是mac下跑不起来，一直没有找到很好的自动化方法，就自己写了一个mac软件，帮助处理自动化切图。需要自己传入相应的png大图路径，plist文件路径，以及输出目录路径
-控制器代码1234567891011121314151617181920212223
-        </p>
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/04/24/Golang 学习笔记5 -- map/" class="article-date">
+            <time datetime="2019-04-24T11:00:00.000Z" itemprop="datePublished">2019-04-24</time>
+        </a>
     </div>
-</article>
-    
+
+		
+
+                
+                阅读数量:<span id="/2019/04/24/Golang 学习笔记5 -- map/" class="leancloud_visitors" data-flag-title="Golang 学习笔记5 -- map"></span>次
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><p>map是一堆键值对的未排序集合</p>
+<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var myMap = make(map[string] PersonInfo)</span><br><span class="line">myMap[&quot;123&quot;] = PersonInfo&#123;&quot;1&quot;, &quot;Jack&quot;, &quot;address 1...&quot;...&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var myMap = map[string]string&#123;</span><br><span class="line">  &quot;123&quot;: &quot;hi&quot;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://blog.golang.org/go-brand/logos.jpg" target="_blank" rel="external"><div align="left"><img src="https://blog.golang.org/go-brand/logos.jpg" alt="go-brand-logo"></div></a></p>
+
         </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://www.spacevoid.cn/2019/04/24/Golang 学习笔记5 -- map/" data-id="cjvaqbtta0005vlup2brd29lp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "苇白"
+        },
+        "headline": "Golang 学习笔记5 -- map",
+        "image": "http://www.spacevoid.cnhttps://blog.golang.org/go-brand/logos.jpg",
+        "keywords": "",
+        "genre": "golang",
+        "datePublished": "2019-04-24",
+        "dateCreated": "2019-04-24",
+        "dateModified": "2019-05-05",
+        "url": "http://www.spacevoid.cn/2019/04/24/Golang 学习笔记5 -- map/",
+        "description": "mapmap是一堆键值对的未排序集合
+声明12var myMap = make(map[string] PersonInfo)myMap[&quot;123&quot;] = PersonInfo&#123;&quot;1&quot;, &quot;Jack&quot;, &quot;address 1...&quot;...&#125;
+123var myMap = map[string]str"
+        "wordCount": 48
+    }
+</script>
+
+</article>
+
+    <section id="comments">
     
+        
+    <div id="valine-thread"></div>
 
 
-    </div></section>
-
+    
+    </section>
 
 
 
@@ -216,6 +298,29 @@
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2019/04/24/Golang 学习笔记4 -- 切片和数组/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            Golang 学习笔记4 -- 切片和数组
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2019/04/24/Golang 学习笔记6 -- 面向对象/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">Golang 学习笔记5 -- map</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         

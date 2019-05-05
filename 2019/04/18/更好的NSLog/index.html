@@ -24,15 +24,15 @@
 第一步，让我们来一一解决掉系统的log系统的log有两种类型，一个是UI新出的main tread checker的log，以及系统输出的NSLog
 
 干掉main tread checker只需要在scheme编辑">
-<meta property="og:image" content="http://i2.bvimg.com/684169/24a1e16ae07b9344.jpg">
-<meta property="og:updated_time" content="2019-04-23T10:53:05.139Z">
+<meta property="og:image" content="https://i.loli.net/2019/05/05/5cce9dffafe5b.png">
+<meta property="og:updated_time" content="2019-05-05T08:26:00.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="更好的NSLog">
 <meta name="twitter:description" content="更好的NSLog自从Xcode9之后，系统的消息里头加入了很多的其实并不需要的log，再加上各种第三方的log，整个log console看的非常的杂乱，想要看见自己的log很困难。
 第一步，让我们来一一解决掉系统的log系统的log有两种类型，一个是UI新出的main tread checker的log，以及系统输出的NSLog
 
 干掉main tread checker只需要在scheme编辑">
-<meta name="twitter:image" content="http://i2.bvimg.com/684169/24a1e16ae07b9344.jpg">
+<meta name="twitter:image" content="https://i.loli.net/2019/05/05/5cce9dffafe5b.png">
     
 
     
@@ -169,6 +169,7 @@
 		
 
                 
+                阅读数量:<span id="/2019/04/18/更好的NSLog/" class="leancloud_visitors" data-flag-title="更好的NSLog"></span>次
             </div>
         
         
@@ -177,7 +178,7 @@
 <p>第一步，让我们来一一解决掉系统的log<br>系统的log有两种类型，一个是UI新出的main tread checker的log，以及系统输出的NSLog</p>
 <ul>
 <li>干掉main tread checker只需要在scheme编辑中选择Diagnostics tag，然后将main tread checker的勾选消除掉，就可以屏蔽掉此类log。</li>
-<li>系统输出NSLog这个比较复杂，因为没有入口可以将它关闭，只能通过关闭NSLog输出来间接关闭系统的输出。有些童鞋会问，那NSLog被关闭自己想要输出怎么办，没关系，这个后面会说，这里先说下如何关闭NSLog的输出。想要关闭NSLog，也是在scheme编辑中，在Arguments tag下，增加”OS_ACTIVITY_DT_MODE”的key，然后设置value为NO，就可以关闭所有的NSLog的输出（包括第三方和自己的）<br><img src="http://i2.bvimg.com/684169/24a1e16ae07b9344.jpg" alt=""></li>
+<li>系统输出NSLog这个比较复杂，因为没有入口可以将它关闭，只能通过关闭NSLog输出来间接关闭系统的输出。有些童鞋会问，那NSLog被关闭自己想要输出怎么办，没关系，这个后面会说，这里先说下如何关闭NSLog的输出。想要关闭NSLog，也是在scheme编辑中，在Arguments tag下，增加”OS_ACTIVITY_DT_MODE”的key，然后设置value为NO，就可以关闭所有的NSLog的输出（包括第三方和自己的）<br><a href="https://i.loli.net/2019/05/05/5cce9dffafe5b.png" target="_blank" rel="external"><img src="https://i.loli.net/2019/05/05/5cce9dffafe5b.png" alt="better_NSLog_01.png"></a></li>
 </ul>
 <p>第二步，让我们来解决掉一些第三方的log<br>其实在第一步的时候我们已经干掉了大部分第三方的log（通过干掉NSLog），我这边观察，还剩下GoogleFireBase的各种log还在输出，这个就需要进入到相对应的第三方的文档去查看如何关闭。以GoogleFireBase的输出为例，想要关闭GoogleFirebase的输出，只需要在初始化App的时候，将firebase的loggerLevel设置为min即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[FIRConfiguration sharedInstance] setLoggerLevel:FIRLoggerLevelMin];</span><br></pre></td></tr></table></figure></p>
 <p>第三步，使用我们更加好用的log来进行输出。现在大部分iOS程序员都知道通过使用另外一个Log来输出进行Debug和Release的区分（Release不需要输出log），这里直接上代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//DLog 打印，debug下打印 非debug不打印</span><br><span class="line">#ifdef DEBUG</span><br><span class="line">#define DLog(FORMAT, ...) fprintf(stderr,&quot;%s\n&quot;, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);</span><br><span class="line">#else</span><br><span class="line">#define DLog(...)</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure></p>
@@ -189,7 +190,7 @@
 
 
 
-    <a data-url="http://www.spacevoid.cn/2019/04/18/更好的NSLog/" data-id="cjuv4ndum000j73upmzwy5a6h" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.spacevoid.cn/2019/04/18/更好的NSLog/" data-id="cjvaqbttl000pvlupg7kv1eey" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -260,18 +261,18 @@
             "name": "苇白"
         },
         "headline": "更好的NSLog",
-        "image": "http://www.spacevoid.cnhttp://i2.bvimg.com/684169/24a1e16ae07b9344.jpg",
+        "image": "http://www.spacevoid.cnhttps://i.loli.net/2019/05/05/5cce9dffafe5b.png",
         "keywords": "",
         "genre": "iOS开发",
         "datePublished": "2019-04-18",
         "dateCreated": "2019-04-18",
-        "dateModified": "2019-04-23",
+        "dateModified": "2019-05-05",
         "url": "http://www.spacevoid.cn/2019/04/18/更好的NSLog/",
         "description": "更好的NSLog自从Xcode9之后，系统的消息里头加入了很多的其实并不需要的log，再加上各种第三方的log，整个log console看的非常的杂乱，想要看见自己的log很困难。
 第一步，让我们来一一解决掉系统的log系统的log有两种类型，一个是UI新出的main tread checker的log，以及系统输出的NSLog
 
 干掉main tread checker只需要在scheme编辑"
-        "wordCount": 51
+        "wordCount": 54
     }
 </script>
 
@@ -345,10 +346,70 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2019/04/24/Golang 学习笔记4 -- 切片和数组/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog.golang.org/go-brand/logos.jpg)" alt="Golang 学习笔记4 -- 切片和数组" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
+                            <p class="item-title"><a href="/2019/04/24/Golang 学习笔记4 -- 切片和数组/" class="title">Golang 学习笔记4 -- 切片和数组</a></p>
+                            <p class="item-date"><time datetime="2019-04-24T11:00:00.000Z" itemprop="datePublished">2019-04-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/04/24/Golang 学习笔记5 -- map/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog.golang.org/go-brand/logos.jpg)" alt="Golang 学习笔记5 -- map" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
+                            <p class="item-title"><a href="/2019/04/24/Golang 学习笔记5 -- map/" class="title">Golang 学习笔记5 -- map</a></p>
+                            <p class="item-date"><time datetime="2019-04-24T11:00:00.000Z" itemprop="datePublished">2019-04-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/04/24/Golang 学习笔记6 -- 面向对象/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog.golang.org/go-brand/logos.jpg)" alt="Golang 学习笔记5 -- map" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
+                            <p class="item-title"><a href="/2019/04/24/Golang 学习笔记6 -- 面向对象/" class="title">Golang 学习笔记5 -- map</a></p>
+                            <p class="item-date"><time datetime="2019-04-24T11:00:00.000Z" itemprop="datePublished">2019-04-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2019/04/24/Hexo中接入评论系统/" class="thumbnail">
     
     
-        <span style="background-image:url(http://i1.bvimg.com/684169/78d00bc9cd49f7c1.jpg)" alt="Hexo hueman主题接入评论系统" class="thumbnail-image"></span>
+        <span style="background-image:url(https://i.loli.net/2019/05/05/5cce9f2e852ab.jpg)" alt="Hexo hueman主题接入评论系统" class="thumbnail-image"></span>
     
     
 </a>
@@ -368,7 +429,7 @@
                             <a href="/2019/04/23/Golang 学习笔记3 -- 函数/" class="thumbnail">
     
     
-        <span style="background-image:url(http://i1.bvimg.com/684169/91ddff1a9750e1ae.jpg)" alt="Golang 学习笔记3 -- 函数" class="thumbnail-image"></span>
+        <span style="background-image:url(https://blog.golang.org/go-brand/logos.jpg)" alt="Golang 学习笔记3 -- 函数" class="thumbnail-image"></span>
     
     
 </a>
@@ -382,66 +443,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/04/23/Golang 学习笔记2 -- for、switch、if-else/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://i1.bvimg.com/684169/91ddff1a9750e1ae.jpg)" alt="Golang 学习笔记2 -- for、switch、if-else" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
-                            <p class="item-title"><a href="/2019/04/23/Golang 学习笔记2 -- for、switch、if-else/" class="title">Golang 学习笔记2 -- for、switch、if-else</a></p>
-                            <p class="item-date"><time datetime="2019-04-23T07:23:31.000Z" itemprop="datePublished">2019-04-23</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/04/23/Golang 学习笔记1 -- 基础类型、fmt、工作空间、指针/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://i1.bvimg.com/684169/91ddff1a9750e1ae.jpg)" alt="Golang 学习笔记1 -- 基础类型、fmt、工作空间、指针" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
-                            <p class="item-title"><a href="/2019/04/23/Golang 学习笔记1 -- 基础类型、fmt、工作空间、指针/" class="title">Golang 学习笔记1 -- 基础类型、fmt、工作空间、指针</a></p>
-                            <p class="item-date"><time datetime="2019-04-23T06:44:54.000Z" itemprop="datePublished">2019-04-23</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/04/18/更好的NSLog/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://i2.bvimg.com/684169/24a1e16ae07b9344.jpg)" alt="更好的NSLog" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/iOS开发/">iOS开发</a></p>
-                            <p class="item-title"><a href="/2019/04/18/更好的NSLog/" class="title">更好的NSLog</a></p>
-                            <p class="item-date"><time datetime="2019-04-18T08:08:18.000Z" itemprop="datePublished">2019-04-18</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -451,7 +452,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cocos2dx/">cocos2dx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS开发/">iOS开发</a><span class="category-list-count">2</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cocos2dx/">cocos2dx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS开发/">iOS开发</a><span class="category-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -461,7 +462,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">5</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">5</span></li></ul>
         </div>
     </div>
 
@@ -494,7 +495,46 @@
         </div>
     </div>
 </footer>
-
+<script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+<script>
+    var APP_ID = '4yEaeF3u0NOkNq3YHGUF0ttr-gzGzoHsz';
+    var APP_KEY = 'uoOK8B8VTKzC8otpHw4JChNd';
+    AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+    });
+    // 显示次数
+    function showTime(Counter) {
+        var query = new AV.Query("Counter");
+        if($(".leancloud_visitors").length > 0){
+            var url = $(".leancloud_visitors").attr('id').trim();
+            // where field
+            query.equalTo("words", url);
+            // count
+            query.count().then(function (number) {
+                // There are number instances of MyClass where words equals url.
+                $(document.getElementById(url)).text(number?  number : '--');
+            }, function (error) {
+                // error is an instance of AVError.
+            });
+        }
+    }
+    // 追加pv
+    function addCount(Counter) {
+        var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'icafebolger.com';
+        var Counter = AV.Object.extend("Counter");
+        var query = new Counter;
+        query.save({
+            words: url
+        }).then(function (object) {
+        })
+    }
+    $(function () {
+        var Counter = AV.Object.extend("Counter");
+        addCount(Counter);
+        showTime(Counter);
+    });
+</script>
         
     
     <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>

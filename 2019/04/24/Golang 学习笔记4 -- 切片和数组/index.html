@@ -6,19 +6,63 @@
     
 
     
-    <title>分类：: cocos2dx | 苇白的混沌空间</title>
+    <title>Golang 学习笔记4 -- 切片和数组 | 苇白的混沌空间</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-    <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="苇白的混沌空间">
-<meta property="og:url" content="http://www.spacevoid.cn/categories/cocos2dx/index.html">
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="数组数组是同一类数据的集合
+声明array := [5]int{1,2,3,4,5}
+Remarks
+数组在函数中是值传递，函数中的操作不会影响外面的数组
+
+切片切片是由三部分组成：
+
+一个指向数组的指针
+元素个数
+已经分配的储存空间
+
+声明
+由数组创建；
+1234// 先定义一个数组var myArray [10]int = [10]int&amp;#123;1, 2, 3, 4, 5, 6, 7, 8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang 学习笔记4 -- 切片和数组">
+<meta property="og:url" content="http://www.spacevoid.cn/2019/04/24/Golang 学习笔记4 -- 切片和数组/index.html">
 <meta property="og:site_name" content="苇白的混沌空间">
-<meta property="og:description">
+<meta property="og:description" content="数组数组是同一类数据的集合
+声明array := [5]int{1,2,3,4,5}
+Remarks
+数组在函数中是值传递，函数中的操作不会影响外面的数组
+
+切片切片是由三部分组成：
+
+一个指向数组的指针
+元素个数
+已经分配的储存空间
+
+声明
+由数组创建；
+1234// 先定义一个数组var myArray [10]int = [10]int&amp;#123;1, 2, 3, 4, 5, 6, 7, 8">
+<meta property="og:image" content="https://blog.golang.org/go-brand/logos.jpg">
+<meta property="og:updated_time" content="2019-05-05T08:35:01.073Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="苇白的混沌空间">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Golang 学习笔记4 -- 切片和数组">
+<meta name="twitter:description" content="数组数组是同一类数据的集合
+声明array := [5]int{1,2,3,4,5}
+Remarks
+数组在函数中是值传递，函数中的操作不会影响外面的数组
+
+切片切片是由三部分组成：
+
+一个指向数组的指针
+元素个数
+已经分配的储存空间
+
+声明
+由数组创建；
+1234// 先定义一个数组var myArray [10]int = [10]int&amp;#123;1, 2, 3, 4, 5, 6, 7, 8">
+<meta name="twitter:image" content="https://blog.golang.org/go-brand/logos.jpg">
     
 
     
@@ -125,76 +169,177 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-folder-open"></i>分类：: <em class="page-title-link">cocos2dx</em>
+    <a class="page-title-link" href="/categories/golang/">golang</a>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            
-
-    
-    
+                            <article id="post-Golang 学习笔记4 -- 切片和数组" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        
-        <section class="archives-wrap">
-            <div class="archive-year-wrap">
-                <a href="/archives/2016" class="archive-year"><i class="icon fa fa-calendar-o"></i>2016</a>
-            </div>
-            <div class="archives">
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2016/04/20/mac下还原pvr与plist为多个png/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://i.loli.net/2019/05/05/5cce9efda42c7.png)" alt="mac下还原pvr与plist为多个png" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span><a href="http://www.spacevoid.cn/2016/04/20/mac下还原pvr与plist为多个png/#isso-thread"></a></span>
-    
-</span>
-
-
-    
-</a>
-
-        
-        <div class="article-meta">
-            <div class="category">
-            <a class="article-category-link" href="/categories/cocos2dx/">cocos2dx</a>
-            </div>
-            <div class="date"><time datetime="2016-04-20T09:06:34.000Z" itemprop="datePublished">2016-04-20</time></div>
-        </div>
-        
+            <header class="article-header">
+                
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2016/04/20/mac下还原pvr与plist为多个png/">mac下还原pvr与plist为多个png</a>
+        Golang 学习笔记4 -- 切片和数组
         </h1>
     
 
-        <p class="article-excerpt">
-            
-在网上找了很久，如何把很多网上下载的ipa包中扣出的图片资源（通常为pvr与plist结合格式）还原为png，只找到了一些python写的代码，但是mac下跑不起来，一直没有找到很好的自动化方法，就自己写了一个mac软件，帮助处理自动化切图。需要自己传入相应的png大图路径，plist文件路径，以及输出目录路径
-控制器代码1234567891011121314151617181920212223
-        </p>
+            </header>
+        
+        
+            <div class="article-meta">
+                
+    <div class="article-date">
+        <a href="/2019/04/24/Golang 学习笔记4 -- 切片和数组/" class="article-date">
+            <time datetime="2019-04-24T11:00:00.000Z" itemprop="datePublished">2019-04-24</time>
+        </a>
     </div>
-</article>
-    
+
+		
+
+                
+                阅读数量:<span id="/2019/04/24/Golang 学习笔记4 -- 切片和数组/" class="leancloud_visitors" data-flag-title="Golang 学习笔记4 -- 切片和数组"></span>次
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>数组是同一类数据的集合</p>
+<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p><code>array := [5]int{1,2,3,4,5}</code></p>
+<h3 id="Remarks"><a href="#Remarks" class="headerlink" title="Remarks"></a>Remarks</h3><ul>
+<li>数组在函数中是值传递，函数中的操作不会影响外面的数组</li>
+</ul>
+<h1 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h1><p>切片是由三部分组成：</p>
+<ul>
+<li>一个指向数组的指针</li>
+<li>元素个数</li>
+<li>已经分配的储存空间</li>
+</ul>
+<h3 id="声明-1"><a href="#声明-1" class="headerlink" title="声明"></a>声明</h3><ul>
+<li><p>由数组创建；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 先定义一个数组</span><br><span class="line">var myArray [10]int = [10]int&#123;1, 2, 3, 4, 5, 6, 7, 8, 9, 10&#125;</span><br><span class="line">// 基于数组创建一个数组切片</span><br><span class="line">var mySlice []int = myArray[:5]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>直接创建： <code>mySlice := make([]int, 5)</code></p>
+</li>
+</ul>
+<h3 id="动态增减元素"><a href="#动态增减元素" class="headerlink" title="动态增减元素"></a>动态增减元素</h3><ul>
+<li>使用 <code>mySlice = append(mySlice,1,2,3)</code>来增加3个元素</li>
+<li>增加过程中，尽量指定Capacity从而增加效率</li>
+</ul>
+<p><a href="https://blog.golang.org/go-brand/logos.jpg" target="_blank" rel="external"><div align="left"><img src="https://blog.golang.org/go-brand/logos.jpg" alt="go-brand-logo"></div></a></p>
+
         </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://www.spacevoid.cn/2019/04/24/Golang 学习笔记4 -- 切片和数组/" data-id="cjvaqbtta0004vlupsa6dvkdy" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "苇白"
+        },
+        "headline": "Golang 学习笔记4 -- 切片和数组",
+        "image": "http://www.spacevoid.cnhttps://blog.golang.org/go-brand/logos.jpg",
+        "keywords": "",
+        "genre": "golang",
+        "datePublished": "2019-04-24",
+        "dateCreated": "2019-04-24",
+        "dateModified": "2019-05-05",
+        "url": "http://www.spacevoid.cn/2019/04/24/Golang 学习笔记4 -- 切片和数组/",
+        "description": "数组数组是同一类数据的集合
+声明array := [5]int{1,2,3,4,5}
+Remarks
+数组在函数中是值传递，函数中的操作不会影响外面的数组
+
+切片切片是由三部分组成：
+
+一个指向数组的指针
+元素个数
+已经分配的储存空间
+
+声明
+由数组创建；
+1234// 先定义一个数组var myArray [10]int = [10]int&#123;1, 2, 3, 4, 5, 6, 7, 8"
+        "wordCount": 71
+    }
+</script>
+
+</article>
+
+    <section id="comments">
     
+        
+    <div id="valine-thread"></div>
 
 
-    </div></section>
-
+    
+    </section>
 
 
 
@@ -216,6 +361,19 @@
             
         </ul>
     </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2019/04/24/Golang 学习笔记5 -- map/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">Golang 学习笔记5 -- map</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
     
     <div class="widgets-container">
         

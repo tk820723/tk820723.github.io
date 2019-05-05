@@ -20,13 +20,13 @@
 <meta property="og:site_name" content="苇白的混沌空间">
 <meta property="og:description" content="在网上找了很久，如何把很多网上下载的ipa包中扣出的图片资源（通常为pvr与plist结合格式）还原为png，只找到了一些python写的代码，但是mac下跑不起来，一直没有找到很好的自动化方法，就自己写了一个mac软件，帮助处理自动化切图。需要自己传入相应的png大图路径，plist文件路径，以及输出目录路径
 控制器代码1234567891011121314151617181920212223">
-<meta property="og:image" content="http://i2.bvimg.com/684169/615b03d783eed71d.png">
-<meta property="og:updated_time" content="2019-04-24T10:15:17.007Z">
+<meta property="og:image" content="https://i.loli.net/2019/05/05/5cce9efda42c7.png">
+<meta property="og:updated_time" content="2019-05-05T08:30:16.059Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mac下还原pvr与plist为多个png">
 <meta name="twitter:description" content="在网上找了很久，如何把很多网上下载的ipa包中扣出的图片资源（通常为pvr与plist结合格式）还原为png，只找到了一些python写的代码，但是mac下跑不起来，一直没有找到很好的自动化方法，就自己写了一个mac软件，帮助处理自动化切图。需要自己传入相应的png大图路径，plist文件路径，以及输出目录路径
 控制器代码1234567891011121314151617181920212223">
-<meta name="twitter:image" content="http://i2.bvimg.com/684169/615b03d783eed71d.png">
+<meta name="twitter:image" content="https://i.loli.net/2019/05/05/5cce9efda42c7.png">
     
 
     
@@ -163,11 +163,12 @@
 		
 
                 
+                阅读数量:<span id="/2016/04/20/mac下还原pvr与plist为多个png/" class="leancloud_visitors" data-flag-title="mac下还原pvr与plist为多个png"></span>次
             </div>
         
         
         <div class="article-entry" itemprop="articleBody">
-            <p><img src="http://i2.bvimg.com/684169/615b03d783eed71d.png" alt=""></p>
+            <p><a href="https://i.loli.net/2019/05/05/5cce9efda42c7.png" target="_blank" rel="external"><img src="https://i.loli.net/2019/05/05/5cce9efda42c7.png" alt="png_004.png"></a></p>
 <p>在网上找了很久，如何把很多网上下载的ipa包中扣出的图片资源（通常为pvr与plist结合格式）还原为png，只找到了一些python写的代码，但是mac下跑不起来，一直没有找到很好的自动化方法，就自己写了一个mac软件，帮助处理自动化切图。需要自己传入相应的png大图路径，plist文件路径，以及输出目录路径</p>
 <figure class="highlight objc"><figcaption><span>控制器代码</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>) <span class="keyword">IBOutlet</span> <span class="built_in">NSTextField</span> *pngPathField;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>) <span class="keyword">IBOutlet</span> <span class="built_in">NSTextField</span> *plistPathField;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>) <span class="keyword">IBOutlet</span> <span class="built_in">NSTextField</span> *targetPathField;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">[<span class="keyword">super</span> viewDidLoad];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">IBAction</span>)BtnClicked:(<span class="built_in">NSButton</span> *)sender &#123;</span><br><span class="line"><span class="keyword">if</span> (_pngPathField.stringValue.length == <span class="number">0</span> || _plistPathField.stringValue.length == <span class="number">0</span> || _targetPathField.stringValue.length == <span class="number">0</span>) &#123;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"输入路径不能为空"</span>);</span><br><span class="line"><span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//读取所有的文件，转换为数据数组</span></span><br><span class="line"><span class="built_in">NSString</span> *pngPath = _pngPathField.stringValue;</span><br><span class="line"><span class="built_in">NSString</span> *plistPath = _plistPathField.stringValue;</span><br><span class="line"><span class="built_in">NSString</span> *targetPath = _targetPathField.stringValue;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSDictionary</span> *plistDic = [<span class="built_in">NSDictionary</span> dictionaryWithContentsOfFile:plistPath];</span><br><span class="line"><span class="built_in">NSDictionary</span> *framesDic = [plistDic valueForKey:<span class="string">@"frames"</span>];</span><br><span class="line"><span class="built_in">NSArray</span> *framesArray = framesDic.allValues;</span><br><span class="line"><span class="built_in">NSArray</span> *namesArray = framesDic.allKeys;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (framesArray.count==<span class="number">0</span>||namesArray.count==<span class="number">0</span>) &#123;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"字典文件没有对象"</span>);</span><br><span class="line"><span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//遍历数组转换plist数据</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt; namesArray.count; i++) &#123;</span><br><span class="line"><span class="built_in">NSString</span> *picName = namesArray[i];</span><br><span class="line"><span class="built_in">NSDictionary</span> *singleImageFrameDic = framesArray[i];</span><br><span class="line"><span class="built_in">BOOL</span> rotated = [[singleImageFrameDic objectForKey:<span class="string">@"rotated"</span>] boolValue];</span><br><span class="line"><span class="built_in">NSRect</span> frame = <span class="built_in">NSRectFromString</span>([singleImageFrameDic valueForKey:<span class="string">@"frame"</span>]);</span><br><span class="line"><span class="keyword">if</span> (rotated) &#123;</span><br><span class="line">frame = <span class="built_in">NSMakeRect</span>(frame.origin.x, frame.origin.y, frame.size.height, frame.size.width);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">frame = <span class="built_in">NSMakeRect</span>(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSImage</span> *image = [[<span class="built_in">NSImage</span> alloc] initWithContentsOfFile:pngPath];</span><br><span class="line"><span class="built_in">CGImageRef</span> cutImageRef = [<span class="keyword">self</span> cutImage:image frame:frame];</span><br><span class="line">[<span class="keyword">self</span> WriteImageRefToFile:cutImageRef path:targetPath withImageName:picName];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"输入图片成功"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//根据数据切割图片，返回切割完的图片ref</span></span><br><span class="line">- (<span class="built_in">CGImageRef</span>)cutImage: (<span class="built_in">NSImage</span> *)image frame: (<span class="built_in">NSRect</span>)frame&#123;</span><br><span class="line"></span><br><span class="line"><span class="built_in">CGImageSourceRef</span> source = <span class="built_in">CGImageSourceCreateWithData</span>((<span class="built_in">CFDataRef</span>)[image TIFFRepresentation], <span class="literal">NULL</span>);</span><br><span class="line"><span class="built_in">CGImageRef</span> maskRef =  <span class="built_in">CGImageSourceCreateImageAtIndex</span>(source, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line"><span class="built_in">CGImageRef</span> finalImgRef = <span class="built_in">CGImageCreateWithImageInRect</span>(maskRef, frame);</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> finalImgRef;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//把图片输出到选择的目录</span></span><br><span class="line">- (<span class="keyword">void</span>)WriteImageRefToFile: (<span class="built_in">CGImageRef</span>) image path: (<span class="built_in">NSString</span> *)path withImageName: (<span class="built_in">NSString</span> *)imageName</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">NSString</span> *desPath = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@/%@"</span>,path,imageName];</span><br><span class="line"></span><br><span class="line"><span class="built_in">CFURLRef</span> url = (__bridge <span class="built_in">CFURLRef</span>)[<span class="built_in">NSURL</span> fileURLWithPath:desPath];</span><br><span class="line"></span><br><span class="line"><span class="built_in">CGImageDestinationRef</span> destination = <span class="built_in">CGImageDestinationCreateWithURL</span>(url, kUTTypePNG, <span class="number">1</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">CGImageDestinationAddImage</span>(destination, image, <span class="literal">nil</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">CGImageDestinationFinalize</span>(destination)) &#123;</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"Failed to write image to %@"</span>, path);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">CFRelease</span>(destination);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)setRepresentedObject:(<span class="keyword">id</span>)representedObject &#123;</span><br><span class="line">[<span class="keyword">super</span> setRepresentedObject:representedObject];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Update the view, if already loaded.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 
@@ -177,7 +178,7 @@
 
 
 
-    <a data-url="http://www.spacevoid.cn/2016/04/20/mac下还原pvr与plist为多个png/" data-id="cjuv4nduh000973upz2mytlkc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.spacevoid.cn/2016/04/20/mac下还原pvr与plist为多个png/" data-id="cjvaqbttg000evlupwq1s6098" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -248,17 +249,17 @@
             "name": "苇白"
         },
         "headline": "mac下还原pvr与plist为多个png",
-        "image": "http://www.spacevoid.cnhttp://i2.bvimg.com/684169/615b03d783eed71d.png",
+        "image": "http://www.spacevoid.cnhttps://i.loli.net/2019/05/05/5cce9efda42c7.png",
         "keywords": "",
         "genre": "cocos2dx",
         "datePublished": "2016-04-20",
         "dateCreated": "2016-04-20",
-        "dateModified": "2019-04-24",
+        "dateModified": "2019-05-05",
         "url": "http://www.spacevoid.cn/2016/04/20/mac下还原pvr与plist为多个png/",
         "description": "
 在网上找了很久，如何把很多网上下载的ipa包中扣出的图片资源（通常为pvr与plist结合格式）还原为png，只找到了一些python写的代码，但是mac下跑不起来，一直没有找到很好的自动化方法，就自己写了一个mac软件，帮助处理自动化切图。需要自己传入相应的png大图路径，plist文件路径，以及输出目录路径
 控制器代码1234567891011121314151617181920212223"
-        "wordCount": 459
+        "wordCount": 462
     }
 </script>
 
@@ -332,10 +333,70 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2019/04/24/Golang 学习笔记4 -- 切片和数组/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog.golang.org/go-brand/logos.jpg)" alt="Golang 学习笔记4 -- 切片和数组" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
+                            <p class="item-title"><a href="/2019/04/24/Golang 学习笔记4 -- 切片和数组/" class="title">Golang 学习笔记4 -- 切片和数组</a></p>
+                            <p class="item-date"><time datetime="2019-04-24T11:00:00.000Z" itemprop="datePublished">2019-04-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/04/24/Golang 学习笔记5 -- map/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog.golang.org/go-brand/logos.jpg)" alt="Golang 学习笔记5 -- map" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
+                            <p class="item-title"><a href="/2019/04/24/Golang 学习笔记5 -- map/" class="title">Golang 学习笔记5 -- map</a></p>
+                            <p class="item-date"><time datetime="2019-04-24T11:00:00.000Z" itemprop="datePublished">2019-04-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2019/04/24/Golang 学习笔记6 -- 面向对象/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://blog.golang.org/go-brand/logos.jpg)" alt="Golang 学习笔记5 -- map" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
+                            <p class="item-title"><a href="/2019/04/24/Golang 学习笔记6 -- 面向对象/" class="title">Golang 学习笔记5 -- map</a></p>
+                            <p class="item-date"><time datetime="2019-04-24T11:00:00.000Z" itemprop="datePublished">2019-04-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2019/04/24/Hexo中接入评论系统/" class="thumbnail">
     
     
-        <span style="background-image:url(http://i1.bvimg.com/684169/78d00bc9cd49f7c1.jpg)" alt="Hexo hueman主题接入评论系统" class="thumbnail-image"></span>
+        <span style="background-image:url(https://i.loli.net/2019/05/05/5cce9f2e852ab.jpg)" alt="Hexo hueman主题接入评论系统" class="thumbnail-image"></span>
     
     
 </a>
@@ -355,7 +416,7 @@
                             <a href="/2019/04/23/Golang 学习笔记3 -- 函数/" class="thumbnail">
     
     
-        <span style="background-image:url(http://i1.bvimg.com/684169/91ddff1a9750e1ae.jpg)" alt="Golang 学习笔记3 -- 函数" class="thumbnail-image"></span>
+        <span style="background-image:url(https://blog.golang.org/go-brand/logos.jpg)" alt="Golang 学习笔记3 -- 函数" class="thumbnail-image"></span>
     
     
 </a>
@@ -369,66 +430,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/04/23/Golang 学习笔记2 -- for、switch、if-else/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://i1.bvimg.com/684169/91ddff1a9750e1ae.jpg)" alt="Golang 学习笔记2 -- for、switch、if-else" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
-                            <p class="item-title"><a href="/2019/04/23/Golang 学习笔记2 -- for、switch、if-else/" class="title">Golang 学习笔记2 -- for、switch、if-else</a></p>
-                            <p class="item-date"><time datetime="2019-04-23T07:23:31.000Z" itemprop="datePublished">2019-04-23</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/04/23/Golang 学习笔记1 -- 基础类型、fmt、工作空间、指针/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://i1.bvimg.com/684169/91ddff1a9750e1ae.jpg)" alt="Golang 学习笔记1 -- 基础类型、fmt、工作空间、指针" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
-                            <p class="item-title"><a href="/2019/04/23/Golang 学习笔记1 -- 基础类型、fmt、工作空间、指针/" class="title">Golang 学习笔记1 -- 基础类型、fmt、工作空间、指针</a></p>
-                            <p class="item-date"><time datetime="2019-04-23T06:44:54.000Z" itemprop="datePublished">2019-04-23</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/04/18/更好的NSLog/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://i2.bvimg.com/684169/24a1e16ae07b9344.jpg)" alt="更好的NSLog" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/iOS开发/">iOS开发</a></p>
-                            <p class="item-title"><a href="/2019/04/18/更好的NSLog/" class="title">更好的NSLog</a></p>
-                            <p class="item-date"><time datetime="2019-04-18T08:08:18.000Z" itemprop="datePublished">2019-04-18</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -438,7 +439,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cocos2dx/">cocos2dx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS开发/">iOS开发</a><span class="category-list-count">2</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cocos2dx/">cocos2dx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS开发/">iOS开发</a><span class="category-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -448,7 +449,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">5</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">5</span></li></ul>
         </div>
     </div>
 
@@ -481,7 +482,46 @@
         </div>
     </div>
 </footer>
-
+<script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
+<script>
+    var APP_ID = '4yEaeF3u0NOkNq3YHGUF0ttr-gzGzoHsz';
+    var APP_KEY = 'uoOK8B8VTKzC8otpHw4JChNd';
+    AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+    });
+    // 显示次数
+    function showTime(Counter) {
+        var query = new AV.Query("Counter");
+        if($(".leancloud_visitors").length > 0){
+            var url = $(".leancloud_visitors").attr('id').trim();
+            // where field
+            query.equalTo("words", url);
+            // count
+            query.count().then(function (number) {
+                // There are number instances of MyClass where words equals url.
+                $(document.getElementById(url)).text(number?  number : '--');
+            }, function (error) {
+                // error is an instance of AVError.
+            });
+        }
+    }
+    // 追加pv
+    function addCount(Counter) {
+        var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'icafebolger.com';
+        var Counter = AV.Object.extend("Counter");
+        var query = new Counter;
+        query.save({
+            words: url
+        }).then(function (object) {
+        })
+    }
+    $(function () {
+        var Counter = AV.Object.extend("Counter");
+        addCount(Counter);
+        showTime(Counter);
+    });
+</script>
         
     
     <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
