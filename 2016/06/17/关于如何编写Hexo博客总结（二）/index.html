@@ -1,589 +1,412 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <meta charset="utf-8" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-    
+<link rel="stylesheet" href="/css/main.css">
 
-    
-    <title>关于如何编写Hexo博客总结（二） | 苇白的混沌空间</title>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-        <meta name="keywords" content="" />
-    
-    <meta name="description" content="Markdown编辑器上一片讲了一些hexo用的markdown语法，这一片主要介绍一下在mac上编写markdown的时候使用的一些工具。
-Ulysses
-根据实际体验，与其说 Ulysses 是个富有创造性功能的应用，倒不如称它为融合了各类 Markdown 编辑器特点的集合体。
 
-Ulysses算是名气最响的markdown编辑器了，功能上比较强大，除了实时编写实时查看效果以外，还自带功能强">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.spacevoid.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Markdown编辑器上一片讲了一些hexo用的markdown语法，这一片主要介绍一下在mac上编写markdown的时候使用的一些工具。 Ulysses 根据实际体验，与其说 Ulysses 是个富有创造性功能的应用，倒不如称它为融合了各类 Markdown 编辑器特点的集合体。  Ulysses算是名气最响的markdown编辑器了，功能上比较强大，除了实时编写实时查看效果以外，还自带功能强">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于如何编写Hexo博客总结（二）">
-<meta property="og:url" content="http://www.spacevoid.cn/2016/06/17/关于如何编写Hexo博客总结（二）/index.html">
-<meta property="og:site_name" content="苇白的混沌空间">
-<meta property="og:description" content="Markdown编辑器上一片讲了一些hexo用的markdown语法，这一片主要介绍一下在mac上编写markdown的时候使用的一些工具。
-Ulysses
-根据实际体验，与其说 Ulysses 是个富有创造性功能的应用，倒不如称它为融合了各类 Markdown 编辑器特点的集合体。
-
-Ulysses算是名气最响的markdown编辑器了，功能上比较强大，除了实时编写实时查看效果以外，还自带功能强">
-<meta property="og:image" content="https://i.loli.net/2019/05/05/5cce9e5143ea1.jpg">
-<meta property="og:updated_time" content="2019-05-05T08:27:56.511Z">
+<meta property="og:url" content="http://www.spacevoid.cn/2016/06/17/%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99Hexo%E5%8D%9A%E5%AE%A2%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
+<meta property="og:site_name" content="苇白的混沌空间 | 致虚极 守静笃">
+<meta property="og:description" content="Markdown编辑器上一片讲了一些hexo用的markdown语法，这一片主要介绍一下在mac上编写markdown的时候使用的一些工具。 Ulysses 根据实际体验，与其说 Ulysses 是个富有创造性功能的应用，倒不如称它为融合了各类 Markdown 编辑器特点的集合体。  Ulysses算是名气最响的markdown编辑器了，功能上比较强大，除了实时编写实时查看效果以外，还自带功能强">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://i2.bvimg.com/684169/4763650411668286.png">
+<meta property="og:image" content="http://i2.bvimg.com/684169/2cc17311844ec5a7.png">
+<meta property="article:published_time" content="2016-06-17T06:56:50.000Z">
+<meta property="article:modified_time" content="2021-08-08T05:08:44.724Z">
+<meta property="article:author" content="苇白">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于如何编写Hexo博客总结（二）">
-<meta name="twitter:description" content="Markdown编辑器上一片讲了一些hexo用的markdown语法，这一片主要介绍一下在mac上编写markdown的时候使用的一些工具。
-Ulysses
-根据实际体验，与其说 Ulysses 是个富有创造性功能的应用，倒不如称它为融合了各类 Markdown 编辑器特点的集合体。
+<meta name="twitter:image" content="http://i2.bvimg.com/684169/4763650411668286.png">
 
-Ulysses算是名气最响的markdown编辑器了，功能上比较强大，除了实时编写实时查看效果以外，还自带功能强">
-<meta name="twitter:image" content="https://i.loli.net/2019/05/05/5cce9e5143ea1.jpg">
-    
+<link rel="canonical" href="http://www.spacevoid.cn/2016/06/17/%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99Hexo%E5%8D%9A%E5%AE%A2%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89/">
 
-    
 
-    
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
 
-    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
-    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+  <title>关于如何编写Hexo博客总结（二） | 苇白的混沌空间 | 致虚极 守静笃</title>
+  
 
-    <link rel="stylesheet" href="/css/style.css">
 
-    <script src="/libs/jquery/3.3.1/jquery.min.js"></script>
-    
-    
-        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
-    
-    
-        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
-    
-    
-    
 
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
 </head>
 
-<body>
-    <div id="wrap">
-        <header id="header">
-    <div id="header-outer" class="outer">
-        <div class="container">
-            <div class="container-inner">
-                <div id="header-title">
-                    <h1 class="logo-wrap">
-                        <a href="/" class="logo"></a>
-                    </h1>
-                    
-                        <h2 class="subtitle-wrap">
-                            <p class="subtitle">致虚极 守静笃</p>
-                        </h2>
-                    
-                </div>
-                <div id="header-inner" class="nav-container">
-                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
-                    <div class="nav-container-inner">
-                        <ul id="main-nav">
-                            
-                                <li class="main-nav-list-item" >
-                                    <a class="main-nav-list-link" href="/">主页</a>
-                                </li>
-                            
-                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/Hexo/">Hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/cocos2dx/">cocos2dx</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/golang/">golang</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/iOS开发/">iOS开发</a></li></ul>
-                                    
-                        </ul>
-                        <nav id="sub-nav">
-                            <div id="search-form-wrap">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
 
-    <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
-        <button type="submit" class="search-form-submit"></button>
-    </form>
-    <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
-            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-</div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: '文章',
-            PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
-            UNTITLED: '(未命名)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script src="/js/insight.js"></script>
+  </div>
 
-</div>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">苇白的混沌空间 | 致虚极 守静笃</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">致虚极 守静笃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
     </div>
-</header>
-        <div class="container">
-            <div class="main-body container-inner">
-                <div class="main-body-inner">
-                    <section id="main">
-                        <div class="main-body-header">
-    <h1 class="header">
-    
-    <a class="page-title-link" href="/categories/Hexo/">Hexo</a>
-    </h1>
+  </div>
 </div>
 
-                        <div class="main-body-content">
-                            <article id="post-关于如何编写Hexo博客总结（二）" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-            <header class="article-header">
-                
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
     
-        <h1 class="article-title" itemprop="name">
-        关于如何编写Hexo博客总结（二）
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.spacevoid.cn/2016/06/17/%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99Hexo%E5%8D%9A%E5%AE%A2%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="苇白">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="苇白的混沌空间 | 致虚极 守静笃">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          关于如何编写Hexo博客总结（二）
         </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-06-17 14:56:50" itemprop="dateCreated datePublished" datetime="2016-06-17T14:56:50+08:00">2016-06-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-08 13:08:44" itemprop="dateModified" datetime="2021-08-08T13:08:44+08:00">2021-08-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
     
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
-            </header>
-        
-        
-            <div class="article-meta">
-                
-    <div class="article-date">
-        <a href="/2016/06/17/关于如何编写Hexo博客总结（二）/" class="article-date">
-            <time datetime="2016-06-17T06:56:50.000Z" itemprop="datePublished">2016-06-17</time>
-        </a>
-    </div>
-
-		
-
-                
-                阅读数量:<span id="/2016/06/17/关于如何编写Hexo博客总结（二）/" class="leancloud_visitors" data-flag-title="关于如何编写Hexo博客总结（二）"></span>次
-            </div>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-            <h1 id="Markdown编辑器"><a href="#Markdown编辑器" class="headerlink" title="Markdown编辑器"></a>Markdown编辑器</h1><p>上一片讲了一些hexo用的markdown语法，这一片主要介绍一下在mac上编写markdown的时候使用的一些工具。</p>
+      
+        <h1 id="Markdown编辑器"><a href="#Markdown编辑器" class="headerlink" title="Markdown编辑器"></a>Markdown编辑器</h1><p>上一片讲了一些hexo用的markdown语法，这一片主要介绍一下在mac上编写markdown的时候使用的一些工具。</p>
 <h2 id="Ulysses"><a href="#Ulysses" class="headerlink" title="Ulysses"></a>Ulysses</h2><blockquote>
 <p>根据实际体验，与其说 Ulysses 是个富有创造性功能的应用，倒不如称它为融合了各类 Markdown 编辑器特点的集合体。</p>
 </blockquote>
 <p>Ulysses算是名气最响的markdown编辑器了，功能上比较强大，除了实时编写实时查看效果以外，还自带功能强大的文档文件管理器，UI非常像邮件APP，也符合了markdown的宗旨。基本可以直接导入你的md文件夹进行编辑，无需每次编辑的时候再去导入，省去了不少麻烦。不过功能强大也带来了一些麻烦，Ulysses会自动对你编辑的东西进行一个自动格式调整，比如会自动把你本地图片换成标识符放在文章最底部，对于一些Hexo本身的插件会有冲突，所以我没有用这个，如果对于格式不用插件的同学，强烈推荐这个软件，使用起来真的很简单。</p>
-<p><a href="https://i.loli.net/2019/05/05/5cce9e5143ea1.jpg" target="_blank" rel="external"><img src="https://i.loli.net/2019/05/05/5cce9e5143ea1.jpg" alt="markdown_2_1.jpg"></a></p>
+<p><img src="http://i2.bvimg.com/684169/4763650411668286.png"></p>
 <h2 id="Mou"><a href="#Mou" class="headerlink" title="Mou"></a>Mou</h2><blockquote>
 <p>Mou 的最大優點是針對中文有比較多的優化，比如對中文輸入時發生行高「漂移」這一 Mac 文本編輯軟件普遍存在的問題做了處理；標點自動配對也有相應完善；還有一個很甜的功能 —— 直行書寫。另外預覽模式也比較靈活。我認為目前唯一缺憾就是所謂的「打字機模式」了，也就是把編輯點固定在文檔窗口的中心點。</p>
 </blockquote>
-<p>Mou算是名气仅次于Ulysses的编辑器，功能与Ulysses差别不大，但是比Ulysses干净。Mou支持直接打开并且保存md文件，在控制台直接hexo new一个文件之后，就可以用mou来直接编辑了，非常方便。<br><a href="https://i.loli.net/2019/05/05/5cce9e519243e.jpg" target="_blank" rel="external"><img src="https://i.loli.net/2019/05/05/5cce9e519243e.jpg" alt="markdown_2_2.jpg"></a></p>
+<p>Mou算是名气仅次于Ulysses的编辑器，功能与Ulysses差别不大，但是比Ulysses干净。Mou支持直接打开并且保存md文件，在控制台直接hexo new一个文件之后，就可以用mou来直接编辑了，非常方便。<br><img src="http://i2.bvimg.com/684169/2cc17311844ec5a7.png"></p>
 <h2 id="Typora"><a href="#Typora" class="headerlink" title="Typora"></a>Typora</h2><p>Typora和前两款编辑器最大的不同，在于他查看效果的方式并不是分屏查看，而是编辑一行之后，立刻应用效果。</p>
 <h3 id="markdown的编辑器一搜有很多，这里就不一一介绍了，读者可以挑选一款适合自己编写习惯的来使用。"><a href="#markdown的编辑器一搜有很多，这里就不一一介绍了，读者可以挑选一款适合自己编写习惯的来使用。" class="headerlink" title="markdown的编辑器一搜有很多，这里就不一一介绍了，读者可以挑选一款适合自己编写习惯的来使用。"></a>markdown的编辑器一搜有很多，这里就不一一介绍了，读者可以挑选一款适合自己编写习惯的来使用。</h3>
-        </div>
-        <footer class="article-footer">
-            
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/06/16/%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99hexo%E5%8D%9A%E5%AE%A2%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%80%EF%BC%89/" rel="prev" title="关于如何编写hexo博客总结（一）">
+      <i class="fa fa-chevron-left"></i> 关于如何编写hexo博客总结（一）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/04/18/%E6%9B%B4%E5%A5%BD%E7%9A%84NSLog/" rel="next" title="更好的NSLog">
+      更好的NSLog <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
 
 
 
-    <a data-url="http://www.spacevoid.cn/2016/06/17/关于如何编写Hexo博客总结（二）/" data-id="cjvaqbttj000kvlupgvm40835" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+          </div>
+          
+
 <script>
-    (function ($) {
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-        </footer>
-    </div>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "author": {
-            "@type": "Person",
-            "name": "苇白"
-        },
-        "headline": "关于如何编写Hexo博客总结（二）",
-        "image": "http://www.spacevoid.cnhttps://i.loli.net/2019/05/05/5cce9e5143ea1.jpg",
-        "keywords": "",
-        "genre": "Hexo",
-        "datePublished": "2016-06-17",
-        "dateCreated": "2016-06-17",
-        "dateModified": "2019-05-05",
-        "url": "http://www.spacevoid.cn/2016/06/17/关于如何编写Hexo博客总结（二）/",
-        "description": "Markdown编辑器上一片讲了一些hexo用的markdown语法，这一片主要介绍一下在mac上编写markdown的时候使用的一些工具。
-Ulysses
-根据实际体验，与其说 Ulysses 是个富有创造性功能的应用，倒不如称它为融合了各类 Markdown 编辑器特点的集合体。
-
-Ulysses算是名气最响的markdown编辑器了，功能上比较强大，除了实时编写实时查看效果以外，还自带功能强"
-        "wordCount": 41
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
     }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
 </script>
 
-</article>
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
 
-    <section id="comments">
-    
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Markdown%E7%BC%96%E8%BE%91%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">Markdown编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ulysses"><span class="nav-number">1.1.</span> <span class="nav-text">Ulysses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mou"><span class="nav-number">1.2.</span> <span class="nav-text">Mou</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Typora"><span class="nav-number">1.3.</span> <span class="nav-text">Typora</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#markdown%E7%9A%84%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%80%E6%90%9C%E6%9C%89%E5%BE%88%E5%A4%9A%EF%BC%8C%E8%BF%99%E9%87%8C%E5%B0%B1%E4%B8%8D%E4%B8%80%E4%B8%80%E4%BB%8B%E7%BB%8D%E4%BA%86%EF%BC%8C%E8%AF%BB%E8%80%85%E5%8F%AF%E4%BB%A5%E6%8C%91%E9%80%89%E4%B8%80%E6%AC%BE%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%BC%96%E5%86%99%E4%B9%A0%E6%83%AF%E7%9A%84%E6%9D%A5%E4%BD%BF%E7%94%A8%E3%80%82"><span class="nav-number">1.3.1.</span> <span class="nav-text">markdown的编辑器一搜有很多，这里就不一一介绍了，读者可以挑选一款适合自己编写习惯的来使用。</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">苇白</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
         
-    <div id="valine-thread"></div>
-
-
-    
-    </section>
-
-
-
-                        </div>
-                    </section>
-                    <aside id="sidebar">
-    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
-    <div class="sidebar-top">
-        <p>关注我 :</p>
-        <ul class="social-links">
-            
-                
-                <li>
-                    <a class="social-tooltip" title="github" href="https://github.com/tk820723" target="_blank" rel="noopener">
-                        <i class="icon fa fa-github"></i>
-                    </a>
-                </li>
-                
-            
-        </ul>
-    </div>
-    
-        
-<nav id="article-nav">
-    
-        <a href="/2019/04/18/更好的NSLog/" id="article-nav-newer" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">下一篇</strong>
-        <p class="article-nav-title">
-        
-            更好的NSLog
-        
-        </p>
-        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
-    </a>
-    
-    
-        <a href="/2016/06/16/关于如何编写hexo博客总结（一）/" id="article-nav-older" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">上一篇</strong>
-        <p class="article-nav-title">关于如何编写hexo博客总结（一）</p>
-        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
         </a>
-    
-</nav>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
 
-    
-    <div class="widgets-container">
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
         
-            
-                
 
-            
-                
-    <div class="widget-wrap">
-        <h3 class="widget-title">最新文章</h3>
-        <div class="widget">
-            <ul id="recent-post" class="">
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/04/24/Golang 学习笔记4 -- 切片和数组/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://blog.golang.org/go-brand/logos.jpg)" alt="Golang 学习笔记4 -- 切片和数组" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
-                            <p class="item-title"><a href="/2019/04/24/Golang 学习笔记4 -- 切片和数组/" class="title">Golang 学习笔记4 -- 切片和数组</a></p>
-                            <p class="item-date"><time datetime="2019-04-24T11:00:00.000Z" itemprop="datePublished">2019-04-24</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/04/24/Golang 学习笔记5 -- map/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://blog.golang.org/go-brand/logos.jpg)" alt="Golang 学习笔记5 -- map" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
-                            <p class="item-title"><a href="/2019/04/24/Golang 学习笔记5 -- map/" class="title">Golang 学习笔记5 -- map</a></p>
-                            <p class="item-date"><time datetime="2019-04-24T11:00:00.000Z" itemprop="datePublished">2019-04-24</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/04/24/Golang 学习笔记6 -- 面向对象/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://blog.golang.org/go-brand/logos.jpg)" alt="Golang 学习笔记5 -- map" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
-                            <p class="item-title"><a href="/2019/04/24/Golang 学习笔记6 -- 面向对象/" class="title">Golang 学习笔记5 -- map</a></p>
-                            <p class="item-date"><time datetime="2019-04-24T11:00:00.000Z" itemprop="datePublished">2019-04-24</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/04/24/Hexo中接入评论系统/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://i.loli.net/2019/05/05/5cce9f2e852ab.jpg)" alt="Hexo hueman主题接入评论系统" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/Hexo/">Hexo</a></p>
-                            <p class="item-title"><a href="/2019/04/24/Hexo中接入评论系统/" class="title">Hexo hueman主题接入评论系统</a></p>
-                            <p class="item-date"><time datetime="2019-04-24T07:03:00.000Z" itemprop="datePublished">2019-04-24</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2019/04/23/Golang 学习笔记3 -- 函数/" class="thumbnail">
-    
-    
-        <span style="background-image:url(https://blog.golang.org/go-brand/logos.jpg)" alt="Golang 学习笔记3 -- 函数" class="thumbnail-image"></span>
-    
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/golang/">golang</a></p>
-                            <p class="item-title"><a href="/2019/04/23/Golang 学习笔记3 -- 函数/" class="title">Golang 学习笔记3 -- 函数</a></p>
-                            <p class="item-date"><time datetime="2019-04-23T08:30:00.000Z" itemprop="datePublished">2019-04-23</time></p>
-                        </div>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-            
-                
-    <div class="widget-wrap widget-list">
-        <h3 class="widget-title">分类</h3>
-        <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/cocos2dx/">cocos2dx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/iOS开发/">iOS开发</a><span class="category-list-count">2</span></li></ul>
-        </div>
-    </div>
-
-
-            
-                
-    <div class="widget-wrap widget-list">
-        <h3 class="widget-title">归档</h3>
-        <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">5</span></li></ul>
-        </div>
-    </div>
-
-
-            
         
-    </div>
-</aside>
 
-                </div>
-            </div>
-        </div>
-        <footer id="footer">
-    <div class="container">
-        <div class="container-inner">
-            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
-            <div class="credit">
-                <h1 class="logo-wrap">
-                    <a href="/" class="logo"></a>
-                </h1>
-                <p>&copy; 2019 苇白</p>
-                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
-            </div>
-            <div class="footer-plugins">
-              
-    
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">苇白</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
 
-
-            </div>
-        </div>
-    </div>
-</footer>
-<script src="//cdn1.lncld.net/static/js/2.5.0/av-min.js"></script>
-<script>
-    var APP_ID = '4yEaeF3u0NOkNq3YHGUF0ttr-gzGzoHsz';
-    var APP_KEY = 'uoOK8B8VTKzC8otpHw4JChNd';
-    AV.init({
-        appId: APP_ID,
-        appKey: APP_KEY
-    });
-    // 显示次数
-    function showTime(Counter) {
-        var query = new AV.Query("Counter");
-        if($(".leancloud_visitors").length > 0){
-            var url = $(".leancloud_visitors").attr('id').trim();
-            // where field
-            query.equalTo("words", url);
-            // count
-            query.count().then(function (number) {
-                // There are number instances of MyClass where words equals url.
-                $(document.getElementById(url)).text(number?  number : '--');
-            }, function (error) {
-                // error is an instance of AVError.
-            });
-        }
-    }
-    // 追加pv
-    function addCount(Counter) {
-        var url = $(".leancloud_visitors").length > 0 ? $(".leancloud_visitors").attr('id').trim() : 'icafebolger.com';
-        var Counter = AV.Object.extend("Counter");
-        var query = new Counter;
-        query.save({
-            words: url
-        }).then(function (object) {
-        })
-    }
-    $(function () {
-        var Counter = AV.Object.extend("Counter");
-        addCount(Counter);
-        showTime(Counter);
-    });
-</script>
         
-    
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-    <script>
-        new Valine({
-            el: '#valine-thread' ,
-            notify:false,
-            verify:false,
-            app_id: '4yEaeF3u0NOkNq3YHGUF0ttr-gzGzoHsz',
-            app_key: 'uoOK8B8VTKzC8otpHw4JChNd',
-            placeholder: '留下你的评论',
-            pageSize: '10',
-            avatar: 'identicon',
-            avatar_cdn:  'https://gravatar.loli.net/avatar/'
-        });
-    </script>
 
 
 
 
 
-    
-        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
-        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
-    
-    
-        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
-    
-    
 
 
 
-<!-- Custom Scripts -->
-<script src="/js/main.js"></script>
+      </div>
+    </footer>
+  </div>
 
-    </div>
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
 </body>
 </html>
