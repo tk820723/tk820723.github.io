@@ -1,410 +1,262 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang='zh-CN'>
+
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="generator" content="Hexo 5.4.0">
+  <meta charset="utf-8">
+  
 
-<link rel="stylesheet" href="/css/main.css">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  <title>Hexo中接入评论系统 - 苇白的混沌空间</title>
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.spacevoid.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="探索评论系统折腾了好久的个人网站又迎来了他的新的功能：评论。以前就折腾过一次这个，不过接入的是多说的服务，很多年没维护之后，这次重启了这个网站却发现，原来很多的评论系统都已经凉了，包括多说。重新接入一个评论系统吧，找了很久，看有人推荐gitment，据说是基于git仓库来进行储存评论，感觉不会挂，所以我就抱着试一试的心态接入了。接完了一直不能登陆，一登陆就返回主页，报一个miss_match_re">
+  
+    <meta name="description" content="探索评论系统折腾了好久的个人网站又迎来了他的新的功能：评论。以前就折腾过一次这个，不过接入的是多说的服务，很多年没维护之后，这次重启了这个网站却发现，原来很多的评论系统都已经凉了，包括多说。重新接入一个评论系统吧，找了很久，看有人推荐gitment，据说是基于git仓库来进行储存评论，感觉不会挂，所以我就抱着试一试的心态接入了。接完了一直不能登陆，一登陆就返回主页，报一个miss_match_re">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo中接入评论系统">
 <meta property="og:url" content="http://www.spacevoid.cn/2019/04/24/Hexo%E4%B8%AD%E6%8E%A5%E5%85%A5%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/index.html">
-<meta property="og:site_name" content="苇白的混沌空间 | 致虚极 守静笃">
+<meta property="og:site_name" content="苇白的混沌空间">
 <meta property="og:description" content="探索评论系统折腾了好久的个人网站又迎来了他的新的功能：评论。以前就折腾过一次这个，不过接入的是多说的服务，很多年没维护之后，这次重启了这个网站却发现，原来很多的评论系统都已经凉了，包括多说。重新接入一个评论系统吧，找了很久，看有人推荐gitment，据说是基于git仓库来进行储存评论，感觉不会挂，所以我就抱着试一试的心态接入了。接完了一直不能登陆，一登陆就返回主页，报一个miss_match_re">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://i1.bvimg.com/684169/78d00bc9cd49f7c1.jpg">
-<meta property="og:image" content="http://i1.bvimg.com/684169/75cae2ff313cc83c.jpg">
 <meta property="article:published_time" content="2019-04-24T07:03:00.000Z">
-<meta property="article:modified_time" content="2021-08-08T05:08:44.724Z">
+<meta property="article:modified_time" content="2021-08-16T08:46:49.148Z">
 <meta property="article:author" content="苇白">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://i1.bvimg.com/684169/78d00bc9cd49f7c1.jpg">
-
-<link rel="canonical" href="http://www.spacevoid.cn/2019/04/24/Hexo%E4%B8%AD%E6%8E%A5%E5%85%A5%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>Hexo中接入评论系统 | 苇白的混沌空间 | 致虚极 守静笃</title>
+<meta name="twitter:card" content="summary_large_image">
+  
   
 
+  <!-- feed -->
+  
 
+  
+    
+<link rel="stylesheet" href="/css/main.css">
 
+  
 
+  
 
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+  
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body>
+  
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
 
-  <div class="site-meta">
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
 
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">苇白的混沌空间 | 致虚极 守静笃</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">致虚极 守静笃</p>
-  </div>
 
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
+<header class="header">
+
+<div class="logo-wrap"><a class="title" href="/"><div class="main">苇白的混沌空间</div><div class="sub cap">致虚极 守静笃</div></a></div>
+<nav class="menu dis-select"></nav></header>
+
+<div class="widgets">
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%B3%A8%E5%86%8C%E6%9D%A5%E5%BF%85%E5%8A%9B"><span class="toc-text">第一步：注册来必力</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">第二步：初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E5%AE%89%E8%A3%85"><span class="toc-text">第三步：安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E7%AE%A1%E7%90%86"><span class="toc-text">第四步：管理</span></a></li></ol></div></div></div>
+
+
 </div>
 
 
-
-
-<nav class="site-nav">
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.spacevoid.cn/2019/04/24/Hexo%E4%B8%AD%E6%8E%A5%E5%85%A5%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="苇白">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="苇白的混沌空间 | 致虚极 守静笃">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Hexo中接入评论系统
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-04-24 15:03:00" itemprop="dateCreated datePublished" datetime="2019-04-24T15:03:00+08:00">2019-04-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-08-08 13:08:44" itemprop="dateModified" datetime="2021-08-08T13:08:44+08:00">2021-08-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+    </aside>
+    <div class='l_main'>
+      
 
       
-        <h1 id="探索评论系统"><a href="#探索评论系统" class="headerlink" title="探索评论系统"></a>探索评论系统</h1><p>折腾了好久的个人网站又迎来了他的新的功能：评论。<br>以前就折腾过一次这个，不过接入的是多说的服务，很多年没维护之后，这次重启了这个网站却发现，原来很多的评论系统都已经凉了，包括多说。<br>重新接入一个评论系统吧，找了很久，看有人推荐gitment，据说是基于git仓库来进行储存评论，感觉不会挂，所以我就抱着试一试的心态接入了。接完了一直不能登陆，一登陆就返回主页，报一个miss_match_redirectURL的错误，仔细检查了很久，发现没有配错什么东西<br>回到了gitment仓库搜索issues才发现，原来gitment的原理是通过作者建立的一个application验证，来授予外部访问的授权，然后再转存到你自己的仓库中。本来没什么，但是麻烦就处在这个application是有服务器验证的，于是在很久没维护之后，这个验证已经挂掉了，想要通过验证，需要自己建立一个验证服务器，略觉麻烦，遂放弃。有兴趣的同学可以通过这个教程来接入：<a target="_blank" rel="noopener" href="https://imsun.net/posts/gitment-introduction/">https://imsun.net/posts/gitment-introduction/</a> 我遇到的问题其实也有解决方案：<a target="_blank" rel="noopener" href="https://github.com/imsun/gitment/issues/178">https://github.com/imsun/gitment/issues/178</a></p>
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Hexo/">Hexo</a></div><div id="post-meta">发布于&nbsp;<time datetime="2019-04-24T07:03:00.000Z">2019-04-24</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>Hexo中接入评论系统</span></h1>
+<h1 id="探索评论系统"><a href="#探索评论系统" class="headerlink" title="探索评论系统"></a>探索评论系统</h1><p>折腾了好久的个人网站又迎来了他的新的功能：评论。<br>以前就折腾过一次这个，不过接入的是多说的服务，很多年没维护之后，这次重启了这个网站却发现，原来很多的评论系统都已经凉了，包括多说。<br>重新接入一个评论系统吧，找了很久，看有人推荐gitment，据说是基于git仓库来进行储存评论，感觉不会挂，所以我就抱着试一试的心态接入了。接完了一直不能登陆，一登陆就返回主页，报一个miss_match_redirectURL的错误，仔细检查了很久，发现没有配错什么东西<br>回到了gitment仓库搜索issues才发现，原来gitment的原理是通过作者建立的一个application验证，来授予外部访问的授权，然后再转存到你自己的仓库中。本来没什么，但是麻烦就处在这个application是有服务器验证的，于是在很久没维护之后，这个验证已经挂掉了，想要通过验证，需要自己建立一个验证服务器，略觉麻烦，遂放弃。有兴趣的同学可以通过这个教程来接入：<a target="_blank" rel="noopener" href="https://imsun.net/posts/gitment-introduction/">https://imsun.net/posts/gitment-introduction/</a> 我遇到的问题其实也有解决方案：<a target="_blank" rel="noopener" href="https://github.com/imsun/gitment/issues/178">https://github.com/imsun/gitment/issues/178</a></p>
 <p>转而尝试去接入另外的评论系统：来必力</p>
 <h1 id="接入来必力"><a href="#接入来必力" class="headerlink" title="接入来必力"></a>接入来必力</h1><p>来必力是韩国的产品，有中文的版本，有免费版本可以使用。接入方法也非常简单，这里使用我的主题hueman来做例子，一步一步记录一下接入的过程。</p>
 <h2 id="第一步：注册来必力"><a href="#第一步：注册来必力" class="headerlink" title="第一步：注册来必力"></a>第一步：注册来必力</h2><p>来必力的官方网站：<a target="_blank" rel="noopener" href="https://www.livere.com/">https://www.livere.com</a><br>在这个网站注册一个账号，并且使用邮箱来验证你的账号，注册就大功告成了</p>
 <h2 id="第二步：初始化"><a href="#第二步：初始化" class="headerlink" title="第二步：初始化"></a>第二步：初始化</h2><p>回到首页，点击安装按钮，然后在city版本下点击安装，然后输入你的网站的连接（如我这个网站：<a target="_blank" rel="noopener" href="https://spacevoid.cn),网站名称随便,选择个人,然后点击申请获取代码来到下面这个页面/">https://spacevoid.cn)，网站名称随便，选择个人，然后点击申请获取代码来到下面这个页面</a></p>
-<p><img src="http://i1.bvimg.com/684169/78d00bc9cd49f7c1.jpg" alt="初始化"></p>
 <h2 id="第三步：安装"><a href="#第三步：安装" class="headerlink" title="第三步：安装"></a>第三步：安装</h2><p>复制图中框住的文字（div的整个block），回到你hexo的目录，打开主题目录下的layout/comment/index.ejs（其他主题也有类似的东西）,直接把之前的复制的文字粘贴在最底部就大功告成了，然后部署你的hexo就可以了。</p>
-<p><img src="http://i1.bvimg.com/684169/75cae2ff313cc83c.jpg" alt="安装"></p>
 <h2 id="第四步：管理"><a href="#第四步：管理" class="headerlink" title="第四步：管理"></a>第四步：管理</h2><p>回到来必力的网站，点击右上角的个人图标，然后点击管理，就可以管理各种各样的东西，包括删除评论，新评论的提醒，登陆方法调整（点亮/拖动那些icons）等等，很简单，这里就不赘述了，大家自己研究就好。</p>
 
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="header cap theme"><span>接下来阅读</span></section><section class="body fs14"><a id="next" href="/2019/04/23/Golang%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03%20--%20%E5%87%BD%E6%95%B0/">Golang 学习笔记3 -- 函数<span class="note">较早</span></a><div class="line"></div><a id="prev" href="/2021/08/08/Runloop%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Runloop源码解析<span class="note">较新</span></a><div class="line"></div><a id="more" href="/archives">检索全部文章</a></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<p>本站由 <a href="http://www.spacevoid.cn/">@苇白</a> 创建，使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.4.1" title="v1.4.1">Stellar</a> 作为主题。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
     </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
 
-    
-    
-    
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
 
-      <footer class="post-footer">
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2019/04/23/Golang%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03%20--%20%E5%87%BD%E6%95%B0/" rel="prev" title="Golang 学习笔记3 -- 函数">
-      <i class="fa fa-chevron-left"></i> Golang 学习笔记3 -- 函数
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/08/08/Runloop%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" rel="next" title="Runloop源码解析">
-      Runloop源码解析 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
       }
     }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
+  };
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.4.1';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
+    sitesjs: '/js/plugins/sites.js',
+    friendsjs: '/js/plugins/friends.js',
+  };
+
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper/swiper-bundle.min.css","js":"https://unpkg.com/swiper/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
   }
 </script>
 
-        </div>
-          
+<!-- required -->
+
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
   </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A2%E7%B4%A2%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">探索评论系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8E%A5%E5%85%A5%E6%9D%A5%E5%BF%85%E5%8A%9B"><span class="nav-number">2.</span> <span class="nav-text">接入来必力</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%B3%A8%E5%86%8C%E6%9D%A5%E5%BF%85%E5%8A%9B"><span class="nav-number">2.1.</span> <span class="nav-text">第一步：注册来必力</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.2.</span> <span class="nav-text">第二步：初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E5%AE%89%E8%A3%85"><span class="nav-number">2.3.</span> <span class="nav-text">第三步：安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E7%AE%A1%E7%90%86"><span class="nav-number">2.4.</span> <span class="nav-text">第四步：管理</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">苇白</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">12</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">4</span>
-        <span class="site-state-item-name">分类</span>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">标签</span>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">苇白</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
 </body>
 </html>
