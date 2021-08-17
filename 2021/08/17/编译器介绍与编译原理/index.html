@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 5.4.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  <title>编译器介绍与编译原理 - 苇白的混沌空间</title>
+
+  
+    <meta name="description" content="传统编译器的组成一般来说，传统编译器由三端组成，前端，优化器和后端。前端负责检查语法错误，将代码解析为语法树；优化器对中间代码进行优化，让代码更加高效；后端则负责将优化后的中间代码转换为机器的代码 传统编译器组成 LLVMLLVM模块化编译器 不同于传统GCC编译器，LLVM在不同语言上使用统一的LLVM IR中间代码。在新增语言和机器支持上，只需要单独加入前端以及后端的支持即可。这样就可以形成一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译器介绍与编译原理">
+<meta property="og:url" content="http://www.spacevoid.cn/2021/08/17/%E7%BC%96%E8%AF%91%E5%99%A8%E4%BB%8B%E7%BB%8D%E4%B8%8E%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="苇白的混沌空间">
+<meta property="og:description" content="传统编译器的组成一般来说，传统编译器由三端组成，前端，优化器和后端。前端负责检查语法错误，将代码解析为语法树；优化器对中间代码进行优化，让代码更加高效；后端则负责将优化后的中间代码转换为机器的代码 传统编译器组成 LLVMLLVM模块化编译器 不同于传统GCC编译器，LLVM在不同语言上使用统一的LLVM IR中间代码。在新增语言和机器支持上，只需要单独加入前端以及后端的支持即可。这样就可以形成一">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/08/13/1gxOpBC3ecGzT24.jpg">
+<meta property="og:image" content="https://i.loli.net/2021/08/13/3otxrPBhRa1U4Z2.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/17/VmgY7sltqCvNryQ.png">
+<meta property="article:published_time" content="2021-08-17T09:56:49.000Z">
+<meta property="article:modified_time" content="2021-08-17T09:59:36.379Z">
+<meta property="article:author" content="苇白">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.loli.net/2021/08/13/1gxOpBC3ecGzT24.jpg">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+</head>
+
+<body>
+  
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+
+<header class="header">
+
+<div class="logo-wrap"><a class="title" href="/"><div class="main">苇白的混沌空间</div><div class="sub cap">致虚极 守静笃</div></a></div>
+<nav class="menu dis-select"></nav></header>
+
+<div class="widgets">
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-text">传统编译器的组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LLVM"><span class="toc-text">LLVM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clang"><span class="toc-text">Clang</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Clang-vs-gcc"><span class="toc-text">Clang vs gcc</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B"><span class="toc-text">编译流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%A2%84%E5%A4%84%E7%90%86%E9%98%B6%E6%AE%B5"><span class="toc-text">1. 预处理阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%BC%96%E8%AF%91%E9%98%B6%E6%AE%B5"><span class="toc-text">2. 编译阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%90%8E%E7%AB%AF"><span class="toc-text">3. 后端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%94%9F%E6%88%90%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6"><span class="toc-text">4. 生成目标文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E9%93%BE%E6%8E%A5"><span class="toc-text">5. 链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E7%BB%91%E5%AE%9A"><span class="toc-text">6. 绑定</span></a></li></ol></li></ol></div></div></div>
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/iOS%E5%BC%80%E5%8F%91/">iOS开发</a></div><div id="post-meta">发布于&nbsp;<time datetime="2021-08-17T09:56:49.000Z">2021-08-17</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>编译器介绍与编译原理</span></h1>
+<h3 id="传统编译器的组成"><a href="#传统编译器的组成" class="headerlink" title="传统编译器的组成"></a>传统编译器的组成</h3><p>一般来说，传统编译器由三端组成，前端，优化器和后端。前端负责检查语法错误，将代码解析为语法树；优化器对中间代码进行优化，让代码更加高效；后端则负责将优化后的中间代码转换为机器的代码</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2021/08/13/1gxOpBC3ecGzT24.jpg" alt="blog_compiler_001.jpg"><br>传统编译器组成</p>
+<h3 id="LLVM"><a href="#LLVM" class="headerlink" title="LLVM"></a>LLVM</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2021/08/13/3otxrPBhRa1U4Z2.png" alt="blog_compiler_002.png"><br>LLVM模块化编译器</p>
+<p>不同于传统GCC编译器，LLVM在不同语言上使用统一的LLVM IR中间代码。在新增语言和机器支持上，只需要单独加入前端以及后端的支持即可。这样就可以形成一个统一的架构</p>
+<blockquote>
+<p>题外话：LLVM之父Chris Latter是UIUC毕业的波兰人，也是Swift之父</p>
+</blockquote>
+<h3 id="Clang"><a href="#Clang" class="headerlink" title="Clang"></a>Clang</h3><p>clang是以LLVM为back-end编译器的前端编译器，苹果开发出来用以替代原先的gcc编译器。<br>目前clang支持C, C++, Objective-C和Objective-C++。</p>
+<h4 id="Clang-vs-gcc"><a href="#Clang-vs-gcc" class="headerlink" title="Clang vs gcc"></a>Clang vs gcc</h4><ul>
+<li>GCC的优势<ol>
+<li>GCC在支持的语言上胜过clang，除了clang支持的哪些C系列语言，GCC还支持Java, Ada, FORTRAN, Go等等语言。</li>
+<li>GCC支持LLVM以外的其他中间代码。</li>
+<li>GCC支持许多语言的拓展，比如说C语言下的内嵌函数(nested function)。</li>
+</ol>
+</li>
+<li>Clang的优势<ol>
+<li>Clang的抽象语法树(AST)和他的设计对于已经熟悉语言以及编译原理的开发者会更加易懂和好上手。GCC则因为较老的代码而很难上手。</li>
+<li>Clang在最开始就是以API的形式被设计，所以它可以被许多源码分析工具，开发工具所复用。相较clang，GCC则像是一个巨大的静态编译器，你很难将它引入其他开发工具并且使用它提供的API。并且，GCC的历史包袱导致它无法进行前端(front-end)和后端(back-end)分离解耦。</li>
+<li>Clang在编译的时候并不会隐式优化你的代码，而gcc则会。这会导致代码分析工具失效，举个例子：如果你在代码里头这么写：”a-a”，在GCC的AST中会被优化为”0”，而”a”这个变量就消失了。</li>
+<li>Clang编译所花费的时间和内存都远小于GCC<blockquote>
+<p>译文来自：<a target="_blank" rel="noopener" href="https://opensource.apple.com/source/clang/clang-23/clang/tools/clang/www/comparison.html">https://opensource.apple.com/source/clang/clang-23/clang/tools/clang/www/comparison.html</a></p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="编译流程"><a href="#编译流程" class="headerlink" title="编译流程"></a>编译流程</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2021/08/17/VmgY7sltqCvNryQ.png" alt="blog_compiler_003.png"></p>
+<h4 id="1-预处理阶段"><a href="#1-预处理阶段" class="headerlink" title="1. 预处理阶段"></a>1. 预处理阶段</h4><p>预处理阶段是进行宏的替换和头文件的导入</p>
+<ul>
+<li>typedef给数据类型取别名时，在预处理阶段不会被替换</li>
+<li>define的取的别名在预处理阶段会被替换，所有我们可以用这方法来进行关键代码混淆，例如将关键类和方法用系统类似的名称取别名<h4 id="2-编译阶段"><a href="#2-编译阶段" class="headerlink" title="2. 编译阶段"></a>2. 编译阶段</h4>编译阶段主要是进行：词法、语法分析和代码错误检查，然后生成中间代码IR</li>
+</ul>
+<ol>
+<li>词法分析(Lexical Analysis)<br>词法分析器的主要任务是读入源程序的输入字符，将它们组成词素(Token)，生成并输出一个词法单元序列，这个词法单元序列被输出到语法分析器进行语法分析。<br>另外，由于词法分析器在编译器中负责读取源程序，因此除了识别词素之外，它还会完成一些其他任务，比如过滤掉源程序中的注释和空白，将编译器生成的错误消息与源程序的位置关联起来等。总而言之，词法分析器的作用如下： <ul>
+<li>读入源程序的输入字符，将它们组成词素，生成并输出一个词法单元序列； </li>
+<li>过滤掉源程序中的注释和空白； </li>
+<li>将编译器生成的错误消息与源程序的位置关联起来； <blockquote>
+<p>关于<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/450422121">Token</a>的详细定义可以看这个</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>语法分析 (Syntax Analysis)<br>验证语法是否正确，在词法分析的基础上将单词序列组合成各类语法短语，如程序、语句、表达式等等，然后将所有节点组成抽象语法树（Abstract Syntax Tree,AST）。语法分析程序判断源程序在结构上是否正确</li>
+<li>生成中间代码.ll(LLVM IR代码)</li>
+<li>如果开启了bitcode 还会继续生成.bc的LLVMIR的二进制代码</li>
+</ol>
+<h4 id="3-后端"><a href="#3-后端" class="headerlink" title="3. 后端"></a>3. 后端</h4><p>LLVM后端主要将.bc和.ll生成对应CPU架构的汇编代码并且进行相应的优化</p>
+<h4 id="4-生成目标文件"><a href="#4-生成目标文件" class="headerlink" title="4. 生成目标文件"></a>4. 生成目标文件</h4><p>是汇编器以汇编代码作为插入，将汇编代码转换为机器代码，最后输出目标文件（object file）</p>
+<h4 id="5-链接"><a href="#5-链接" class="headerlink" title="5. 链接"></a>5. 链接</h4><p>链接主要是链接需要的动态库和静态库</p>
+<ul>
+<li>静态库和可执行文件合并</li>
+<li>动态库是独立链接</li>
+</ul>
+<p>链接器会吧编译生成的.o文件和(.dylib.a)文件，生成一个mach-o文件</p>
+<h4 id="6-绑定"><a href="#6-绑定" class="headerlink" title="6. 绑定"></a>6. 绑定</h4><p>绑定主要是通过不同的架构，生成对应的mach-o格式可执行文件</p>
+<blockquote>
+<p>资料：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/796fd6b184e9">iOS-底层原理：LLVM编译流程 &amp; Clang插件开发</a></p>
+</blockquote>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="header cap theme"><span>接下来阅读</span></section><section class="body fs14"><a id="next" href="/2021/08/08/Runloop%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Runloop源码解析<span class="note">较早</span></a><div class="line"></div><div class="line"></div><a id="more" href="/archives">检索全部文章</a></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<p>本站由 <a href="http://www.spacevoid.cn/">@苇白</a> 创建，使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.4.1" title="v1.4.1">Stellar</a> 作为主题。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.4.1';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
+    sitesjs: '/js/plugins/sites.js',
+    friendsjs: '/js/plugins/friends.js',
+  };
+
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper/swiper-bundle.min.css","js":"https://unpkg.com/swiper/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
