@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/08/13/3otxrPBhRa1U4Z2.png">
 <meta property="og:image" content="https://i.loli.net/2021/08/17/VmgY7sltqCvNryQ.png">
 <meta property="article:published_time" content="2021-08-17T09:56:49.000Z">
-<meta property="article:modified_time" content="2021-08-17T09:59:36.379Z">
+<meta property="article:modified_time" content="2021-08-30T13:45:30.149Z">
 <meta property="article:author" content="苇白">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://i.loli.net/2021/08/13/1gxOpBC3ecGzT24.jpg">
@@ -68,7 +68,7 @@
 
 <div class="widgets">
 
-<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-text">传统编译器的组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LLVM"><span class="toc-text">LLVM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clang"><span class="toc-text">Clang</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Clang-vs-gcc"><span class="toc-text">Clang vs gcc</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B"><span class="toc-text">编译流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%A2%84%E5%A4%84%E7%90%86%E9%98%B6%E6%AE%B5"><span class="toc-text">1. 预处理阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%BC%96%E8%AF%91%E9%98%B6%E6%AE%B5"><span class="toc-text">2. 编译阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%90%8E%E7%AB%AF"><span class="toc-text">3. 后端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%94%9F%E6%88%90%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6"><span class="toc-text">4. 生成目标文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E9%93%BE%E6%8E%A5"><span class="toc-text">5. 链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E7%BB%91%E5%AE%9A"><span class="toc-text">6. 绑定</span></a></li></ol></li></ol></div></div></div>
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-text">传统编译器的组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LLVM"><span class="toc-text">LLVM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E7%BC%96%E8%AF%91%E5%99%A8-%E2%80%93-Clang-gcc"><span class="toc-text">前端编译器 – Clang&#x2F;gcc</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Clang-vs-gcc"><span class="toc-text">Clang vs gcc</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E6%B5%81%E7%A8%8B"><span class="toc-text">编译流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%A2%84%E5%A4%84%E7%90%86%E9%98%B6%E6%AE%B5"><span class="toc-text">1. 预处理阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%BC%96%E8%AF%91%E9%98%B6%E6%AE%B5"><span class="toc-text">2. 编译阶段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%90%8E%E7%AB%AF"><span class="toc-text">3. 后端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%94%9F%E6%88%90%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6"><span class="toc-text">4. 生成目标文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E9%93%BE%E6%8E%A5"><span class="toc-text">5. 链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E7%BB%91%E5%AE%9A"><span class="toc-text">6. 绑定</span></a></li></ol></li></ol></div></div></div>
 
 
 </div>
@@ -92,7 +92,7 @@
 <blockquote>
 <p>题外话：LLVM之父Chris Latter是UIUC毕业的波兰人，也是Swift之父</p>
 </blockquote>
-<h3 id="Clang"><a href="#Clang" class="headerlink" title="Clang"></a>Clang</h3><p>clang是以LLVM为back-end编译器的前端编译器，苹果开发出来用以替代原先的gcc编译器。<br>目前clang支持C, C++, Objective-C和Objective-C++。</p>
+<h3 id="前端编译器-–-Clang-gcc"><a href="#前端编译器-–-Clang-gcc" class="headerlink" title="前端编译器 – Clang/gcc"></a>前端编译器 – Clang/gcc</h3><p>clang是以LLVM为back-end编译器的前端编译器，苹果开发出来用以替代原先的gcc编译器。<br>目前clang支持C, C++, Objective-C和Objective-C++。</p>
 <h4 id="Clang-vs-gcc"><a href="#Clang-vs-gcc" class="headerlink" title="Clang vs gcc"></a>Clang vs gcc</h4><ul>
 <li>GCC的优势<ol>
 <li>GCC在支持的语言上胜过clang，除了clang支持的哪些C系列语言，GCC还支持Java, Ada, FORTRAN, Go等等语言。</li>
@@ -115,8 +115,9 @@
 <h4 id="1-预处理阶段"><a href="#1-预处理阶段" class="headerlink" title="1. 预处理阶段"></a>1. 预处理阶段</h4><p>预处理阶段是进行宏的替换和头文件的导入</p>
 <ul>
 <li>typedef给数据类型取别名时，在预处理阶段不会被替换</li>
-<li>define的取的别名在预处理阶段会被替换，所有我们可以用这方法来进行关键代码混淆，例如将关键类和方法用系统类似的名称取别名<h4 id="2-编译阶段"><a href="#2-编译阶段" class="headerlink" title="2. 编译阶段"></a>2. 编译阶段</h4>编译阶段主要是进行：词法、语法分析和代码错误检查，然后生成中间代码IR</li>
+<li>define的取的别名在预处理阶段会被替换，所有我们可以用这方法来进行关键代码混淆，例如将关键类和方法用系统类似的名称取别名</li>
 </ul>
+<h4 id="2-编译阶段"><a href="#2-编译阶段" class="headerlink" title="2. 编译阶段"></a>2. 编译阶段</h4><p>编译阶段主要是进行：词法、语法分析和代码错误检查，然后生成中间代码IR</p>
 <ol>
 <li>词法分析(Lexical Analysis)<br>词法分析器的主要任务是读入源程序的输入字符，将它们组成词素(Token)，生成并输出一个词法单元序列，这个词法单元序列被输出到语法分析器进行语法分析。<br>另外，由于词法分析器在编译器中负责读取源程序，因此除了识别词素之外，它还会完成一些其他任务，比如过滤掉源程序中的注释和空白，将编译器生成的错误消息与源程序的位置关联起来等。总而言之，词法分析器的作用如下： <ul>
 <li>读入源程序的输入字符，将它们组成词素，生成并输出一个词法单元序列； </li>

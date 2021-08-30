@@ -20,12 +20,12 @@
   <title>零基础带你解读MACH-O - 苇白的混沌空间</title>
 
   
-    <meta name="description" content="概述定义 MACH-O文件是苹果推出的可执行文件类型 大部分基于Mach核心操作系统所使用的 苹果将多个架构的mach-o以排列的形式组合为一个更大的mach-o文件以进行多系统架构支持常见的MACH-O文件   类型 说明    .o 目标文件   .a&#x2F;.dylib&#x2F;.framework 库文件   没有后缀 可执行文件   dyld 动态链接器   dsym 编译中转文件   Mach-O文">
+    <meta name="description" content="概述定义 MACH-O文件是苹果推出的可执行文件类型 大部分基于Mach核心操作系统所使用的 苹果将多个架构的mach-o以排列的形式组合为一个更大的mach-o文件以进行多系统架构支持  常见的MACH-O文件   类型 说明    .o 目标文件   .a&#x2F;.dylib&#x2F;.framework 库文件   没有后缀 可执行文件   dyld 动态链接器   dsym 编译中转文件   Mach-">
 <meta property="og:type" content="article">
 <meta property="og:title" content="零基础带你解读MACH-O">
 <meta property="og:url" content="http://www.spacevoid.cn/2021/08/30/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%B8%A6%E4%BD%A0%E8%A7%A3%E8%AF%BBMACH-O/index.html">
 <meta property="og:site_name" content="苇白的混沌空间">
-<meta property="og:description" content="概述定义 MACH-O文件是苹果推出的可执行文件类型 大部分基于Mach核心操作系统所使用的 苹果将多个架构的mach-o以排列的形式组合为一个更大的mach-o文件以进行多系统架构支持常见的MACH-O文件   类型 说明    .o 目标文件   .a&#x2F;.dylib&#x2F;.framework 库文件   没有后缀 可执行文件   dyld 动态链接器   dsym 编译中转文件   Mach-O文">
+<meta property="og:description" content="概述定义 MACH-O文件是苹果推出的可执行文件类型 大部分基于Mach核心操作系统所使用的 苹果将多个架构的mach-o以排列的形式组合为一个更大的mach-o文件以进行多系统架构支持  常见的MACH-O文件   类型 说明    .o 目标文件   .a&#x2F;.dylib&#x2F;.framework 库文件   没有后缀 可执行文件   dyld 动态链接器   dsym 编译中转文件   Mach-">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2021/08/13/FnfZXxAaDvzEqcj.png">
 <meta property="og:image" content="https://i.loli.net/2021/08/19/OXoBzr8U7j4PDIW.png">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/08/30/wvUBMjzGdr5bmec.png">
 <meta property="og:image" content="https://i.loli.net/2021/08/30/3SDnLZPbkOFzg6m.png">
 <meta property="article:published_time" content="2021-08-30T13:15:06.000Z">
-<meta property="article:modified_time" content="2021-08-30T13:28:35.427Z">
+<meta property="article:modified_time" content="2021-08-30T13:42:46.675Z">
 <meta property="article:author" content="苇白">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://i.loli.net/2021/08/13/FnfZXxAaDvzEqcj.png">
@@ -90,7 +90,9 @@
 <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><ol>
 <li>MACH-O文件是苹果推出的可执行文件类型</li>
 <li>大部分基于Mach核心操作系统所使用的</li>
-<li>苹果将多个架构的mach-o以排列的形式组合为一个更大的mach-o文件以进行多系统架构支持<h4 id="常见的MACH-O文件"><a href="#常见的MACH-O文件" class="headerlink" title="常见的MACH-O文件"></a>常见的MACH-O文件</h4><table>
+<li>苹果将多个架构的mach-o以排列的形式组合为一个更大的mach-o文件以进行多系统架构支持</li>
+</ol>
+<h4 id="常见的MACH-O文件"><a href="#常见的MACH-O文件" class="headerlink" title="常见的MACH-O文件"></a>常见的MACH-O文件</h4><table>
 <thead>
 <tr>
 <th>类型</th>
@@ -118,8 +120,8 @@
 <td>编译中转文件</td>
 </tr>
 </tbody></table>
-<h3 id="Mach-O文件的组成"><a href="#Mach-O文件的组成" class="headerlink" title="Mach-O文件的组成"></a>Mach-O文件的组成</h3>一个MACH-O文件通常由三部分组成：<code>Header</code>，<code>Load Commands</code>, 和<code>Data</code>，下面将由这三部分分别展开讲解。对于一个fat mach-o文件来说，是由多个单独mach-o文件组合而成，苹果将他们顺序排列以适配不同的cpu架构<h4 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h4><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2021/08/13/FnfZXxAaDvzEqcj.png" alt="blog_mach-o_001.png"><br>将Mach-O文件使用MachOViewer来查看，从图里可以看见，一个MACH-O文件包括CPU类型，文件类型，Load Commands的数量等描述<br>其中苹果是通过<code>Magic Number</code>来区分可执行文件的类型是对应fat binary(Macho文件的集合)还是单独的可执行文件</li>
-</ol>
+<h3 id="Mach-O文件的组成"><a href="#Mach-O文件的组成" class="headerlink" title="Mach-O文件的组成"></a>Mach-O文件的组成</h3><p>一个MACH-O文件通常由三部分组成：<code>Header</code>，<code>Load Commands</code>, 和<code>Data</code>，下面将由这三部分分别展开讲解。对于一个fat mach-o文件来说，是由多个单独mach-o文件组合而成，苹果将他们顺序排列以适配不同的cpu架构</p>
+<h4 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h4><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2021/08/13/FnfZXxAaDvzEqcj.png" alt="blog_mach-o_001.png"><br>将Mach-O文件使用MachOViewer来查看，从图里可以看见，一个MACH-O文件包括CPU类型，文件类型，Load Commands的数量等描述<br>其中苹果是通过<code>Magic Number</code>来区分可执行文件的类型是对应fat binary(Macho文件的集合)还是单独的可执行文件</p>
 <blockquote>
 <p>对于fat binary的魔数是 <code>0xcafebabe</code>（小端）<code>0xbebafeca</code> (大端)<br>对于Mach-O的魔数是 <code>0xfeedface</code> (32位) <code>0xfeedfacf</code> (64位)</p>
 </blockquote>
