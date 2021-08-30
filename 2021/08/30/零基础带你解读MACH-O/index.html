@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 5.4.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  <title>零基础带你解读MACH-O - 苇白的混沌空间</title>
+
+  
+    <meta name="description" content="概述定义 MACH-O文件是苹果推出的可执行文件类型 大部分基于Mach核心操作系统所使用的 苹果将多个架构的mach-o以排列的形式组合为一个更大的mach-o文件以进行多系统架构支持常见的MACH-O文件   类型 说明    .o 目标文件   .a&#x2F;.dylib&#x2F;.framework 库文件   没有后缀 可执行文件   dyld 动态链接器   dsym 编译中转文件   Mach-O文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="零基础带你解读MACH-O">
+<meta property="og:url" content="http://www.spacevoid.cn/2021/08/30/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%B8%A6%E4%BD%A0%E8%A7%A3%E8%AF%BBMACH-O/index.html">
+<meta property="og:site_name" content="苇白的混沌空间">
+<meta property="og:description" content="概述定义 MACH-O文件是苹果推出的可执行文件类型 大部分基于Mach核心操作系统所使用的 苹果将多个架构的mach-o以排列的形式组合为一个更大的mach-o文件以进行多系统架构支持常见的MACH-O文件   类型 说明    .o 目标文件   .a&#x2F;.dylib&#x2F;.framework 库文件   没有后缀 可执行文件   dyld 动态链接器   dsym 编译中转文件   Mach-O文">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/08/13/FnfZXxAaDvzEqcj.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/19/OXoBzr8U7j4PDIW.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/17/FwzeQZO1KydLMIn.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/30/wvUBMjzGdr5bmec.png">
+<meta property="og:image" content="https://i.loli.net/2021/08/30/3SDnLZPbkOFzg6m.png">
+<meta property="article:published_time" content="2021-08-30T13:15:06.000Z">
+<meta property="article:modified_time" content="2021-08-30T13:28:35.427Z">
+<meta property="article:author" content="苇白">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.loli.net/2021/08/13/FnfZXxAaDvzEqcj.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+</head>
+
+<body>
+  
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+
+<header class="header">
+
+<div class="logo-wrap"><a class="title" href="/"><div class="main">苇白的混沌空间</div><div class="sub cap">致虚极 守静笃</div></a></div>
+<nav class="menu dis-select"></nav></header>
+
+<div class="widgets">
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84MACH-O%E6%96%87%E4%BB%B6"><span class="toc-text">常见的MACH-O文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mach-O%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-text">Mach-O文件的组成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Header"><span class="toc-text">Header</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Load-Commands"><span class="toc-text">Load Commands</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Segments"><span class="toc-text">Segments</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-text">参考文献</span></a></li></ol></div></div></div>
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/iOS%E5%BC%80%E5%8F%91/">iOS开发</a></div><div id="post-meta">发布于&nbsp;<time datetime="2021-08-30T13:15:06.000Z">2021-08-30</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>零基础带你解读MACH-O</span></h1>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><ol>
+<li>MACH-O文件是苹果推出的可执行文件类型</li>
+<li>大部分基于Mach核心操作系统所使用的</li>
+<li>苹果将多个架构的mach-o以排列的形式组合为一个更大的mach-o文件以进行多系统架构支持<h4 id="常见的MACH-O文件"><a href="#常见的MACH-O文件" class="headerlink" title="常见的MACH-O文件"></a>常见的MACH-O文件</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.o</td>
+<td>目标文件</td>
+</tr>
+<tr>
+<td>.a/.dylib/.framework</td>
+<td>库文件</td>
+</tr>
+<tr>
+<td>没有后缀</td>
+<td>可执行文件</td>
+</tr>
+<tr>
+<td>dyld</td>
+<td>动态链接器</td>
+</tr>
+<tr>
+<td>dsym</td>
+<td>编译中转文件</td>
+</tr>
+</tbody></table>
+<h3 id="Mach-O文件的组成"><a href="#Mach-O文件的组成" class="headerlink" title="Mach-O文件的组成"></a>Mach-O文件的组成</h3>一个MACH-O文件通常由三部分组成：<code>Header</code>，<code>Load Commands</code>, 和<code>Data</code>，下面将由这三部分分别展开讲解。对于一个fat mach-o文件来说，是由多个单独mach-o文件组合而成，苹果将他们顺序排列以适配不同的cpu架构<h4 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h4><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2021/08/13/FnfZXxAaDvzEqcj.png" alt="blog_mach-o_001.png"><br>将Mach-O文件使用MachOViewer来查看，从图里可以看见，一个MACH-O文件包括CPU类型，文件类型，Load Commands的数量等描述<br>其中苹果是通过<code>Magic Number</code>来区分可执行文件的类型是对应fat binary(Macho文件的集合)还是单独的可执行文件</li>
+</ol>
+<blockquote>
+<p>对于fat binary的魔数是 <code>0xcafebabe</code>（小端）<code>0xbebafeca</code> (大端)<br>对于Mach-O的魔数是 <code>0xfeedface</code> (32位) <code>0xfeedfacf</code> (64位)</p>
+</blockquote>
+<h4 id="Load-Commands"><a href="#Load-Commands" class="headerlink" title="Load Commands"></a>Load Commands</h4><p>Load Commands定义了与这个可执行文件相关的元信息。</p>
+<ul>
+<li>Load Commands类型</li>
+</ul>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2021/08/19/OXoBzr8U7j4PDIW.png" alt="blog_mach-o_003.png"></p>
+<ul>
+<li>常见的Load Commands总结 </li>
+</ul>
+<ol>
+<li><p> LC_SEGMENT/ LC_SEGMENT_64<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2021/08/17/FwzeQZO1KydLMIn.png" alt="blog_mach-o_002.png"><br>如图所示，<code>LC_SEGMENT</code>指定了内核如何设置新运行的进程的内存空间，它包含该SEGMENT的对应内存位置以及偏移量</p>
+</li>
+<li><p> LC_DYLD_INFO_ONLY<br>这个指令标记了Mach-O加载时候所需的<code>rebase</code>，<code>binding</code>的位置信息以及偏移量</p>
+<blockquote>
+<p>关于<a target="_blank" rel="noopener" href="https://blog.csdn.net/henry_lei/article/details/109822340">stubs/rebase/bind</a>相关概念可以看连接博文，介绍的比较详细</p>
+</blockquote>
+</li>
+<li><p>LC_SYMTAB</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * The symtab_command contains the offsets and sizes of the link-edit 4.3BSD</span></span><br><span class="line"><span class="comment"> * &quot;stab&quot; style symbol table information as described in the header files</span></span><br><span class="line"><span class="comment"> * &lt;nlist.h&gt; and &lt;stab.h&gt;.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">symtab_command</span> &#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span>    cmd;        <span class="comment">/* LC_SYMTAB */</span></span><br><span class="line">    <span class="keyword">uint32_t</span>    cmdsize;    <span class="comment">/* sizeof(struct symtab_command) */</span></span><br><span class="line">    <span class="keyword">uint32_t</span>    symoff;        <span class="comment">/* symbol table offset */</span></span><br><span class="line">    <span class="keyword">uint32_t</span>    nsyms;        <span class="comment">/* number of symbol table entries */</span></span><br><span class="line">    <span class="keyword">uint32_t</span>    stroff;        <span class="comment">/* string table offset */</span></span><br><span class="line">    <span class="keyword">uint32_t</span>    strsize;    <span class="comment">/* string table size in bytes */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>LC_SYMTAB</code>提供了Symbol Table以及String Table的偏移量和元素个数<br>Symbol Table提供了对应方法和对应实现的地址数据</p>
+</li>
+<li><p> LC_DYSYMTAB<br>动态符号表信息，他与<code>LC_DYSYMTAB</code>的区别在于<code>LC_DYSYMTAB</code>仅仅提供符号和string表格的位置信息，<code>LC_DYSYMTAB</code>提供了rebase信息以及local, external以及undefined符号的区间</p>
+</li>
+<li><p>LC_LOAD_DYLINKER<br>表示了使用哪种连接器进行连接，一般是<code>dyld</code></p>
+</li>
+<li><p>LC_UUID<br>标识了这个macho文件的唯一识别码，这个与<code>dSYM</code>文件的UUID是一致的，一般崩溃解析是通过这个进行关联</p>
+</li>
+<li><p>LC_LOAD_DYLIB<br>标识了动态链接库的地址以及版本信息，与每个需要连接的动态库一一对应</p>
+</li>
+<li><p>LC_MAIN<br><code>LC_MAIN</code>是main函数加载地址</p>
+</li>
+</ol>
+<blockquote>
+<p>这里只列举常见的load commands，如果对于其他支持的功能可以看苹果的<a target="_blank" rel="noopener" href="https://opensource.apple.com/source/xnu/xnu-2050.18.24/EXTERNAL_HEADERS/mach-o/loader.h">开源源码</a></p>
+</blockquote>
+<h4 id="Segments"><a href="#Segments" class="headerlink" title="Segments"></a>Segments</h4><p>Segments是macho文件中实质数据字段/函数实现/文本(Sections)，符号表(Symbol Table)，动态符号表(Dynamic Symbol Table)以及字符串表(String Table)。<br>主要Segments类型：<code>__PAGEZERO</code>, <code>__TEXT</code>, <code>__DATA</code>, <code>__OBJC</code>, <code>__IMPORT</code>, <code>__LINKEDIT</code>。其中<code>__PAGEZERO</code>, <code>__TEXT</code>, <code>__DATA</code>以及<code>__LINKEDIT</code>在大部分的mach-o文件中都有。</p>
+<ol>
+<li><p>__PAGEZERO<br>关于<code>__PAGEZERO</code>先来看看<code>mach-o/loader.h</code>中有对于此段的说明。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">the pagezero segment which has no protections and catches NULL references for MH_EXECUTE files */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>    SEG_PAGEZERO    <span class="meta-string">&quot;__PAGEZERO&quot;</span>    </span></span><br></pre></td></tr></table></figure>
+<p><code>__PAGEZERO</code>是Mach-O加载进内存之后附加的一块区域，它不可读，不可写，主要用来捕捉NULL指针的引用。如果访问<code>__PAGEZERO</code>段，会引起程序崩溃。当我们遇到<code>EXC_BAD_ACCESS</code>野指针崩溃，就是由于代码中尝试读取此部分内存而导致。<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2021/08/30/wvUBMjzGdr5bmec.png" alt="blog_mach-o_005.png"><br>在64位情况下，一个PAGEZERO内存是从0x00000000000到0x00100000000。只占用内存，但是没有实际内容，所以File Size为0。</p>
+</li>
+<li><p>__TEXT</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* the tradition UNIX text segment */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>    SEG_TEXT    <span class="meta-string">&quot;__TEXT&quot;</span>    </span></span><br></pre></td></tr></table></figure>
+<p><code>__TEXT</code>主要包含程序所有可执行代码以及可读数据段，这段内容为只读。只允许从硬盘拷贝内容到内存中，并不会发生内存反写的情况，所以当kernel内核需要更多的内存，会直接释放掉<code>__TEXT</code>页然后当再次被使用的时候重新加载。</p>
+</li>
+</ol>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2021/08/30/3SDnLZPbkOFzg6m.png" alt="blog_mach-o_006.png"></p>
+<p>在内存中，<code>__TEXT</code>段从<code>__PAGEZERO</code>段结束开始。File Size与VM Size相同，意味着kernel会将此段完整的数据从硬盘中加载到内存中。下面列出了<code>__TEXT</code>中拥有的部分sections说明。</p>
+<table>
+<thead>
+<tr>
+<th>Sections</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>__text</td>
+<td>主程序代码</td>
+</tr>
+<tr>
+<td>__stubs/__stub_helper</td>
+<td>桩代码/占位代码，用以dyld进行”lazy”绑定方法实现</td>
+</tr>
+<tr>
+<td>__cstring</td>
+<td>C语言字符串</td>
+</tr>
+<tr>
+<td>__objc_methname</td>
+<td>OC方法名称</td>
+</tr>
+<tr>
+<td>__objc_classname</td>
+<td>OC类名称</td>
+</tr>
+<tr>
+<td>__objc_methtype</td>
+<td>OC方法类型</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>源自：<a target="_blank" rel="noopener" href="https://www.desgard.com/iOS-Source-Probe/C/mach-o/Mach-O%20%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E6%8E%A2%E7%B4%A2.html">Mach-O文件格式探索</a> 补充一下关于<code>stub</code>：</p>
+<ol>
+<li><code>__la_symbol_ptr</code> 里面的所有表项的数据在开始时都会被 binding 成 <code>__stub_helper</code>。而在之后的调用中，虽然依旧会跳到 <code>__stub</code> 区域，但是 <code>__la_symbol_ptr</code> 中由于在之前的调用中获取到了对应方法的真实地址，所以无需在进入 <code>dyld_stub_binder</code> 阶段，并直接调用函数。这样就完成了一次近似于 lazy 思想的延时 <code>binding</code> 过程。</li>
+<li><code>Stub</code> 机制其实和 wikipedia 上的说法一致，设置函数占位符并采用 lazy 思想做成延迟 <code>binding</code> 的流程。在 macOS 中也是如此，外部函数引用在 <code>__DATA</code> 段的 <code>__la_symbol_ptr</code> 区域先生产一个占位符，当第一个调用启动时，就会进入符号的动态链接过程，一旦找到地址后，就将 <code>__DATA</code> Segment 中的 <code>__la_symbol_ptr Section</code> 中的占位符修改为方法的真实地址，这样就完成了只需要一个符号绑定的执行过程。</li>
+</ol>
+</blockquote>
+<ol start="3">
+<li>__DATA<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* the tradition UNIX data segment */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>    SEG_DATA    <span class="meta-string">&quot;__DATA&quot;</span>    </span></span><br></pre></td></tr></table></figure>
+<code>__DATA</code>段是一段可读可写的数据，它并不存放可执行文件，而是存放那些需要被更新的数据。下面列出了<code>__DATA</code>中拥有的部分sections说明。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Sections</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>__data</td>
+<td>用来存放所有非静态的已初始化变量</td>
+</tr>
+<tr>
+<td>__la_symbol_ptr</td>
+<td>懒加载的函数指针，用以存放比如在一个函数中被调用的未被定义过的另外一个函数。这些指针一开始都指向__stub_helper，最终在调用的时候被确定</td>
+</tr>
+<tr>
+<td>__nl_symbol_ptr</td>
+<td>非懒加载的指针，这些指针是在可执行文件被加载的时候被确定的</td>
+</tr>
+<tr>
+<td>__cfstring</td>
+<td>使用了占位符的字符串</td>
+</tr>
+<tr>
+<td>__objc_classlist</td>
+<td>所有非系统类的列表</td>
+</tr>
+<tr>
+<td>__objc_classrefs</td>
+<td>被引用的类的列表</td>
+</tr>
+<tr>
+<td>__mod_init_func</td>
+<td>被引用的类的列表</td>
+</tr>
+</tbody></table>
+<ol start="4">
+<li>__OBJC<br>根据苹果文档：<blockquote>
+<p>All sections in the <code>__OBJC</code> segment, including old sections that are no longer used and future sections that may be added, are exclusively reserved for the Objective-C compiler’s use.</p>
+</blockquote>
+</li>
+</ol>
+<p>这个segment为可选段，里面所有的内容都是保留为OC编译器使用</p>
+<ol start="5">
+<li><p>__IMPORT<br>这个段也是可选段，只有在英特尔32位处理器下使用，用以储存一些符号<code>stubs</code>和<code>non-lazy</code>的未被定义的一些变量的指针。</p>
+</li>
+<li><p>__LINKEDIT<br>这个段包含需要被动态链接器使用的符号表以及字符串表等。</p>
+</li>
+</ol>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><blockquote>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/aidansteele/osx-abi-macho-file-format-reference">osx-abi-macho-file-format-reference</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.apple.com/library/archive/documentation/DeveloperTools/Reference/Assembler/000-Introduction/introduction.html#//apple_ref/doc/uid/TP30000851-CH211-SW1">苹果编译文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/tokopedia-engineering/a-curious-case-of-mach-o-executable-26d5ecadd995">国外大神关于Mach-O的总结</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.objc.io/issues/6-build-tools/mach-o-executables/">objc.io推荐文章</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.desgard.com/iOS-Source-Probe/C/mach-o/Mach-O%20%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F%E6%8E%A2%E7%B4%A2.html">东神的文章</a></li>
+</ol>
+</blockquote>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="header cap theme"><span>接下来阅读</span></section><section class="body fs14"><a id="next" href="/2021/08/17/%E7%BC%96%E8%AF%91%E5%99%A8%E4%BB%8B%E7%BB%8D%E4%B8%8E%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译器介绍与编译原理<span class="note">较早</span></a><div class="line"></div><div class="line"></div><a id="more" href="/archives">检索全部文章</a></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<p>本站由 <a href="http://www.spacevoid.cn/">@苇白</a> 创建，使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.4.1" title="v1.4.1">Stellar</a> 作为主题。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.4.1';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
+    sitesjs: '/js/plugins/sites.js',
+    friendsjs: '/js/plugins/friends.js',
+  };
+
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper/swiper-bundle.min.css","js":"https://unpkg.com/swiper/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
