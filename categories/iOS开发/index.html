@@ -163,9 +163,9 @@ LLVMLLVM模块化编译器
 不同于传统GCC编译器，LLVM在不同语言上使用统一的LLVM IR中间代码。在新增语言和机器支持上，只需要单独加入前端以及后端的支持即可。这样就可以...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2021-08-17T09:56:49.000Z">2021-08-17</time></span><span class="cap breadcrumb">iOS开发</span><div>
 </article></a><a class="post-card post " href="/2021/08/08/Runloop%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"><article class="excerpt md">
 <div class="post-cover"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2021/08/16/BNaTODJ1PexEMhb.jpg"/></div><h2 class="post-title">Runloop源码解析</h2><div class="excerpt"><p>Runloop概述
-Runloop本身是一个Event Loop循环，内部是用do while来实现
+Runloop本身是一个Event Loop循环，内部是用do while以及for(;;)来实现
 runloop内部有许多modes，存放在内部mutableSet里面。Mode又包含source observer timer三种item(用来回调)，这些mode代表内部runloop事件回传实体，在runloop获取的时候，如果没有就会创建对应的mode。
-真实存在的mode种类分为d...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2021-08-08T05:14:02.000Z">2021-08-08</time></span><span class="cap breadcrumb">iOS开发</span><div>
+真实存在的...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2021-08-08T05:14:02.000Z">2021-08-08</time></span><span class="cap breadcrumb">iOS开发</span><div>
 </article></a><a class="post-card post " href="/2019/04/18/%E6%9B%B4%E5%A5%BD%E7%9A%84NSLog/"><article class="excerpt md">
 <div class="post-cover"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2021/08/16/23cysgQb6VefWGu.jpg"/></div><h2 class="post-title">更好的NSLog</h2><div class="excerpt"><p>更好的NSLog自从Xcode9之后，系统的消息里头加入了很多的其实并不需要的log，再加上各种第三方的log，整个log console看的非常的杂乱，想要看见自己的log很困难。
 第一步，让我们来一一解决掉系统的log系统的log有两种类型，一个是UI新出的main tread checker的log，以及系统输出的NSLog
