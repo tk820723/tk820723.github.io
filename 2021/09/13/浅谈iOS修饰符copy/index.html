@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 5.4.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  <title>浅谈iOS修饰符copy - 苇白的混沌空间</title>
+
+  
+    <meta name="description" content="最近开发的时候，旁边的同事发出了一声抱怨，为什么用copy修饰mutableDictionary有时候有问题有时候又没有问题。理论上，mutableDictionary用copy修饰符会导致承接变量变成不可变，一旦调用setValueForKey就会崩溃。仔细看了下，他是这么写的： 123456789101112131415161718@property (nonatomic, copy) NSM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈iOS修饰符copy">
+<meta property="og:url" content="http://www.spacevoid.cn/2021/09/13/%E6%B5%85%E8%B0%88iOS%E4%BF%AE%E9%A5%B0%E7%AC%A6copy/index.html">
+<meta property="og:site_name" content="苇白的混沌空间">
+<meta property="og:description" content="最近开发的时候，旁边的同事发出了一声抱怨，为什么用copy修饰mutableDictionary有时候有问题有时候又没有问题。理论上，mutableDictionary用copy修饰符会导致承接变量变成不可变，一旦调用setValueForKey就会崩溃。仔细看了下，他是这么写的： 123456789101112131415161718@property (nonatomic, copy) NSM">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/09/10/lI7BztaSp3CUE1d.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/10/hOvknlcSgoLiqsP.png">
+<meta property="article:published_time" content="2021-09-13T09:20:32.000Z">
+<meta property="article:modified_time" content="2021-09-13T09:21:06.555Z">
+<meta property="article:author" content="苇白">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.loli.net/2021/09/10/lI7BztaSp3CUE1d.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+</head>
+
+<body>
+  
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+
+<header class="header">
+
+<div class="logo-wrap"><a class="title" href="/"><div class="main">苇白的混沌空间</div><div class="sub cap">致虚极 守静笃</div></a></div>
+<nav class="menu dis-select"></nav></header>
+
+<div class="widgets">
+
+
+<div class="widget-wrap" id="recent"><div class="widget-header cap dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><div class="line"></div><a class="more-item" href="/2021/09/13/%E6%B5%85%E8%B0%88iOS%E4%BF%AE%E9%A5%B0%E7%AC%A6copy/"><div class="cap"><time>2021-09-13</time><span>iOS开发</span></div><span class="title">浅谈iOS修饰符copy</span></a><div class="line"></div><a class="more-item" href="/2021/08/08/Runloop%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"><div class="cap"><time>2021-09-02</time><span>iOS开发</span></div><span class="title">Runloop源码解析</span></a><div class="line"></div><a class="more-item" href="/2021/08/17/%E7%BC%96%E8%AF%91%E5%99%A8%E4%BB%8B%E7%BB%8D%E4%B8%8E%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"><div class="cap"><time>2021-08-30</time><span>iOS开发</span></div><span class="title">编译器介绍与编译原理</span></a><div class="line"></div><a class="more-item" href="/2021/08/30/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%B8%A6%E4%BD%A0%E8%A7%A3%E8%AF%BBMACH-O/"><div class="cap"><time>2021-08-30</time><span>iOS开发</span></div><span class="title">零基础带你解读MACH-O</span></a><div class="line"></div><a class="more-item" href="/2016/04/20/hexo-deploy-%E7%BC%93%E6%85%A2%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"><div class="cap"><time>2021-08-16</time><span>Hexo</span></div><span class="title">hexo deploy 部署github缓慢解决方法</span></a></div></div>
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/iOS%E5%BC%80%E5%8F%91/">iOS开发</a></div><div id="post-meta">发布于&nbsp;<time datetime="2021-09-13T09:20:32.000Z">2021-09-13</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>浅谈iOS修饰符copy</span></h1>
+<p>最近开发的时候，旁边的同事发出了一声抱怨，为什么用copy修饰mutableDictionary有时候有问题有时候又没有问题。<br>理论上，mutableDictionary用copy修饰符会导致承接变量变成不可变，一旦调用setValueForKey就会崩溃。<br>仔细看了下，他是这么写的：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSMutableDictionary</span> *dic;</span><br><span class="line">- (<span class="built_in">NSMutableDictionary</span> *)dic&#123;</span><br><span class="line">    <span class="keyword">if</span> (!_dic) &#123;</span><br><span class="line">        _dic = [[<span class="built_in">NSMutableDictionary</span> alloc] init];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _dic;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">self</span>.dic setValue:<span class="string">@&quot;1&quot;</span> forKey:<span class="string">@&quot;1&quot;</span>];</span><br><span class="line">    <span class="keyword">self</span>.dic = [[<span class="built_in">NSMutableDictionary</span> alloc] init];</span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">self</span>.dic setValue:<span class="string">@&quot;2&quot;</span> forKey:<span class="string">@&quot;2&quot;</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>我们一步一步运行</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2021/09/10/lI7BztaSp3CUE1d.png" alt="blog_ios_property_003.png"></p>
+<p>可以发现，懒加载使用指针创建出来的是可变的dictionary。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2021/09/10/hOvknlcSgoLiqsP.png" alt="blog_ios_property_002.png"></p>
+<p>在经过<code>self.dic = [[NSMutableDictionary alloc] init];</code>之后，变成了<code>frozenDictionary</code>，也就是不可变数组，导致了接下来<code>setValueForKey</code>的崩溃。</p>
+<p>从这里看好像修饰符<code>copy</code>只会影响使用<code>setter</code>方法设置的变量，而不会影响指针。这是为什么呢？</p>
+<p>我们使用<code>xcrun -sdk iphoneos clang -arch arm64 -framework UIKit -rewrite-objc viewController.m -o a.cpp</code>将这段代码转换为c++代码进行分析</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法列表</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> /*_<span class="title">method_list_t</span>*/ &#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> entsize;  <span class="comment">// sizeof(struct _objc_method)</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> method_count;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">objc_method</span> <span class="title">method_list</span>[4];</span></span><br><span class="line">&#125; _OBJC_$_INSTANCE_METHODS_ViewController __attribute__ ((used, <span class="built_in">section</span> (<span class="string">&quot;__DATA,__objc_const&quot;</span>))) = &#123;</span><br><span class="line">    <span class="built_in"><span class="keyword">sizeof</span></span>(_objc_method),</span><br><span class="line">    <span class="number">4</span>,</span><br><span class="line">    &#123;&#123;(struct objc_selector *)<span class="string">&quot;dic&quot;</span>, <span class="string">&quot;@16@0:8&quot;</span>, (<span class="keyword">void</span> *)_I_ViewController_dic&#125;,</span><br><span class="line">    &#123;(struct objc_selector *)<span class="string">&quot;viewDidLoad&quot;</span>, <span class="string">&quot;v16@0:8&quot;</span>, (<span class="keyword">void</span> *)_I_ViewController_viewDidLoad&#125;,</span><br><span class="line">    &#123;(struct objc_selector *)<span class="string">&quot;setDic:&quot;</span>, <span class="string">&quot;v24@0:8@16&quot;</span>, (<span class="keyword">void</span> *)_I_ViewController_setDic_&#125;,</span><br><span class="line">    &#123;(struct objc_selector *)<span class="string">&quot;setDic:&quot;</span>, <span class="string">&quot;v24@0:8@16&quot;</span>, (<span class="keyword">void</span> *)_I_ViewController_setDic_&#125;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//dic懒加载方法</span></span><br><span class="line"><span class="keyword">static</span> NSMutableDictionary * _I_ViewController_dic(ViewController * self, SEL _cmd) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!(self + OBJC_IVAR_$_ViewController$_dic)) &#123;</span><br><span class="line">        (self + OBJC_IVAR_$_ViewController$_dic) = <span class="built_in">objc_msgSend</span>(<span class="built_in">objc_getClass</span>(<span class="string">&quot;NSMutableDictionary&quot;</span>), <span class="built_in">sel_registerName</span>(<span class="string">&quot;alloc&quot;</span>)), <span class="built_in">sel_registerName</span>(<span class="string">&quot;init&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (self + OBJC_IVAR_$_ViewController$_dic);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//ViewDidLoad</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> _I_ViewController_viewDidLoad(ViewController * self, SEL _cmd) &#123;</span><br><span class="line">    <span class="comment">//[super viewDidLoad];</span></span><br><span class="line">    <span class="built_in">objc_msgSendSuper</span>((__rw_objc_super)&#123;self, <span class="built_in">class_getSuperclass</span>(<span class="built_in">objc_getClass</span>(<span class="string">&quot;ViewController&quot;</span>))&#125;,</span><br><span class="line">                      <span class="built_in">sel_registerName</span>(<span class="string">&quot;viewDidLoad&quot;</span>)</span><br><span class="line">                      );</span><br><span class="line"></span><br><span class="line">    <span class="comment">//[self.dic setValue:@&quot;1&quot; forKey:@&quot;1&quot;];</span></span><br><span class="line">    <span class="built_in">objc_msgSend</span>(<span class="built_in">objc_msgSend</span>(self, <span class="built_in">sel_registerName</span>(<span class="string">&quot;dic&quot;</span>)),</span><br><span class="line">                 <span class="built_in">sel_registerName</span>(<span class="string">&quot;setValue:forKey:&quot;</span>),</span><br><span class="line">                 &amp;__NSConstantStringImpl__viewController_2,</span><br><span class="line">                 &amp;__NSConstantStringImpl__viewController_3</span><br><span class="line">                 );</span><br><span class="line"></span><br><span class="line">    <span class="comment">//self.dic = [[NSMutableDictionary alloc] init];</span></span><br><span class="line">    <span class="built_in">objc_msgSend</span>(self,</span><br><span class="line">                 <span class="built_in">sel_registerName</span>(<span class="string">&quot;setDic:&quot;</span>),</span><br><span class="line">                 <span class="built_in">objc_msgSend</span>(<span class="built_in">objc_msgSend</span>(<span class="built_in">objc_getClass</span>(<span class="string">&quot;NSMutableDictionary&quot;</span>), <span class="built_in">sel_registerName</span>(<span class="string">&quot;alloc&quot;</span>)),<span class="built_in">sel_registerName</span>(<span class="string">&quot;init&quot;</span>))</span><br><span class="line">                );</span><br><span class="line"></span><br><span class="line">    <span class="comment">//[self.dic setValue:@&quot;2&quot; forKey:@&quot;2&quot;];</span></span><br><span class="line">    <span class="built_in">objc_msgSend</span>(<span class="built_in">objc_msgSend</span>(self, <span class="built_in">sel_registerName</span>(<span class="string">&quot;dic&quot;</span>)),</span><br><span class="line">                 <span class="built_in">sel_registerName</span>(<span class="string">&quot;setValue:forKey:&quot;</span>),</span><br><span class="line">                 &amp;__NSConstantStringImpl__viewController_2,</span><br><span class="line">                 &amp;__NSConstantStringImpl__viewController_3</span><br><span class="line">                 );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//setter方法</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> _I_ViewController_setDic_(ViewController * self, SEL _cmd, NSMutableDictionary *dic) &#123;</span><br><span class="line">    <span class="built_in">objc_setProperty</span> (self, _cmd, __OFFSETOFIVAR__(struct ViewController, _dic), (id)dic, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>为了阅读的方便，对代码进行了一定的简化。</p>
+<p>先看使用指针的赋值</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_dic = [[<span class="built_in">NSMutableDictionary</span> alloc] init];</span><br></pre></td></tr></table></figure>
+<p>被转换为</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(self + OBJC_IVAR_$_ViewController$_dic) = <span class="built_in">objc_msgSend</span>(<span class="built_in">objc_getClass</span>(<span class="string">&quot;NSMutableDictionary&quot;</span>), <span class="built_in">sel_registerName</span>(<span class="string">&quot;alloc&quot;</span>)), <span class="built_in">sel_registerName</span>(<span class="string">&quot;init&quot;</span>));</span><br></pre></td></tr></table></figure>
+<p>可以看出来，在直接使用指针进行直接set的时候，是直接把指针所指位置指向alloc init返回的地址，中间并没有对copy等修饰符进行判断以及额外的操作。</p>
+<p>而使用setter方法</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>.dic = [[<span class="built_in">NSMutableDictionary</span> alloc] init];</span><br></pre></td></tr></table></figure>
+<p>被转换为</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">objc_msgSend</span>(self,</span><br><span class="line">                 <span class="built_in">sel_registerName</span>(<span class="string">&quot;setDic:&quot;</span>),</span><br><span class="line">                 <span class="built_in">objc_msgSend</span>(<span class="built_in">objc_msgSend</span>(<span class="built_in">objc_getClass</span>(<span class="string">&quot;NSMutableDictionary&quot;</span>), <span class="built_in">sel_registerName</span>(<span class="string">&quot;alloc&quot;</span>)),<span class="built_in">sel_registerName</span>(<span class="string">&quot;init&quot;</span>))</span><br><span class="line">                );</span><br></pre></td></tr></table></figure>
+<p>这中间调用了<code>setDic:</code>，我们在methodList中找到对应的方法实现，<code>&#123;(struct objc_selector *)&quot;setDic:&quot;, &quot;v24@0:8@16&quot;, (void *)_I_ViewController_setDic_&#125;</code>，最终找到setDic的实现<code>_I_ViewController_setDic_</code>函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> _I_ViewController_setDic_(ViewController * self, SEL _cmd, NSMutableDictionary *dic) &#123;</span><br><span class="line">    <span class="built_in">objc_setProperty</span> (self, _cmd, __OFFSETOFIVAR__(struct ViewController, _dic), (id)dic, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最终setter方法被转换为objc_setProperty方法。那么objc_setProperty到底做了什么，可以从<a target="_blank" rel="noopener" href="https://opensource.apple.com/source/objc4/objc4-551.1/runtime/Accessors.subproj/objc-accessors.mm.auto.html">苹果runtime源码</a>中找到</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">void</span> objc_setProperty(<span class="keyword">id</span> <span class="keyword">self</span>, SEL _cmd, ptrdiff_t offset, <span class="keyword">id</span> newValue, <span class="built_in">BOOL</span> atomic, <span class="keyword">signed</span> <span class="keyword">char</span> shouldCopy) &#123;</span><br><span class="line">    objc_setProperty_non_gc(<span class="keyword">self</span>, _cmd, offset, newValue, atomic, shouldCopy);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> objc_setProperty_non_gc(<span class="keyword">id</span> <span class="keyword">self</span>, SEL _cmd, ptrdiff_t offset, <span class="keyword">id</span> newValue, <span class="built_in">BOOL</span> atomic, <span class="keyword">signed</span> <span class="keyword">char</span> shouldCopy) &#123;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">copy</span> = (shouldCopy &amp;&amp; shouldCopy != MUTABLE_COPY);</span><br><span class="line">    <span class="keyword">bool</span> mutableCopy = (shouldCopy == MUTABLE_COPY);</span><br><span class="line">    reallySetProperty(<span class="keyword">self</span>, _cmd, newValue, offset, atomic, <span class="keyword">copy</span>, mutableCopy);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> reallySetProperty(<span class="keyword">id</span> <span class="keyword">self</span>, SEL _cmd, <span class="keyword">id</span> newValue, ptrdiff_t offset, <span class="keyword">bool</span> atomic, <span class="keyword">bool</span> <span class="keyword">copy</span>, <span class="keyword">bool</span> mutableCopy)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">id</span> oldValue;</span><br><span class="line">    <span class="keyword">id</span> *slot = (<span class="keyword">id</span>*) ((<span class="keyword">char</span>*)<span class="keyword">self</span> + offset);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">copy</span>) &#123;</span><br><span class="line">        newValue = [newValue copyWithZone:<span class="literal">NULL</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mutableCopy) &#123;</span><br><span class="line">        newValue = [newValue mutableCopyWithZone:<span class="literal">NULL</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (*slot == newValue) <span class="keyword">return</span>;</span><br><span class="line">        newValue = objc_retain(newValue);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!atomic) &#123;</span><br><span class="line">        oldValue = *slot;</span><br><span class="line">        *slot = newValue;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        spin_lock_t *slotlock = &amp;PropertyLocks[GOODHASH(slot)];</span><br><span class="line">        _spin_lock(slotlock);</span><br><span class="line">        oldValue = *slot;</span><br><span class="line">        *slot = newValue;        </span><br><span class="line">        _spin_unlock(slotlock);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    objc_release(oldValue);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在<code>objc_setProperty</code>中，我们发现传入的<code>shouldCopy</code>为1，而源码中定义的<code>MUTABLE_COPY</code>值为2。所以在最终调用<code>reallySetProperty</code>的时候，<code>copy</code>值为true，<code>mutableCopy</code>值为false。<code>reallySetProperty</code>中实际上调用的是<code>newValue = [newValue copyWithZone:NULL];</code>导致创建出来的是不可变变量。</p>
+<p>总结一下，针对copy的修饰符，系统会在setter方法中调用objc_setProperty进行赋值，当使用标识符copy/mutableCopy的时候，objc_setProperty方法内部会根据标识符来判断是使用copyWithZone还是mutableCopyWithZone进行可变拷贝和不可变拷贝。使用指针去赋值的时候，并不会进行拷贝操作，所以使用的就是alloc init出来的对象。这样就解释了为什么前面关于指针和setter赋值现象不同。</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="header cap theme"><span>接下来阅读</span></section><section class="body fs14"><a id="next" href="/2021/08/30/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%B8%A6%E4%BD%A0%E8%A7%A3%E8%AF%BBMACH-O/">零基础带你解读MACH-O<span class="note">较早</span></a><div class="line"></div><div class="line"></div><a id="more" href="/archives">检索全部文章</a></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<p>本站由 <a href="http://www.spacevoid.cn/">@苇白</a> 创建，使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.4.1" title="v1.4.1">Stellar</a> 作为主题。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.4.1';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
+    sitesjs: '/js/plugins/sites.js',
+    friendsjs: '/js/plugins/friends.js',
+  };
+
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper/swiper-bundle.min.css","js":"https://unpkg.com/swiper/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -121,7 +121,10 @@
   </nav>
 </div>
 
-  <div class="post-list post"><a class="post-card post " href="/2021/08/30/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%B8%A6%E4%BD%A0%E8%A7%A3%E8%AF%BBMACH-O/"><article class="excerpt md">
+  <div class="post-list post"><a class="post-card post " href="/2021/09/13/%E6%B5%85%E8%B0%88iOS%E4%BF%AE%E9%A5%B0%E7%AC%A6copy/"><article class="excerpt md">
+<div class="post-cover"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2021/08/17/71t8IkPmTuLd3EO.jpg"/></div><h2 class="post-title">浅谈iOS修饰符copy</h2><div class="excerpt"><p>最近开发的时候，旁边的同事发出了一声抱怨，为什么用copy修饰mutableDictionary有时候有问题有时候又没有问题。理论上，mutableDictionary用copy修饰符会导致承接变量变成不可变，一旦调用setValueForKey就会崩溃。仔细看了下，他是这么写的：
+123456789101112131415161718@property (nonatomic, copy) ...</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2021-09-13T09:20:32.000Z">2021-09-13</time></span><span class="cap breadcrumb">iOS开发</span><div>
+</article></a><a class="post-card post " href="/2021/08/30/%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%B8%A6%E4%BD%A0%E8%A7%A3%E8%AF%BBMACH-O/"><article class="excerpt md">
 <div class="post-cover"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.loli.net/2021/08/17/KI7XELRz8ZuxFda.jpg"/></div><h2 class="post-title">零基础带你解读MACH-O</h2><div class="excerpt"><p>概述定义
 MACH-O文件是苹果推出的可执行文件类型
 大部分基于Mach核心操作系统所使用的
