@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 5.4.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  <title>精准埋点实践 - 苇白的混沌空间</title>
+
+  
+    <meta name="description" content="目录 背景与目标 埋点开发节点优化 新精准曝光系统 埋点验证可视化   成果与展望  背景与目标背景埋点研发链路 如图所示，公司埋点的研发链路可以大致分为四步。第一步是在埋点需求平台进行埋点需求的释放；然后开发在需求平台上按照埋点数据模板进行开发；开发完成后，通过打日志对埋点进行人工验证；最后测试通过埋点数据展示平台数据的回溯进行埋点数据验证从而达到上限标准。 部分埋点由于纯人工验证，可靠率并不算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="精准埋点实践">
+<meta property="og:url" content="http://www.spacevoid.cn/2022/06/06/%E7%B2%BE%E5%87%86%E5%9F%8B%E7%82%B9%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="苇白的混沌空间">
+<meta property="og:description" content="目录 背景与目标 埋点开发节点优化 新精准曝光系统 埋点验证可视化   成果与展望  背景与目标背景埋点研发链路 如图所示，公司埋点的研发链路可以大致分为四步。第一步是在埋点需求平台进行埋点需求的释放；然后开发在需求平台上按照埋点数据模板进行开发；开发完成后，通过打日志对埋点进行人工验证；最后测试通过埋点数据展示平台数据的回溯进行埋点数据验证从而达到上限标准。 部分埋点由于纯人工验证，可靠率并不算">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/06/06/vtpYrcVEFCD4SHX.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/06/c1SrOGvzKFntYXQ.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/06/js6OhCDItFaPG1c.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/06/V6E15aPCc2HkThY.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/06/uLeTOIcKZWxFp74.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/06/9XIuZFCOzqhNRBc.png">
+<meta property="og:image" content="https://s2.loli.net/2022/06/06/KjULYRTW8fJ26ox.gif">
+<meta property="og:image" content="https://s2.loli.net/2022/06/06/fkvcrYl78i6sDKg.png">
+<meta property="article:published_time" content="2022-06-06T07:15:34.000Z">
+<meta property="article:modified_time" content="2022-06-06T07:37:04.104Z">
+<meta property="article:author" content="苇白">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2022/06/06/vtpYrcVEFCD4SHX.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+</head>
+
+<body>
+  
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+
+<header class="header">
+
+<div class="logo-wrap"><a class="title" href="/"><div class="main">苇白的混沌空间</div><div class="sub cap">致虚极 守静笃</div></a></div>
+<nav class="menu dis-select"></nav></header>
+
+<div class="widgets">
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%9B%AE%E6%A0%87"><span class="toc-text">核心目标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E7%B2%BE%E5%87%86%E6%9B%9D%E5%85%89%E7%B3%BB%E7%BB%9F"><span class="toc-text">新精准曝光系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#iOS%E7%AB%AF%E8%BF%BD%E8%B8%AA%E4%B8%8E%E5%BC%95%E7%94%A8%E6%9C%BA%E5%88%B6%E8%AF%B4%E6%98%8E"><span class="toc-text">iOS端追踪与引用机制说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%8B%E7%82%B9%E9%AA%8C%E8%AF%81%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1"><span class="toc-text">埋点验证功能设计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%8B%E7%82%B9%E6%95%B0%E6%8D%AE%E5%88%97%E8%A1%A8%E5%B1%95%E7%A4%BA%E4%BB%A5%E5%8F%8A%E5%9F%8B%E7%82%B9%E6%90%9C%E7%B4%A2%E7%AD%9B%E9%80%89"><span class="toc-text">埋点数据列表展示以及埋点搜索筛选</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%8B%E7%82%B9%E9%9C%80%E6%B1%82%E6%A8%A1%E6%9D%BF%E4%B8%8B%E5%8F%91%E4%BB%A5%E5%8F%8A%E6%95%B0%E6%8D%AE%E8%87%AA%E5%8A%A8%E6%A0%A1%E9%AA%8C"><span class="toc-text">埋点需求模板下发以及数据自动校验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E6%B8%97%E9%80%8F"><span class="toc-text">业务渗透</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E6%9C%AC%E8%8A%82%E7%BA%A6"><span class="toc-text">成本节约</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%8B%E7%82%B9%E5%87%86%E7%A1%AE%E7%8E%87%E6%8F%90%E5%8D%87"><span class="toc-text">埋点准确率提升</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E6%8F%90%E6%95%88"><span class="toc-text">开发提效</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AA%8C%E6%B5%8B%E6%8F%90%E6%95%88"><span class="toc-text">验测提效</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%95%E6%9C%9B"><span class="toc-text">展望</span></a></li></ol></div></div></div>
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/iOS%E5%BC%80%E5%8F%91/">iOS开发</a></div><div id="post-meta">发布于&nbsp;<time datetime="2022-06-06T07:15:34.000Z">2022-06-06</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>精准埋点实践</span></h1>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
+<li>背景与目标</li>
+<li>埋点开发节点优化<ol>
+<li>新精准曝光系统</li>
+<li>埋点验证可视化</li>
+</ol>
+</li>
+<li>成果与展望</li>
+</ol>
+<h1 id="背景与目标"><a href="#背景与目标" class="headerlink" title="背景与目标"></a>背景与目标</h1><h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://s2.loli.net/2022/06/06/vtpYrcVEFCD4SHX.png" alt="blog_mta_001.png"><br><em>埋点研发链路</em></p>
+<p>如图所示，公司埋点的研发链路可以大致分为四步。第一步是在埋点需求平台进行<strong>埋点需求的释放</strong>；然后开发在需求平台上<strong>按照埋点数据模板进行开发</strong>；开发完成后，通过打日志对埋点进行<strong>人工验证</strong>；最后测试通过埋点数据展示平台<strong>数据的回溯进行埋点数据验证</strong>从而达到上限标准。</p>
+<p>部分埋点由于纯人工验证，可靠率并不算高。埋点的更改偶发影响线上已经验测埋点数据，造成埋点不准确问题反复出现并且常常带到线上，给数据同学的数据收集造成了很大的噪音。</p>
+<p>而在开发侧而言，埋点系统经过不断的迭代，已经不足以支撑越来越复杂的业务，冗余埋点参数越来越多，埋点系统对业务的侵入性也越来越大，开发过程难免要写很多与业务无关的代码来适配埋点的需求，本来较为清晰的模块化也因此产生了大量耦合。</p>
+<p>目前数据侧制定的埋点采集策略将App端埋点分为页面，点击以及曝光埋点三种埋点。点击埋点与业务耦合性最高，但是触发条件是最简单的一个，这部分站在开发方面可优化的并不多。页面曝光则由基础模块统一处理，这块业务耦合性最低，对业务的侵入性也最低。而曝光埋点则较为复杂，不同的业务出现的判断条件不一，有的曝光重复露出不需要重新上报，而有的露出就需要重新上报，对业务的侵入较大，也是埋点开发中占用开发时间最长部分。</p>
+<p>原先的曝光系统为出现元素即上报，以spemid进行聚合，App端收集满十条，或者切页等触发手段进行文件上传，最终上报到埋点数据库，并不支持不同的埋点露出规则，也不支持对可视区域的区分。</p>
+<p>综上所述，总结了一下原系统一直存在的一些痛点：</p>
+<ul>
+<li>露出上报<strong>不能反映真实用户行为</strong>，滑动过程中的用户没看见的元素也被当成曝光行为进行上报</li>
+<li>由于上层控件的遮挡，用户其实没看见实际资源位，而原埋点系统无法根据埋点的不同而<strong>对可视区域的规则区分</strong>，所以导致埋点不准确</li>
+<li><strong>不支持精准的曝光行为追溯</strong>，针对比例以及露出时长来确定是否埋点</li>
+<li>在用户快速滑动的过程中，部分控件用户其实没看见也被当成露出，产生了<strong>大量冗余数据</strong></li>
+<li>埋点以及验证噪音很大，并且<strong>占用大量开发时间</strong></li>
+</ul>
+<p>通过痛点分析，我们对需要解决的问题进行了合并和归纳，总结出来项目核心目标。</p>
+<h4 id="核心目标"><a href="#核心目标" class="headerlink" title="核心目标"></a>核心目标</h4><p>精准埋点系统旨在解决三个业务上的目标：</p>
+<ul>
+<li>更加科学的埋点设计，<strong>统一业务设计埋点规则</strong>，将埋点的各种行为进行区分和细化。（埋点数据的业务定义，通过整理所有历史的埋点，将不规则的埋点进行优化调整，以达到埋点规则的统一）</li>
+<li>埋点**准确率达到99%**以上</li>
+<li>过滤冗余数据，更加精准进行上报，<strong>降低埋点数据成本</strong>（硬件成本和网络成本）</li>
+</ul>
+<p>而技术实现将围绕三个目标：</p>
+<ul>
+<li>整体埋点<strong>开发成本降低</strong></li>
+<li>曝光规则可配置，<strong>不同埋点规则可变</strong>，支撑商业化埋点与技术性埋点等不同的业务</li>
+<li>埋点可以进行<strong>有效的机器校验以及可视化校验</strong></li>
+</ul>
+<h1 id="埋点开发节点优化-—-新精准曝光系统"><a href="#埋点开发节点优化-—-新精准曝光系统" class="headerlink" title="埋点开发节点优化 — 新精准曝光系统"></a>埋点开发节点优化 — 新精准曝光系统</h1><p>以曝光举例，之前的埋点流程：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://s2.loli.net/2022/06/06/c1SrOGvzKFntYXQ.png" alt="blog_mta_003.png"></p>
+<p>针对埋点开发节点，原先的曝光系统痛点：</p>
+<ul>
+<li><strong>开发成本高</strong>，业务方需要编写大量的代码来添加埋点，添加一个埋点成本就需要至少50行代码</li>
+<li><strong>精准曝光的缺失</strong>，不支持露出比例以及时长的判断</li>
+<li>不支持对可见区域不同的判断，如有的页面带导航栏，有的没有导航栏，一律按照没有导航栏处理，<strong>埋点不够精确</strong></li>
+<li>针对部分埋点计算没有优化，将传入的所有追踪实例遍历计算，<strong>计算效率低</strong></li>
+<li>不支持云控配置，<strong>曝光规则单一</strong></li>
+</ul>
+<p>开发一个埋点的成本高达50行代码，如果可以将大量的重复性的代码收口进统一的埋点系统里头管理，业务使用方使用的时候如果可以一行代码就搞定，则可以大大提高开发效率。</p>
+<p>但是中间有比较多的问题需要解决。app端控件容器种类较多，需要收口要适配非常多的控件。如果想实现真真正正的一行代码，则需要在黑盒的情况下适配各种业务情况，业务复杂度高。原系统也因此有很多局限性。</p>
+<h4 id="新精准曝光系统"><a href="#新精准曝光系统" class="headerlink" title="新精准曝光系统"></a>新精准曝光系统</h4><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://s2.loli.net/2022/06/06/js6OhCDItFaPG1c.png" alt="blog_mta_004.png"></p>
+<p>新精准曝光系统在原有的系统上进行优化，新增功能点支撑：</p>
+<ul>
+<li>过滤业务端的重复调用以及切页等问题</li>
+<li>将跟踪加入的业务视图滑动/拖动/动画/隐藏等等与UE相关行动因子内置进曝光系统内部</li>
+<li>数据可配置，露出比例/时长/云端配置等功能内置</li>
+<li>埋点聚合/文件写入/文件上传</li>
+</ul>
+<p>面向开发端的埋点系统核心设计目标就是将大量业务重复逻辑植入到埋点系统之中，针对不同的滑动控件的种类，进行匹配判断，跟踪其容器的自动追踪；针对不同的刷新模式，自动进行是否重复上报逻辑判断；提供不同的接口以适应不同业务；对展开收起的支撑等等。</p>
+<p>对埋点系统的改造完成整体功能内置进埋点系统本身完成，从而实现业务端接入只需要一行代码即可搞定曝光开发。</p>
+<p>而将业务的大量代码，通过无痕方式切入，存在许多需要攻克的<strong>技术难点</strong>：</p>
+<ul>
+<li>滑动控件并不是统一的，有滑动的控件，也有非滑动控件。如何适配并且无痕自动追踪滚动/露出事件？<blockquote>
+<p>针对不同的容器的滑动容器进行判断匹配，通过KVO的方式为主要追踪手段，而计时器作为页面无滑动时的补充手段，从而达到无痕追踪的效果。</p>
+</blockquote>
+</li>
+<li>作为黑盒系统，需要追踪所有埋点业务视图的滚动事件，所以要保存埋点业务视图的追踪。为解决外部强弱引用问题，以免造成控件生命周期混乱，需要在外部释放的同时，内部的引用也进行释放<blockquote>
+<p>通过对关系的梳理，确定从滑动容器/滑动容器模型 –&gt; 事件模型的绑定关系，将内部模型生命周期与外部视图进行绑定，来实现外部视图销毁后，事件追踪模型也会销毁。下面会进行详细展开说明。</p>
+</blockquote>
+</li>
+<li>在统一的规则以及在业务黑盒的情况下，如何保证埋点业务视图与埋点数据的一一对应？ <blockquote>
+<p>在前期系统适配模型中建立输入口，通过传入系统初始化模型，来进行业务视图埋点数据key的传入。</p>
+</blockquote>
+</li>
+<li>是否存在性能问题？<blockquote>
+<p>在计算追踪的时候，因为需要调用UIKit的frame进行位置获取，这一步必须在主线程完成，为了不影响性能，需要进行计算量的优化，通过两层漏斗进行过滤，第一个是外部容器是否在屏幕以及最上层的漏斗，过滤掉不活跃的容器，在进行内部子容器是否活跃的判断，过滤掉冗余的子容器，最后剩余的容器才进行frame的计算。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="iOS端追踪与引用机制说明"><a href="#iOS端追踪与引用机制说明" class="headerlink" title="iOS端追踪与引用机制说明"></a>iOS端追踪与引用机制说明</h4><p>通过分析整体埋点可知，埋点控件存在数据模型到埋点数据的一一对应关系，所以建立埋点控件到埋点数据的映射关系是可行的，顺着这个切入点来进行整个生命周期管理的设计。</p>
+<p>新版埋点系统提供了两种埋点追踪方式：埋点视图(EPView)或者埋点数据(EPModel)来与埋点行为进行一一对应，通过建立内部EPView/EPModel → UUID → 埋点行为模型的映射对所有埋点状态进行追踪。业务方将需要追踪的容器传入，通过容器类型判断进行滑动/拖动/动画/隐藏等行为的监听。</p>
+<p>系统为了不影响外部生命周期，对外部引用重新做了梳理。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://s2.loli.net/2022/06/06/V6E15aPCc2HkThY.png" alt="blog_mta_005.png"></p>
+<p>图中绿色代表弱引用，红线代表强引用。如图所示，系统内部使用两个弱引用map表来储存所需的信息。当外部业务视图(EPView)或者业务模型(EPModel)被释放的时候，业务不需要回调曝光系统进行相应的销毁，该键值会被自动释放，这样极大地缩减了接入的成本。</p>
+<p>精准曝光埋点提供的API：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 添加ep进入追踪 需要传入该资源位唯一识别码</span></span><br><span class="line"><span class="comment">/// 适用场景：刷新之后，刷了模型，但是资源位没变化，不需要重新报的场景</span></span><br><span class="line"><span class="comment">/// @param epView 需要追踪的epView</span></span><br><span class="line"><span class="comment">/// @param epUID epUID为该资源位唯一识别码，只要这个码不变，并且在屏幕内，即使多次添加不会再次回调</span></span><br><span class="line"><span class="comment">/// @param userAction 与此epview绑定的数据model的userAction</span></span><br><span class="line"><span class="comment">/// @param containers 底部需要追踪的滚动容器</span></span><br><span class="line"><span class="comment">/// @param visibleRect 需要曝光的可视区域 坐标系相对于UIWindow</span></span><br><span class="line"><span class="comment">/// @param callback 埋点回调，此处需要手动去处理数据拼接以及埋点</span></span><br><span class="line">- (<span class="keyword">void</span>)addEPView:(<span class="built_in">UIView</span> *)epView</span><br><span class="line">       epUniqueID:(<span class="built_in">NSString</span> *)epUID</span><br><span class="line">       userAction:(<span class="built_in">NSString</span> *)userAction</span><br><span class="line">       containers:(<span class="built_in">NSArray</span>&lt;<span class="built_in">UIView</span> *&gt; *)containers</span><br><span class="line">      visibleRect:(<span class="built_in">CGRect</span>)visibleRect</span><br><span class="line">  epEventCallback:(<span class="keyword">void</span> (^)(<span class="built_in">UIView</span> * _Nonnull epView))callback;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// 添加ep进入追踪 需要传入数据Model</span></span><br><span class="line"><span class="comment">/// 适用场景：刷新之后，模型发生了改变并且需要重新曝光的场景</span></span><br><span class="line"><span class="comment">/// @param epView 需要追踪的epView</span></span><br><span class="line"><span class="comment">/// @param model 与此epview绑定的数据model，模型一旦发生改变（对同一个资源位来说模型地址发生变化），则会再次触发回调</span></span><br><span class="line"><span class="comment">/// @param userAction 与此epview绑定的数据model的userAction</span></span><br><span class="line"><span class="comment">/// @param containers 底部需要追踪的滚动容器</span></span><br><span class="line"><span class="comment">/// @param visibleRect 需要曝光的可视区域 坐标系相对于UIWindow</span></span><br><span class="line"><span class="comment">/// @param callback 埋点回调，此处需要手动去处理数据拼接以及埋点</span></span><br><span class="line">- (<span class="keyword">void</span>)addEPView:(<span class="built_in">UIView</span> *)epView</span><br><span class="line">            model:(<span class="built_in">NSObject</span> *)model</span><br><span class="line">       userAction:(<span class="built_in">NSString</span> *)userAction</span><br><span class="line">       containers:(<span class="built_in">NSArray</span>&lt;<span class="built_in">UIView</span> *&gt; *)containers</span><br><span class="line">      visibleRect:(<span class="built_in">CGRect</span>)visibleRect</span><br><span class="line"> epEventCallback:(<span class="keyword">void</span> (^)(<span class="built_in">UIView</span> * _Nonnull epView))callback;</span><br></pre></td></tr></table></figure>
+<p>iOS使用系统的KVO机制，辅助针对视图的动画/隐藏等监听来实现。而代理KVO机制弥补了监听实体被释放的时候，无需主动解除监听。UUID的转换，保证KV键值的统一，提升排查问题的便捷性。</p>
+<p>接口层上，区分了曝光的追踪服务、曝光节点的回调服务以及底层上报服务三个接口，分别由三个不同的实例实现，保证不同业务服务之间的隔离。</p>
+<p>针对曝光埋点设计了两个追踪的节点，判断是否需要上报曝光埋点：</p>
+<ul>
+<li>每1/2秒钟触发的定时timer，此Timer会轮询所有的已添加进来的需要曝光的视图进行计算</li>
+<li>第二个追踪节点为滑动容器的滑动回调（KVO机制实现），此回调仅会将滑动容器所绑定的EPView进行计算</li>
+</ul>
+<p>在节点触发的时候，会从两个EPMap进行直接获取所需数据，不需要额外进行过滤的操作，降低了计算的次数，提高整体计算效率。</p>
+<h1 id="埋点开发节点优化之埋点验证可视化"><a href="#埋点开发节点优化之埋点验证可视化" class="headerlink" title="埋点开发节点优化之埋点验证可视化"></a>埋点开发节点优化之埋点验证可视化</h1><p>业务侧痛点收集和分析</p>
+<ul>
+<li><strong>埋点测试效率低下</strong>：一次滑动产生大量埋点数据。之前的验证方式是通过打日志方式、抓包或者数据展示平台直接查看来进行验证，数据无直观关联，需要人眼主动进行关联，验证效率非常低 </li>
+<li><strong>多次上报的曝光次数验证困难</strong>：有很多其他数据干扰，直接抓包或者数据展示平台无法区分不同的session，只能通过时间节点方式进行人工关联，容易出错</li>
+<li><strong>相关数据难以查找</strong>：在数据展示平台上只提供了一级信息的搜索，没办法更加详细的相关信息的筛选  </li>
+</ul>
+<p>技术侧痛点</p>
+<ol>
+<li><strong>缺乏验测模型数据</strong>：要做数据验证，没有相关的数据模型进行支撑，无法对本次埋点结果进行自动化的机器校验</li>
+<li><strong>很难做数据挂钩</strong>：通过AOP切面方式接入埋点验证，最大化不干扰业务端，带来的弊端就是很难做数据挂钩，捕捉到的埋点视图中很难与埋点数据进行一一对应</li>
+</ol>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://s2.loli.net/2022/06/06/uLeTOIcKZWxFp74.png" alt="blog_mta_006.png"></p>
+<blockquote>
+<p><em>数据平台上的数据密集且难寻，用肉眼验证相当复杂且容易出错</em></p>
+</blockquote>
+<h4 id="埋点验证功能设计"><a href="#埋点验证功能设计" class="headerlink" title="埋点验证功能设计"></a>埋点验证功能设计</h4><p>埋点验证主要包含以下功能点：</p>
+<ol>
+<li>曝光埋点状态、数据以及上报次数可视化验证</li>
+<li>埋点数据列表展示以及埋点搜索筛选</li>
+<li>埋点需求模板下发以及数据自动校验<br>曝光埋点状态、数据以及上报次数可视化验证</li>
+</ol>
+<p>为了尽可能追踪埋点状态，根据曝光埋点链条的不同节点，将曝光埋点行为状态化，分拆成三种状态：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://s2.loli.net/2022/06/06/9XIuZFCOzqhNRBc.png" alt="blog_mta_007.png"></p>
+<ul>
+<li>追踪中【红色】：埋点已经添加进来，还未判断为露出状态</li>
+<li>控件露出【黄色】：控件根据精准曝光条件判断为露出，但未上报状态</li>
+<li>已上报【绿色】：曝光时长满足延迟时间，已经回调并且上报</li>
+</ul>
+<p>在业务端这三种状态以不同颜色来表示，通过给埋点控件染色，以达到状态可视化效果。验测的时候，<strong>只需要判断颜色的变化是否符合预期，则可以判定埋点节点的准确性</strong>。</p>
+<p>通过对控件的上报埋点回溯绑定当前控件的埋点数据，可以实现使用过程中，<strong>长按控件即显示该控件目前的埋点数据</strong>。这样快速追踪控件的埋点数据，极大地缩短在海量数据中寻找控件数据的时间。并且<strong>在控件最上层添加信息label，展示当前已经上报过埋点的次数，方便进行上报次数的正确性回验</strong>。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://s2.loli.net/2022/06/06/KjULYRTW8fJ26ox.gif" alt="blog_mta_008.gif"><br><em>埋点可视化验证</em></p>
+<h4 id="埋点数据列表展示以及埋点搜索筛选"><a href="#埋点数据列表展示以及埋点搜索筛选" class="headerlink" title="埋点数据列表展示以及埋点搜索筛选"></a>埋点数据列表展示以及埋点搜索筛选</h4><p>在开发过程中，添加已上报的埋点数据列表，并且提供搜索功能。能够方便进行埋点数据的归类查找以及对其中相应的埋点参数中的一级参数进行展示。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://s2.loli.net/2022/06/06/fkvcrYl78i6sDKg.png" alt="blog_mta_009.png"></p>
+<p><em>App端内部埋点日志展示与筛选查询</em></p>
+<h4 id="埋点需求模板下发以及数据自动校验"><a href="#埋点需求模板下发以及数据自动校验" class="headerlink" title="埋点需求模板下发以及数据自动校验"></a>埋点需求模板下发以及数据自动校验</h4><p>前端系统与埋点需求系统打通，通过下载埋点需求系统的数据模板和截取上报数据进行比对，提前发现目前埋点问题。App端拿到埋点需求系统提供的Key值进行校验，最终验证该埋点数据的准确性，如果key值缺失，进行toast提示提醒。</p>
+<h1 id="成果与展望"><a href="#成果与展望" class="headerlink" title="成果与展望"></a>成果与展望</h1><h4 id="业务渗透"><a href="#业务渗透" class="headerlink" title="业务渗透"></a>业务渗透</h4><p>目前在App端，已完成80%相关页面的切换</p>
+<h4 id="成本节约"><a href="#成本节约" class="headerlink" title="成本节约"></a>成本节约</h4><p>统计近5期的版本，清理15.08%的冗余埋点数据，节约了成本</p>
+<h4 id="埋点准确率提升"><a href="#埋点准确率提升" class="headerlink" title="埋点准确率提升"></a>埋点准确率提升</h4><p>准确率从原先的90%提升至98%</p>
+<h4 id="开发提效"><a href="#开发提效" class="headerlink" title="开发提效"></a>开发提效</h4><p>代码行数极大的缩减，从原先的平均50行到1行，代码缩减比例达到98%。从而将3天/期/人的埋点开发时间缩短至0.5天/期/人的埋点开发时间<br>目前3个ToC端App已经全面接入使用，针对不同app环境均作了适配，实现系统的复用。</p>
+<h4 id="验测提效"><a href="#验测提效" class="headerlink" title="验测提效"></a>验测提效</h4><p>验测时间缩短了60%，效率提升了两倍以上</p>
+<h4 id="展望"><a href="#展望" class="headerlink" title="展望"></a>展望</h4><p>新版埋点系统已经稳定运作多版本，目前已经初步达到技术侧以及业务侧定的目标。<br>当然，目前在埋点链路的优化建设上还有许多不足的地方，如：</p>
+<ul>
+<li>目前埋点实践只在App端进行了落地，目前H5、RN还在改造中，预计2022年下半年实现三端的对齐</li>
+<li>结合目前已有能力进行拓宽，借助数据模型到数据下发的闭环，提升至100%的准确率</li>
+<li>在效率方面，针对标准化后的埋点进行基类统一处理的方案，将最后的一行代码也优化掉。</li>
+</ul>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="header cap theme"><span>接下来阅读</span></section><section class="body fs14"><a id="next" href="/2021/11/18/iOS15%E9%80%82%E9%85%8D/">升级xcode13以及iOS15适配<span class="note">较早</span></a><div class="line"></div><div class="line"></div><a id="more" href="/archives">检索全部文章</a></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<p>本站由 <a href="http://www.spacevoid.cn/">@苇白</a> 创建，使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.4.1" title="v1.4.1">Stellar</a> 作为主题。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.4.1';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js',
+    sitesjs: '/js/plugins/sites.js',
+    friendsjs: '/js/plugins/friends.js',
+  };
+
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper/swiper-bundle.min.css","js":"https://unpkg.com/swiper/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
